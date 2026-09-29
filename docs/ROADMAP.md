@@ -6,6 +6,10 @@
 - Configure the private repository, milestones, issues, and planning documentation.
 - Confirm GitHub Pages visibility requirements before launch.
 
+Confirmed: Aldo Mazzilli reference; balanced editorial/community tone; public email, LinkedIn, and phone; private development repository; no analytics by default; downloadable resume; GPT-6-Luna-High as the approved implementation substitute.
+
+Pending: exact LinkedIn URL and phone formatting; custom domain; public-at-launch repository decision if required; employer confidentiality constraints; explicit approval of Astro plus custom parallax as the interpretation of "TypeScript and Parallax."
+
 ## Milestone 1 - Content strategy and information architecture
 
 - Audit all work and finalize the featured five versus archive.
@@ -62,4 +66,5 @@
 - Keyboard access, WCAG AA contrast, semantic headings, alt text, and reduced-motion support.
 - Responsive QA from 320px mobile through wide desktop.
 - Target Lighthouse mobile scores: Performance 90+, Accessibility 95+, Best Practices 95+, SEO 95+.
-
+- Browser support: current Safari, Chrome, and Firefox plus current iPhone-size Safari behavior.
+- Performance budget proposal: no unnecessary client framework, no scroll-hijacking library, and no unoptimized original photography shipped to production.
