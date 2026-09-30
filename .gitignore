@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.foundation-dist/
 .astro/
 .env
 .env.*
@@ -12,4 +13,7 @@ coverage/
 *.log
 .cache/
 .DS_Store
-
+.private-evidence/
+test-results/
+playwright-report/
+coverage/

@@ -1,0 +1,16 @@
+---
+import { routeHref } from '../lib/site';
+
+interface Props {
+  label: string;
+  items: Array<{ href: string; label: string }>;
+}
+
+const { label, items } = Astro.props;
+---
+
+<nav class="site-navigation" aria-label={label}>
+  {items.map(({ href, label: linkLabel }) => (
+    <a href={href.startsWith('/') ? routeHref(href) : href}>{linkLabel}</a>
+  ))}
+</nav>

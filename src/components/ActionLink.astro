@@ -1,0 +1,15 @@
+---
+import { routeHref } from '../lib/site';
+
+interface Props {
+  href: string;
+  label: string;
+}
+const { href, label } = Astro.props;
+const destination = href.startsWith('/') ? routeHref(href) : href;
+---
+
+<a class="action-link" href={destination}>
+  <span>{label}</span>
+  <span aria-hidden="true">↗</span>
+</a>

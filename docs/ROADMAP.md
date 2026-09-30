@@ -6,22 +6,26 @@
 - Configure the private repository, milestones, issues, and planning documentation.
 - Confirm GitHub Pages visibility requirements before launch.
 
-Confirmed: Aldo Mazzilli reference; balanced editorial/community tone; public email, LinkedIn, and phone; private development repository; no analytics by default; downloadable resume; GPT-6-Luna-High as the approved implementation substitute.
+Confirmed: Aldo Mazzilli reference; balanced editorial/community tone; public LinkedIn (https://www.linkedin.com/in/katherine-kalill/); public email (katherinerkalill@gmail.com); phone omitted for privacy; private development with permission to make the repository public at launch; default GitHub Pages URL (https://katherinekalill.github.io/katherine-kalill-portfolio/); no custom domain for v1; no analytics; downloadable resume; Astro, strict TypeScript, and custom accessible parallax. No employer or client restrictions are currently known. Publication permission for the supplied Drive assets is recorded separately from per-file ownership and credit evidence.
 
-Pending: exact LinkedIn URL and phone formatting; custom domain; public-at-launch repository decision if required; employer confidentiality constraints; explicit approval of Astro plus custom parallax as the interpretation of "TypeScript and Parallax."
+The five projects remain provisional until the asset, role, and evidence audit. Resume file is pending. Per-asset ownership, photographer credits, and third-party permissions remain to be verified. Do not close M0/#2 until its evidence acceptance criteria are met.
 
 ## Milestone 1 - Content strategy and information architecture
 
 - Audit all work and finalize the featured five versus archive.
 - Approve the sitemap and recruiter journeys.
 - Define a typed project and media model.
-- Draft, verify, and approve portfolio copy.
+- Draft concise portfolio copy from available evidence; prepare project questions for Katherine; verify remaining dates, roles, credits, and claims from her responses and source records.
+- Keep M1/#8 open until the M2 scaffold runs its content schema and publication checks.
 
 ## Milestone 2 - Technical scaffold and visual system
 
-- Scaffold Astro with strict TypeScript, linting, formatting, and tests.
+- Scaffold Astro with strict TypeScript, linting, formatting, and tests using Node 24 LTS.
 - Implement the editorial design system and responsive component primitives.
 - Implement accessible parallax and motion that respect reduced-motion preferences.
+- Build a non-production foundation review page so every visual primitive and motion behavior can be reviewed without publishing draft work.
+
+The M1 questionnaire and content-model specification are in `docs/CONTENT_QUESTIONNAIRE.md` and `docs/CONTENT_MODEL.md`. The approved sitemap and recruiter journeys are in `docs/INFORMATION_ARCHITECTURE.md`. The copy draft is in `docs/CONTENT_DRAFTS.md`; private source/evidence records are not stored in this public-capable repository.
 
 ## Milestone 3 - Homepage experience
 

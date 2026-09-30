@@ -1,0 +1,82 @@
+---
+import { routeHref } from '../lib/site';
+import MediaFrame from './MediaFrame.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+  title: string;
+  client?: string | null;
+  disciplines?: string[];
+  href?: string | null;
+  media?:
+    | {
+        src: string;
+        alt: string;
+        decorative: boolean;
+        width: number;
+        height: number;
+        focalPoint: { x: number; y: number };
+        credit: string | null;
+      }
+    | undefined;
+}
+const { title, client, disciplines = [], href = null, media } = Astro.props;
+---
+
+<article class="project-card">
+  {href ? (
+    <a class="project-card__link" href={routeHref(href)}>
+      {media ? (
+        <MediaFrame
+          src={media.src}
+          alt={media.alt}
+          decorative={media.decorative}
+          width={media.width}
+          height={media.height}
+          focalPoint={media.focalPoint}
+          credit={media.credit}
+        />
+      ) : (
+        <span class="project-card__visual" aria-hidden="true"></span>
+      )}
+      <span class="project-card__copy">
+        {client && <span class="project-card__client">{client}</span>}
+        <span class="project-card__title">{title}</span>
+        {disciplines.length > 0 && (
+          <span class="tag-list" aria-label="Project disciplines">
+            {disciplines.map((discipline) => (
+              <Tag>{discipline}</Tag>
+            ))}
+          </span>
+        )}
+      </span>
+    </a>
+  ) : (
+    <div class="project-card__link">
+      {media ? (
+        <MediaFrame
+          src={media.src}
+          alt={media.alt}
+          decorative={media.decorative}
+          width={media.width}
+          height={media.height}
+          focalPoint={media.focalPoint}
+          credit={media.credit}
+        />
+      ) : (
+        <span class="project-card__visual" aria-hidden="true"></span>
+      )}
+      <span class="project-card__copy">
+        {client && <span class="project-card__client">{client}</span>}
+        <span class="project-card__title">{title}</span>
+        {disciplines.length > 0 && (
+          <span class="tag-list" aria-label="Project disciplines">
+            {disciplines.map((discipline) => (
+              <Tag>{discipline}</Tag>
+            ))}
+          </span>
+        )}
+      </span>
+    </div>
+  )}
+</article>

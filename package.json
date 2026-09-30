@@ -1,0 +1,61 @@
+{
+  "name": "katherine-kalill-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=10"
+  },
+  "overrides": {
+    "ignore": "7.0.6"
+  },
+  "scripts": {
+    "check:runtime": "node scripts/check-node-version.mjs",
+    "predev": "npm run check:runtime",
+    "prebuild": "npm run check:runtime",
+    "prebuild:foundation": "npm run check:runtime",
+    "prepreview": "npm run check:runtime",
+    "prepreview:foundation": "npm run check:runtime",
+    "pretypecheck": "npm run check:runtime",
+    "prelint": "npm run check:runtime",
+    "preformat": "npm run check:runtime",
+    "preformat:check": "npm run check:runtime",
+    "pretest": "npm run check:runtime",
+    "pretest:e2e": "npm run check:runtime",
+    "prevalidate:content": "npm run check:runtime",
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:foundation": "cross-env FOUNDATION_PREVIEW=1 astro build",
+    "preview": "vite preview --base /katherine-kalill-portfolio/ --outDir dist",
+    "preview:foundation": "cross-env FOUNDATION_PREVIEW=1 vite preview --base /katherine-kalill-portfolio/ --outDir .foundation-dist",
+    "typecheck": "astro check",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:e2e": "npm run build && npm run build:foundation && playwright test",
+    "validate:content": "node --import tsx/esm scripts/validate-content.ts",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run validate:content && npm run test && npm run test:e2e"
+  },
+  "dependencies": {
+    "astro": "^7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.3",
+    "cross-env": "^10.1.0",
+    "eslint": "^10.11.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.3"
+  }
+}

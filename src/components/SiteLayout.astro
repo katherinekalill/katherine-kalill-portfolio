@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import { routeHref } from '../lib/site';
+import { siteConfig } from '../lib/site-config';
+import manropeFont from '../assets/fonts/manrope-latin-wght-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonical = Astro.site
+  ? new URL(routeHref(Astro.url.pathname), Astro.site)
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f6f3ed" />
+    <meta name="robots" content="index,follow" />
+    <title>{title}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link
+      rel="preload"
+      href={manropeFont}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <a class="site-header__brand" href={routeHref('/')}>
+        {siteConfig.name}
+      </a>
+      <span class="site-header__context">
+        Brand experience · Community · Partnerships
+      </span>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      {siteConfig.email && (
+        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      )}
+      <a href={siteConfig.linkedin} rel="me">
+        LinkedIn <span aria-hidden="true">↗</span>
+      </a>
+      <span>© {new Date().getFullYear()} Katherine Kalill</span>
+    </footer>
+  </body>
+</html>

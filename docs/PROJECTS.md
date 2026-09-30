@@ -8,35 +8,40 @@ Final selection depends on the Milestone 1 evidence, permissions, and asset audi
 
 **Project:** All City Mile x Rebel Relays  
 **Context:** Global brand / community / product launch  
-**Potential proof - pending reconciliation:** participation growth, runners, fundraising, heats, volunteers, sold-out status. Existing materials conflict between 225 participants / $3.5K+ raised and 300+ runners / $2.5K raised; do not publish until the source of truth is confirmed.  
+**Evidence:** Drive folder contains event photographs and screenshots. Existing materials conflict between 225 participants / $3.5K+ raised and 300+ runners / $2.5K raised. The event/year, race versus pre-run counts, and fundraising source remain unresolved; do not publish these figures until reconciled.
+
 **Purpose:** Demonstrate localization, event leadership, product trial, community growth, and commercial awareness.
 
 ### Building a Community People Return To
 
 **Project:** Your Mothers Run Crew  
 **Context:** Owned community / founder-led / partnerships  
-**Potential proof - pending permission and verification:** Goop and Little Words Project activations, sold-out status, recurring participation, and partner results.  
+**Evidence:** separate Goop and Little Words Project folders are available. The Goop folder currently lists video only. Confirm whether a still frame is an appropriate public image. Sold-out status, recurring participation, partner results, exact role, dates, credits, and ownership remain pending.
+
 **Purpose:** Demonstrate direct community building, recurring rituals, premium partnerships, and founder-level initiative.
 
 ### Creating a Reason to Gather
 
 **Project:** Freaks of Nature x Alba Optics x Runaway Milano  
 **Context:** Independent collaboration / Milan / experiential  
-**Potential proof - pending verification:** three partners, 50+ runners, capacity/sell-out status, and organic content.  
+**Evidence:** Drive folder contains event photography. Partner roles, participant count, capacity/sell-out status, organic-content results, exact role, dates, credits, and ownership remain pending verification.
+
 **Purpose:** Demonstrate resourcefulness, local cultural understanding, partnership creation, and work outside major-brand infrastructure.
 
 ### Turning a Retail Moment Into a Personal Gesture
 
 **Project:** Mom, You Deserve Your Flowers  
 **Context:** Global brand / emotional storytelling / retail  
-**Potential proof - pending verification:** attendance and consumer acquisition.  
+**Evidence:** Drive folder contains event photographs and video. Attendance, consumer acquisition, exact role, dates, credits, and ownership remain pending verification.
+
 **Purpose:** Demonstrate how human insight can connect product trial, gifting, movement, and retail.
 
 ### Using Brand Purpose to Create Practical Impact
 
 **Project:** Women's Self-Defense Initiative with New Balance and REI  
 **Context:** Partnership / women's sport / purpose  
-**Potential proof - pending verification and attribution review:** community participation and the reported 420% REI Seattle sales growth. The commercial figure must not be published until its source, time period, baseline, and Katherine's level of attribution are confirmed.  
+**Evidence:** Drive folder contains event photography. Community participation and the reported 420% REI Seattle sales growth are unverified. Do not publish the sales figure until its source, definition, time period, baseline, absolute values, comparison window, and Katherine's attributable contribution are established.
+
 **Purpose:** Demonstrate mission-led programming, relevant partnership design, and measurable local impact.
 
 ## Visual archive
@@ -60,3 +65,7 @@ Final selection depends on the Milestone 1 evidence, permissions, and asset audi
 - State Katherine's role precisely and credit collaborators.
 - Mark every metric and image as verified, pending verification, or unavailable before publication.
 - Store employment context, exact role, collaborators, claim status, asset rights, and confidentiality status for every project.
+
+## Newly identified archive candidates
+
+The supplied Drive root additionally contains Canada, a second Canada folder, Latinas History Month Celebration, Seattle Marathon years 1 and 2, SJJ 50, and Urban Hike with Sara. Audit these and existing archive entries before deciding final archive coverage. Luxury Concepts is academic work and must be labeled academic if included. Drive folder presence does not establish authorship, rights, claims, or permission for every file.

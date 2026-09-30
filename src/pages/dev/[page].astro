@@ -1,0 +1,115 @@
+---
+import ActionLink from '../../components/ActionLink.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import Metric from '../../components/Metric.astro';
+import Navigation from '../../components/Navigation.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import SiteLayout from '../../components/SiteLayout.astro';
+import Tag from '../../components/Tag.astro';
+
+export function getStaticPaths() {
+  if (!import.meta.env.DEV && process.env.FOUNDATION_PREVIEW !== '1') return [];
+  return [{ params: { page: 'foundation' } }];
+}
+---
+
+<SiteLayout
+  title="Foundation review — Katherine Kalill"
+  description="Temporary review fixture for the portfolio's design and motion foundations."
+>
+  <div class="shell foundation-preview">
+    <section class="hero" aria-labelledby="foundation-title">
+      <span class="foundation-label">
+        Review fixture · not portfolio content
+      </span>
+      <p class="hero__eyebrow">Type · Image · Motion</p>
+      <h1 id="foundation-title">A foundation for human stories.</h1>
+      <p class="hero__description">
+        A temporary review of the shared visual primitives and accessible motion
+        system. No project claims or client assets appear here.
+      </p>
+      <div class="hero__rule" aria-hidden="true"></div>
+    </section>
+
+    <section
+      class="foundation-primitives"
+      id="components"
+      aria-labelledby="components-title"
+    >
+      <SectionHeading
+        id="components-title"
+        eyebrow="01 · Components"
+        title="Quiet structure. Clear detail."
+        level={2}
+      />
+      <div class="foundation-grid">
+        <div>
+          <h3 class="section-heading section-heading--3">
+            Editorial image frame
+          </h3>
+          <MediaFrame
+            decorative
+            alt=""
+            caption="Synthetic graphic fixture; no client assets."
+          />
+        </div>
+        <div class="foundation-examples">
+          <h3 class="section-heading section-heading--3">
+            Interaction and information
+          </h3>
+          <div class="tag-list">
+            <Tag>Community</Tag>
+            <Tag>Brand experience</Tag>
+            <Tag>Partnerships</Tag>
+          </div>
+          <Metric value="—" label="Use verified outcomes only" />
+          <Navigation
+            label="Foundation review"
+            items={[
+              { href: '/', label: 'Home' },
+              { href: '#motion-title', label: 'Motion review' },
+            ]}
+          />
+          <div class="foundation-nav">
+            <ActionLink
+              href="https://www.linkedin.com/in/katherine-kalill/"
+              label="Visit LinkedIn"
+            />
+            <button class="button" type="button" disabled>
+              Unavailable action
+            </button>
+          </div>
+          <ProjectCard
+            href="#components"
+            title="A useful gathering"
+            client="Synthetic project card"
+            disciplines={['Event', 'Local culture']}
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="foundation-motion" aria-labelledby="motion-title">
+      <div data-reveal>
+        <SectionHeading
+          id="motion-title"
+          eyebrow="02 · Motion"
+          title="Movement with room to breathe."
+          level={2}
+        />
+        <p>
+          Parallax belongs to image layers. This reveals only after the script
+          loads, and stays readable without motion or JavaScript.
+        </p>
+        <ActionLink href="#motion-title" label="Jump to this section" />
+      </div>
+      <div class="foundation-motion__layer" data-parallax>
+        <span>Decorative motion layer</span>
+      </div>
+    </section>
+  </div>
+  <script>
+    import '../../scripts/motion';
+  </script>
+</SiteLayout>
