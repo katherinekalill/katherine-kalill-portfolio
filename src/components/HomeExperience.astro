@@ -1,0 +1,338 @@
+---
+import { homepageCopy } from '../data/homepage';
+import { siteConfig } from '../lib/site-config';
+import ActionLink from './ActionLink.astro';
+import FeaturedStory from './FeaturedStory.astro';
+import SectionHeading from './SectionHeading.astro';
+import SiteLayout from './SiteLayout.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+  preview?: boolean;
+  reviewStory?: boolean;
+  projects?: HomepageProject[];
+  media?: HomepageMedia[];
+}
+
+interface HomepageProject {
+  id: string;
+  slug: string;
+  featured: boolean;
+  featuredOrder: number | null;
+  title: string;
+  editorialTitle: string | null;
+  clientPlatform: string | null;
+  operatingContext: string | null;
+  disciplines: string[];
+  summary: string | null;
+  mediaIds: string[];
+}
+
+interface HomepageMedia {
+  id: string;
+  src: string;
+  width: number;
+  height: number;
+  focalPoint: { x: number; y: number };
+  alt: string;
+  decorative: boolean;
+  credit: string | null;
+}
+
+const {
+  preview = false,
+  reviewStory = false,
+  projects = [],
+  media = [],
+} = Astro.props;
+const featured = projects
+  .filter((project) => project.featured)
+  .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+const completeFeaturedSequence = featured.length === 5;
+const usePreview = preview && !reviewStory;
+const rootPath = preview ? '/dev/homepage/' : '/';
+const navigation = reviewStory
+  ? [
+      { href: '/dev/homepage/#work', label: 'Featured work' },
+      { href: '/dev/story/', label: 'Story preview', current: true },
+      { href: '/dev/homepage/#contact', label: 'Contact' },
+    ]
+  : usePreview
+    ? [
+        { href: '#work', label: 'Work', sectionId: 'work' },
+        { href: '#range', label: 'Range', sectionId: 'range' },
+        {
+          href: '#capabilities',
+          label: 'Capabilities',
+          sectionId: 'capabilities',
+        },
+        { href: '#archive', label: 'Archive', sectionId: 'archive' },
+        { href: '#about', label: 'About', sectionId: 'about' },
+        { href: '#contact', label: 'Contact', sectionId: 'contact' },
+      ]
+    : [
+        {
+          href: '#capabilities',
+          label: 'Capabilities',
+          sectionId: 'capabilities',
+        },
+        { href: '#contact', label: 'Contact', sectionId: 'contact' },
+      ];
+
+function previewImage(index: number): string {
+  const palettes = [
+    ['#7b303e', '#e5c6a4', '#d9aa8f'],
+    ['#34534f', '#d4b995', '#d4cec0'],
+    ['#9b664e', '#e1c8a8', '#64736b'],
+    ['#694353', '#d8b29c', '#c9b581'],
+    ['#334b65', '#d2a582', '#c0cabb'],
+  ];
+  const [ink, warmth, ground] = palettes[index % palettes.length] ?? [
+    '#7b303e',
+    '#e5c6a4',
+    '#d9aa8f',
+  ];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect width="1200" height="800" fill="${ground}"/><path d="M0 585 330 265 710 605 972 184 1200 401V800H0Z" fill="${warmth}"/><circle cx="875" cy="265" r="142" fill="${ink}"/><rect x="18" y="18" width="1164" height="764" fill="none" stroke="#1e1e1a" stroke-width="18"/><path d="M40 70h100M40 70v100M1160 70h-100M1160 70v100M40 730h100M40 730V630M1160 730h-100M1160 730V630" fill="none" stroke="#1e1e1a" stroke-width="8"/></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+const title = reviewStory
+  ? 'Story navigation review — Katherine Kalill'
+  : usePreview
+    ? 'Homepage review — Katherine Kalill'
+    : `${siteConfig.name} — ${siteConfig.portfolioThesis}`;
+---
+
+<SiteLayout
+  title={title}
+  description="Brand experience, community, and partnerships shaped by the moments that bring people together."
+  navigation={navigation}
+  homeHref={usePreview || reviewStory ? '/dev/homepage/' : '/'}
+  homeIsCurrent={!reviewStory}
+  reviewLabel={
+    preview
+      ? 'Review only · Draft project content and synthetic images are not approved for publication.'
+      : undefined
+  }
+>
+  {reviewStory ? (
+    <div class="shell story-review">
+      <p class="eyebrow">Preview route · Navigation fixture</p>
+      <h1 class="section-heading">Destination content loads immediately.</h1>
+      <p>
+        This temporary story page exists to review native navigation, browser
+        history, and scroll restoration. It contains no project claims or media.
+      </p>
+      <ActionLink
+        href={`${rootPath}#work`}
+        label="Return to the featured stories"
+      />
+    </div>
+  ) : (
+    <>
+      <section class="hero shell" aria-labelledby="home-title">
+        <p class="hero__eyebrow">
+          {siteConfig.name} · Sport · Fashion · Culture
+        </p>
+        <h1 id="home-title" data-reveal="hero">
+          {siteConfig.portfolioThesis}
+        </h1>
+        <p class="hero__description" data-reveal>
+          {homepageCopy.positioning.description}
+        </p>
+        <div class="hero__rule" aria-hidden="true"></div>
+      </section>
+
+      <section
+        class="point-of-view shell section"
+        aria-labelledby="point-of-view-title"
+      >
+        <div class="point-of-view__index" aria-hidden="true">
+          01
+        </div>
+        <div data-reveal>
+          <p class="eyebrow">{homepageCopy.pointOfView.eyebrow}</p>
+          <h2 id="point-of-view-title" class="section-heading">
+            {homepageCopy.pointOfView.title}
+          </h2>
+          <p class="section-copy">{homepageCopy.pointOfView.description}</p>
+        </div>
+      </section>
+
+      {(completeFeaturedSequence || usePreview) && (
+        <section
+          class="featured-work shell section"
+          id="work"
+          aria-labelledby="work-title"
+        >
+          <div data-reveal>
+            <SectionHeading
+              id="work-title"
+              eyebrow="02 · Selected work"
+              title="A reason to come together."
+              level={2}
+            />
+          </div>
+          {usePreview && (
+            <p class="review-note">
+              Project titles, partner names, and contexts are provisional. Each
+              story remains a draft until Katherine’s facts and asset approvals
+              are in.
+            </p>
+          )}
+          <div class="featured-work__stories">
+            {featured.map((project, index) => {
+              const projectMedia = media.find((item) =>
+                project.mediaIds.includes(item.id),
+              );
+              const image = projectMedia
+                ? {
+                    src: projectMedia.src,
+                    width: projectMedia.width,
+                    height: projectMedia.height,
+                    focalPoint: projectMedia.focalPoint,
+                    alt: projectMedia.alt,
+                    decorative: projectMedia.decorative,
+                    credit: projectMedia.credit,
+                  }
+                : undefined;
+              return (
+                <FeaturedStory
+                  id={project.slug}
+                  title={project.editorialTitle ?? project.title}
+                  client={project.clientPlatform}
+                  context={project.operatingContext}
+                  disciplines={project.disciplines}
+                  summary={usePreview ? null : project.summary}
+                  image={usePreview ? undefined : image}
+                  previewImage={usePreview ? previewImage(index) : undefined}
+                  reversed={index % 2 === 1}
+                  reveal
+                  revealDelay={Math.min(index * 60, 180)}
+                />
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {(completeFeaturedSequence || usePreview) && (
+        <section
+          class="operating-range shell section"
+          id="range"
+          aria-labelledby="range-title"
+        >
+          <div data-reveal>
+            <p class="eyebrow">{homepageCopy.range.eyebrow}</p>
+            <h2 class="section-heading" id="range-title">
+              {homepageCopy.range.title}
+            </h2>
+            <p class="section-copy">{homepageCopy.range.description}</p>
+          </div>
+          <div class="operating-range__contexts" aria-label="Project contexts">
+            {[...new Set(featured.map((project) => project.operatingContext))]
+              .filter((context): context is string => Boolean(context))
+              .map((context) => (
+                <Tag>{context}</Tag>
+              ))}
+          </div>
+        </section>
+      )}
+
+      <section
+        class="capabilities shell section"
+        id="capabilities"
+        aria-labelledby="capabilities-title"
+      >
+        <div data-reveal>
+          <p class="eyebrow">{homepageCopy.capabilities.eyebrow}</p>
+          <h2 class="section-heading" id="capabilities-title">
+            {homepageCopy.capabilities.title}
+          </h2>
+        </div>
+        <ul class="capabilities__list">
+          {homepageCopy.capabilities.items.map((capability, index) => (
+            <li data-reveal data-reveal-delay={index * 60}>
+              <span aria-hidden="true">0{index + 1}</span>
+              <span>{capability}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {(completeFeaturedSequence || usePreview) && (
+        <section
+          class="archive-invitation shell section"
+          id="archive"
+          aria-labelledby="archive-title"
+        >
+          <div data-reveal>
+            <p class="eyebrow">{homepageCopy.archive.eyebrow}</p>
+            <h2 class="section-heading" id="archive-title">
+              {homepageCopy.archive.title}
+            </h2>
+            <p class="section-copy">{homepageCopy.archive.description}</p>
+          </div>
+          {usePreview && (
+            <p class="review-note">
+              Archive destination deferred until the verified projects are
+              ready.
+            </p>
+          )}
+        </section>
+      )}
+
+      <section class="about-close shell section" id="about">
+        <div data-reveal>
+          <p class="eyebrow">{homepageCopy.about.eyebrow}</p>
+          <h2 class="section-heading">{homepageCopy.about.title}</h2>
+          {usePreview ? (
+            <p class="section-copy">
+              <span class="review-note__label">
+                Positioning draft · review only
+              </span>
+              {homepageCopy.about.description}
+            </p>
+          ) : (
+            <p class="section-copy">
+              A portfolio exploring brand experience, community, and
+              partnerships across sport, fashion, and culture.
+            </p>
+          )}
+        </div>
+        <div class="about-close__contact" id="contact" data-reveal>
+          <div>
+            <p class="eyebrow">{homepageCopy.contact.eyebrow}</p>
+            <h3 class="section-heading section-heading--3">
+              {homepageCopy.contact.title}
+            </h3>
+          </div>
+          <div class="about-close__links">
+            {siteConfig.email && (
+              <ActionLink
+                href={`mailto:${siteConfig.email}`}
+                label={siteConfig.email}
+              />
+            )}
+            <ActionLink
+              href={siteConfig.linkedin}
+              label="Connect on LinkedIn"
+            />
+          </div>
+        </div>
+      </section>
+      {usePreview && (
+        <div class="shell story-review-link">
+          <ActionLink
+            href="/dev/story/"
+            label="Open the navigation review fixture"
+          />
+        </div>
+      )}
+    </>
+  )}
+</SiteLayout>
+
+<script>
+  import '../scripts/motion';
+</script>

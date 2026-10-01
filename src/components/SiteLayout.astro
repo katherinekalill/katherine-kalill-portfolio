@@ -2,13 +2,32 @@
 import '../styles/global.css';
 import { routeHref } from '../lib/site';
 import { siteConfig } from '../lib/site-config';
+import Navigation from './Navigation.astro';
 import manropeFont from '../assets/fonts/manrope-latin-wght-normal.woff2?url';
+
+interface NavItem {
+  href: string;
+  label: string;
+  sectionId?: string;
+  current?: boolean;
+}
 
 interface Props {
   title: string;
   description: string;
+  navigation?: NavItem[];
+  homeHref?: string;
+  homeIsCurrent?: boolean;
+  reviewLabel?: string | undefined;
 }
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  navigation = [],
+  homeHref = '/',
+  homeIsCurrent = false,
+  reviewLabel,
+} = Astro.props;
 const canonical = Astro.site
   ? new URL(routeHref(Astro.url.pathname), Astro.site)
   : undefined;
@@ -37,14 +56,24 @@ const canonical = Astro.site
       Skip to content
     </a>
     <header class="site-header">
-      <a class="site-header__brand" href={routeHref('/')}>
-        {siteConfig.name}
-      </a>
-      <span class="site-header__context">
-        Brand experience · Community · Partnerships
-      </span>
+      <div class="site-header__inner">
+        <a
+          class="site-header__brand"
+          href={routeHref(homeHref)}
+          aria-current={homeIsCurrent ? 'page' : undefined}
+        >
+          {siteConfig.name}
+        </a>
+        <span class="site-header__context">
+          Brand experience · Community · Partnerships
+        </span>
+        {navigation.length > 0 && (
+          <Navigation label="Primary" items={navigation} />
+        )}
+      </div>
     </header>
     <main id="main-content" tabindex="-1">
+      {reviewLabel && <p class="review-banner shell">{reviewLabel}</p>}
       <slot />
     </main>
     <footer class="site-footer">
@@ -56,5 +85,8 @@ const canonical = Astro.site
       </a>
       <span>© {new Date().getFullYear()} Katherine Kalill</span>
     </footer>
+    <script>
+      import '../scripts/site-navigation';
+    </script>
   </body>
 </html>

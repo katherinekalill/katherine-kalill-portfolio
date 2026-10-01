@@ -240,6 +240,25 @@ export function publicProjectProjection(projects: Project[]) {
     }));
 }
 
+export function previewProjectProjection(projects: Project[]) {
+  return projects
+    .filter((project) => project.featured)
+    .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0))
+    .map((project) => ({
+      id: project.id,
+      slug: project.slug,
+      featured: project.featured,
+      featuredOrder: project.featuredOrder,
+      title: project.title,
+      editorialTitle: project.editorialTitle,
+      clientPlatform: project.clientPlatform,
+      operatingContext: project.operatingContext,
+      disciplines: project.disciplines,
+      summary: null,
+      mediaIds: [],
+    }));
+}
+
 export function publicMediaProjection(
   media: Media[],
   usedMediaIds: Set<string>,

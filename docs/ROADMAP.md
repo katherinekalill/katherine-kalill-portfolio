@@ -32,6 +32,8 @@ The M1 questionnaire and content-model specification are in `docs/CONTENT_QUESTI
 - Build the hero, point of view, featured work sequence, capabilities, and closing contact area.
 - Build accessible navigation, responsive behavior, and restrained page transitions.
 
+Implemented: the production homepage uses only approved positioning, capabilities, email, and LinkedIn; the `/dev/homepage/` review page presents the provisional five-story order with synthetic images and an explicit review banner. Featured work and project-context range remain unpublished until all five stories have verified content and approved media. The navigation supports keyboard, touch, no-JavaScript links, current-section state, and browser history/scroll restoration. Native page transitions leave destination content visible immediately and turn off under reduced motion. The `/dev/story/` route is a temporary navigation fixture; production story routes belong to M4. M3 issue closure still requires Katherine's content and visual review for #11; #12's production case-study navigation depends on M4 routes.
+
 ## Milestone 4 - Featured case studies
 
 - Build the reusable case-study template.

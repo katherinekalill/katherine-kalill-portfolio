@@ -26,6 +26,11 @@ export default defineConfig({
       testMatch: 'foundation.spec.ts',
       use: { ...device, baseURL: 'http://127.0.0.1:4322' },
     },
+    {
+      name: `homepage-${name}`,
+      testMatch: 'homepage.spec.ts',
+      use: { ...device, baseURL: 'http://127.0.0.1:4322' },
+    },
   ]),
   webServer: [
     {

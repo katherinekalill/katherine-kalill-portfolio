@@ -1,7 +1,5 @@
 ---
-import SiteLayout from '../components/SiteLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { siteConfig } from '../lib/site-config';
+import HomeExperience from '../components/HomeExperience.astro';
 import { getCollection } from 'astro:content';
 import mediaManifest from '../data/media.json';
 import {
@@ -30,39 +28,7 @@ const safeMedia = publicMediaProjection(
   media,
   new Set(safeProjects.flatMap((project) => project.mediaIds)),
 );
-const featured = safeProjects
-  .filter((project) => project.featured)
-  .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+const featured = safeProjects.filter((project) => project.featured);
 ---
 
-<SiteLayout
-  title={`${siteConfig.name} — ${siteConfig.portfolioThesis}`}
-  description={`${siteConfig.name}'s portfolio of brand experience, community, and partnerships.`}
->
-  <section class="hero shell" aria-labelledby="home-title">
-    <p class="hero__eyebrow">{siteConfig.name} · Sport · Fashion · Culture</p>
-    <h1 id="home-title">{siteConfig.portfolioThesis}</h1>
-    <p class="hero__description">
-      Brand experience, community, and partnerships shaped by the moments that
-      bring people together.
-    </p>
-    <div class="hero__rule" aria-hidden="true"></div>
-  </section>
-  {featured.length > 0 && (
-    <section class="section shell" id="work" aria-labelledby="work-title">
-      <h2 id="work-title" class="section-heading">
-        Selected work
-      </h2>
-      <div class="project-grid">
-        {featured.map((project) => (
-          <ProjectCard
-            title={project.editorialTitle ?? project.title}
-            client={project.clientPlatform}
-            disciplines={project.disciplines}
-            media={safeMedia.find((item) => project.mediaIds.includes(item.id))}
-          />
-        ))}
-      </div>
-    </section>
-  )}
-</SiteLayout>
+<HomeExperience projects={featured} media={safeMedia} />

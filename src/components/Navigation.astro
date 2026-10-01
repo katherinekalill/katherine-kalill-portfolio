@@ -3,14 +3,44 @@ import { routeHref } from '../lib/site';
 
 interface Props {
   label: string;
-  items: Array<{ href: string; label: string }>;
+  items: Array<{
+    href: string;
+    label: string;
+    sectionId?: string;
+    current?: boolean;
+  }>;
 }
 
 const { label, items } = Astro.props;
 ---
 
-<nav class="site-navigation" aria-label={label}>
-  {items.map(({ href, label: linkLabel }) => (
-    <a href={href.startsWith('/') ? routeHref(href) : href}>{linkLabel}</a>
-  ))}
+<nav class="site-navigation" aria-label={label} data-site-navigation>
+  {items.length > 1 && (
+    <button
+      class="site-navigation__toggle"
+      type="button"
+      aria-expanded="true"
+      aria-controls="site-navigation-items"
+      data-menu-toggle
+      hidden
+    >
+      <span>Menu</span>
+      <span aria-hidden="true">+</span>
+    </button>
+  )}
+  <div
+    class="site-navigation__items"
+    id="site-navigation-items"
+    data-menu-panel
+  >
+    {items.map(({ href, label: linkLabel, sectionId, current }) => (
+      <a
+        href={href.startsWith('/') ? routeHref(href) : href}
+        data-section-id={sectionId}
+        aria-current={current ? 'page' : undefined}
+      >
+        {linkLabel}
+      </a>
+    ))}
+  </div>
 </nav>

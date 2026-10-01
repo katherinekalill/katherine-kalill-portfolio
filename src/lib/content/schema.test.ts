@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   mediaSchema,
   projectSchema,
+  previewProjectProjection,
   publicProjectProjection,
   validateContent,
 } from './schema';
@@ -114,6 +115,37 @@ describe('content publication gate', () => {
     expect(publicRecord).not.toHaveProperty('internalSource');
     expect(publicRecord).not.toHaveProperty('confidentialityEvidence');
     expect(publicRecord).not.toHaveProperty('confidentiality');
+  });
+
+  it('keeps preview story cards limited to a safe display whitelist', () => {
+    const reviewProject = {
+      ...draft,
+      featured: true,
+      featuredOrder: 1,
+      title: 'Sample project',
+      editorialTitle: 'A reason to gather',
+      clientPlatform: 'Sample partner',
+      operatingContext: 'Independent collaboration',
+      disciplines: ['Community'],
+      role: 'PRIVATE_ROLE_SENTINEL',
+      metrics: [
+        {
+          value: 'PRIVATE_METRIC_SENTINEL',
+          label: 'Private result',
+          verification: 'pending' as const,
+        },
+      ],
+    };
+    const [card] = previewProjectProjection([reviewProject]);
+    expect(card).toMatchObject({
+      slug: 'sample',
+      editorialTitle: 'A reason to gather',
+      operatingContext: 'Independent collaboration',
+    });
+    expect(card).not.toHaveProperty('role');
+    expect(card).not.toHaveProperty('metrics');
+    expect(card).not.toHaveProperty('confidentiality');
+    expect(JSON.stringify(card)).not.toContain('PRIVATE_METRIC_SENTINEL');
   });
 
   it('rejects duplicate featured order and unresolved media references', () => {

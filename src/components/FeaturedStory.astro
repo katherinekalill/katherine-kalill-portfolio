@@ -1,0 +1,90 @@
+---
+import MediaFrame from './MediaFrame.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  client: string | null;
+  context: string | null;
+  disciplines: string[];
+  summary: string | null;
+  image?:
+    | {
+        src: string;
+        width: number;
+        height: number;
+        focalPoint: { x: number; y: number };
+        alt: string;
+        decorative: boolean;
+        credit: string | null;
+      }
+    | undefined;
+  previewImage?: string | undefined;
+  reversed?: boolean;
+  reveal?: boolean;
+  revealDelay?: number;
+}
+
+const {
+  id,
+  title,
+  client,
+  context,
+  disciplines,
+  summary,
+  image,
+  previewImage,
+  reversed = false,
+  reveal = false,
+  revealDelay = 0,
+} = Astro.props;
+---
+
+<article
+  class:list={['featured-story', reversed && 'featured-story--reversed']}
+  data-project-id={id}
+  data-reveal={reveal ? '' : undefined}
+  data-reveal-delay={reveal ? revealDelay : undefined}
+>
+  <div class="featured-story__image">
+    {previewImage ? (
+      <MediaFrame
+        src={previewImage}
+        alt=""
+        decorative
+        width={1200}
+        height={800}
+        parallax
+        caption="Synthetic image study for layout review"
+      />
+    ) : image ? (
+      <MediaFrame
+        src={image.src}
+        alt={image.alt}
+        decorative={image.decorative}
+        width={image.width}
+        height={image.height}
+        focalPoint={image.focalPoint}
+        credit={image.credit}
+        parallax
+      />
+    ) : (
+      <div class="featured-story__empty" aria-hidden="true"></div>
+    )}
+  </div>
+  <div class="featured-story__copy">
+    {client && <p class="featured-story__client">{client}</p>}
+    <h3 class="featured-story__title" id={`story-${id}`}>
+      {title}
+    </h3>
+    {context && <p class="featured-story__context">{context}</p>}
+    {summary && <p class="featured-story__summary">{summary}</p>}
+    {disciplines.length > 0 && (
+      <ul class="featured-story__disciplines" aria-label="Project disciplines">
+        {disciplines.map((discipline) => (
+          <li>{discipline}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+</article>

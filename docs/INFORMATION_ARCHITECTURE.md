@@ -20,14 +20,16 @@ All routes are static, with trailing slashes. In development and production they
 
 ### Desktop
 
-From Home, see positioning and the five featured projects in the first viewport and subsequent scroll. Each featured project opens in one interaction. The persistent navigation exposes Work, Archive, About, and the resume when its approved file is available. Case studies link to the next featured story and About. Contact paths live in About and the footer.
+The target journey starts with positioning and leads into the five featured projects. Each finished project will open in one interaction, and the persistent navigation will expose destinations when those pages and approved materials are ready. Case studies will link to the next featured story and About. Contact paths live on the homepage and, once built, in About and the footer.
+
+Current M3 implementation: production navigation exposes only available homepage sections. The non-production `/dev/homepage/` review route previews the intended seven-section narrative and draft five-story order. Its project links remain non-navigating story cards until M4 case-study routes exist. Archive, About, and resume destinations remain deferred to M5; no placeholder route or resume link is published.
 
 ### Tablet
 
-Keep the same content order and navigation destinations. Use a compact navigation with keyboard-operable open/close behavior once built in M3. Project cards may use fewer grid columns; no project should be hidden behind hover.
+Keep the same content order and navigation destinations. The M3 compact navigation has keyboard-operable open/close behavior and remains usable by touch. Project cards may use fewer grid columns; no project should be hidden behind hover.
 
 ### Mobile
 
 Present one readable column with the positioning first and each featured project directly reachable. Navigation must be operable by touch and keyboard. Archive filters remain usable without hover. Resume and LinkedIn remain obvious from About and the footer; omit phone and do not show a placeholder email.
 
-The M2 foundation review validates primitives and layout behavior. Finished Home, Archive, About, and case-study journeys are implemented in M3–M5.
+The M2 foundation review validates primitives and layout behavior. Finished Home, Archive, About, and case-study journeys are implemented in M3–M5. The current M3 homepage is production-safe while Katherine's questionnaire, project evidence, media approvals, and case-study routes are pending.
