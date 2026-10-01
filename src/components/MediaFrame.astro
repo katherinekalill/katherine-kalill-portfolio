@@ -8,11 +8,17 @@ interface Props {
   alt?: string;
   decorative?: boolean;
   focalPoint?: { x: number; y: number };
-  caption?: string;
+  caption?: string | undefined;
   credit?: string | null;
   width?: number;
   height?: number;
   parallax?: boolean;
+  loading?: 'eager' | 'lazy';
+  srcSet?: string | undefined;
+  sizes?: string | undefined;
+  layout?: 'portrait' | 'landscape' | 'full-bleed' | 'detail';
+  fit?: 'cover' | 'natural';
+  hoverZoom?: boolean;
 }
 
 const {
@@ -25,35 +31,66 @@ const {
   width = 1600,
   height = 1000,
   parallax = false,
+  loading = 'lazy',
+  srcSet,
+  sizes,
+  layout,
+  fit = 'cover',
+  hoverZoom = false,
 } = Astro.props;
+const mediaAspect = width / height;
 ---
 
-<figure class="media-frame" style={mediaStyle(focalPoint)}>
+<figure
+  class:list={[
+    'media-frame',
+    layout && `media-frame--${layout}`,
+    fit === 'natural' && 'media-frame--natural',
+  ]}
+  style={`${mediaStyle(focalPoint)}; --media-aspect: ${mediaAspect}`}
+>
   <div
     class="media-frame__content"
     style={`aspect-ratio: ${width} / ${height}`}
   >
     {typeof src === 'string' ? (
-      <img
-        class={parallax ? 'media-frame__image' : undefined}
-        src={routeHref(src)}
-        alt={decorative ? '' : alt}
-        width={width}
-        height={height}
-        loading="lazy"
-        decoding="async"
-        data-parallax={parallax ? '' : undefined}
-      />
+      <div
+        class:list={[
+          'media-frame__zoom',
+          hoverZoom && 'media-frame__zoom--enabled',
+        ]}
+      >
+        <img
+          class={parallax ? 'media-frame__image' : undefined}
+          src={routeHref(src)}
+          alt={decorative ? '' : alt}
+          width={width}
+          height={height}
+          loading={loading}
+          decoding="async"
+          srcset={srcSet}
+          sizes={sizes}
+          data-parallax={parallax ? '' : undefined}
+        />
+      </div>
     ) : src ? (
-      <Image
-        class={parallax ? 'media-frame__image' : undefined}
-        src={src}
-        alt={decorative ? '' : alt}
-        loading="lazy"
-        decoding="async"
-        data-parallax={parallax ? '' : undefined}
-        style={mediaStyle(focalPoint)}
-      />
+      <div
+        class:list={[
+          'media-frame__zoom',
+          hoverZoom && 'media-frame__zoom--enabled',
+        ]}
+      >
+        <Image
+          class={parallax ? 'media-frame__image' : undefined}
+          src={src}
+          alt={decorative ? '' : alt}
+          loading={loading}
+          decoding="async"
+          sizes={sizes}
+          data-parallax={parallax ? '' : undefined}
+          style={mediaStyle(focalPoint)}
+        />
+      </div>
     ) : (
       <div class="media-frame__placeholder" aria-hidden="true"></div>
     )}

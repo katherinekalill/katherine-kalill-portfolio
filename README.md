@@ -8,7 +8,7 @@ An editorial, visual-first portfolio for Katherine Kalill's work across brand ex
 
 The site combines fashion-level art direction and restrained parallax with warm, locally grounded storytelling. Project names and human insights lead; brand names and metrics provide context and proof.
 
-## Provisional featured work
+## Featured work
 
 1. All City Mile x Rebel Relays
 2. Your Mothers Run Crew
@@ -16,7 +16,7 @@ The site combines fashion-level art direction and restrained parallax with warm,
 4. Mom, You Deserve Your Flowers
 5. Women's Self-Defense Initiative with New Balance and REI
 
-The selection remains provisional until the Milestone 1 evidence and asset audit is complete. All other professional, contract, community, owned-platform, and academic work will live in a visual archive.
+The standard homepage links to all five case studies as one coordinated release. Unknown dates stay unlisted. Other professional, contract, community, owned-platform, and academic work is outside the current release.
 
 ## Audience and target roles
 
@@ -61,7 +61,10 @@ npm run test          # Vitest unit tests
 npm run lint          # ESLint
 npm run typecheck     # Astro and TypeScript diagnostics
 npm run build         # Production build in dist/
+npm run check:external-links # Check external links in the built dist/ site
 ```
+
+Build the site before running the external-link check. Access-restricted responses (such as HTTP 403) and rate limits are inconclusive; verify those destinations manually in a browser or from another network.
 
 For browser tests, install the Playwright browsers once, then run the end-to-end suite. It builds the production site and isolated foundation preview, starts local servers on ports 4321 and 4322, and runs Chromium, Firefox, and WebKit tests:
 
@@ -70,7 +73,9 @@ npx playwright install chromium firefox webkit
 npm run test:e2e
 ```
 
-Run the full validation sequence with `npm run check`. To inspect a production build locally, run `npm run build` followed by `npm run preview`, then open <http://localhost:4321/katherine-kalill-portfolio/>.
+After the coordinated release, the standard homepage links to all five `/work/<slug>/` case studies. Developer-only story fixtures are not needed for normal review.
+
+Run the full validation sequence with `npm run check`. To inspect a production build locally, run `npm run build` followed by `npm run preview`, then open <http://localhost:4173/katherine-kalill-portfolio/>. The static preview server uses Vite's default port 4173; the development server uses 4321.
 
 ## Confirmed public-facing choices
 
@@ -82,7 +87,7 @@ Run the full validation sequence with `npm run check`. To inspect a production b
 - Resume: downloadable in v1
 - Framework: Astro with strict TypeScript, typed content collections, custom accessible parallax, and reduced-motion support
 
-The owner confirmed that supplied Drive assets may be used on the public portfolio and in a public repository. This authorization does not establish individual asset ownership, photographer credits, or third-party restrictions; those remain tracked in the private evidence audit. No employer or client restrictions are currently known.
+The owner approved the supplied Drive assets for use on the public portfolio and in a public repository. Credit the selected All City Mile photos to Cooper Reid; the other selected supplied media is approved without required attribution. No additional asset permission or credit approvals are pending for these selections, and no employer or client restrictions are known.
 
 M1 working artifacts: [asset checklist](docs/ASSET_CHECKLIST.md), [copyable project questionnaire](docs/CONTENT_QUESTIONNAIRE.md), [positioning and content drafts](docs/CONTENT_DRAFTS.md), [sitemap and recruiter journeys](docs/INFORMATION_ARCHITECTURE.md), and [typed content model](docs/CONTENT_MODEL.md).
 
@@ -101,4 +106,4 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the complete delivery plan, [docs/PRO
 
 ## Status
 
-Milestones 0–2 - planning complete; content audit, scaffold, visual system, and motion foundations in progress. Katherine's project questionnaire is pending her availability.
+The five case studies and their homepage links are implemented in the working tree. Manual verification is pending; deployment is not confirmed.

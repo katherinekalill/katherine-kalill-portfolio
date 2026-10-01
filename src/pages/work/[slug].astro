@@ -1,0 +1,22 @@
+---
+import CaseStudy from '../../components/CaseStudy.astro';
+import { loadSiteContent } from '../../lib/content/site-content';
+
+export async function getStaticPaths() {
+  const content = await loadSiteContent();
+  if (!content.published) return [];
+  return content.featured.map((project, index) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      media: content.media,
+      previous: content.featured[index - 1],
+      next: content.featured[index + 1],
+    },
+  }));
+}
+
+const { project, media, previous, next } = Astro.props;
+---
+
+<CaseStudy project={project} media={media} previous={previous} next={next} />

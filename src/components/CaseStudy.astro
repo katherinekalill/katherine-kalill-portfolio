@@ -1,0 +1,405 @@
+---
+import '../styles/story.css';
+import ActionLink from './ActionLink.astro';
+import MediaFrame from './MediaFrame.astro';
+import Metric from './Metric.astro';
+import SectionHeading from './SectionHeading.astro';
+import SiteLayout from './SiteLayout.astro';
+import Tag from './Tag.astro';
+import { routeHref } from '../lib/site';
+import type {
+  CaseStudyMedia,
+  CaseStudyProject,
+} from '../lib/content/case-study-types';
+
+interface Props {
+  project: CaseStudyProject;
+  media: CaseStudyMedia[];
+  previous?: CaseStudyProject | undefined;
+  next?: CaseStudyProject | undefined;
+  preview?: boolean;
+}
+
+const { project, media, previous, next, preview = false } = Astro.props;
+const title = project.editorialTitle ?? project.title;
+const heroId = project.presentation.heroMediaId;
+const hero =
+  (heroId ? media.find(({ id }) => id === heroId) : undefined) ??
+  project.mediaIds
+    .map((id) => media.find((item) => item.id === id))
+    .find((item) => item?.decorative !== undefined);
+const imageFor = (id: string) => media.find((item) => item.id === id);
+const byChapter = (id: string) =>
+  project.presentation.gallery.filter((item) => item.chapterId === id);
+const looseGallery = project.presentation.gallery.filter(
+  (item) => !item.chapterId,
+);
+const paragraphs = (value: string) => value.split(/\n{2,}/).filter(Boolean);
+const galleryGroups = <T extends { layout: string }>(placements: T[]) => {
+  const groups: Array<{ placements: T[]; portraitPair: boolean }> = [];
+  for (let index = 0; index < placements.length;) {
+    const current = placements[index];
+    const nextPlacement = placements[index + 1];
+    if (
+      current?.layout === 'portrait' &&
+      nextPlacement?.layout === 'portrait'
+    ) {
+      groups.push({ placements: [current, nextPlacement], portraitPair: true });
+      index += 2;
+    } else if (current) {
+      groups.push({ placements: [current], portraitPair: false });
+      index += 1;
+    } else index += 1;
+  }
+  return groups;
+};
+const mediaSet = (item: CaseStudyMedia) =>
+  item.variants.length > 0
+    ? [item, ...item.variants]
+        .map((variant) => `${routeHref(variant.src)} ${variant.width}w`)
+        .join(', ')
+    : undefined;
+const homeHref = preview ? '/dev/homepage/' : '/';
+const featuredHref = preview ? `${homeHref}#work` : '/#work';
+const hasOverview =
+  Boolean(project.summary || project.role) ||
+  project.targetRoleRelevance.length > 0;
+const hasApproach = Boolean(
+  project.insight || project.intention || project.opportunity || project.idea,
+);
+const hasExperience = Boolean(
+  project.experience ||
+  project.chapters.length ||
+  project.presentation.gallery.length,
+);
+const hasImpact = Boolean(
+  project.metrics.length || project.takeaway || project.credits.length,
+);
+---
+
+<SiteLayout
+  title={`${title} — Katherine Kalill`}
+  description={
+    project.summary ?? `${title} — selected work by Katherine Kalill.`
+  }
+  homeHref={homeHref}
+  reviewLabel={
+    preview
+      ? 'Review fixture · synthetic content and imagery; not portfolio content.'
+      : undefined
+  }
+  robots={preview ? 'noindex,nofollow' : 'index,follow'}
+>
+  <article
+    class:list={['case-study', 'shell', hero && 'case-study--has-hero']}
+    data-case-study={project.slug}
+  >
+    <header class="case-study__header">
+      <p class="eyebrow" data-reveal="story-meta" data-reveal-initial>
+        {project.operatingContext}
+      </p>
+      <h1 class="section-heading" data-reveal="story-title" data-reveal-initial>
+        {title}
+      </h1>
+      {project.clientPlatform && (
+        <p
+          class="case-study__client"
+          data-reveal="story-meta"
+          data-reveal-initial
+        >
+          {project.clientPlatform}
+        </p>
+      )}
+      <dl class="case-study__metadata" data-reveal-group>
+        {project.location && (
+          <div data-reveal="story-meta">
+            <dt>Location</dt>
+            <dd>{project.location}</dd>
+          </div>
+        )}
+        {project.year && (
+          <div data-reveal="story-meta">
+            <dt>Year</dt>
+            <dd>{project.year}</dd>
+          </div>
+        )}
+        {project.disciplines.length > 0 && (
+          <div data-reveal="story-meta">
+            <dt>Disciplines</dt>
+            <dd>{project.disciplines.join(' · ')}</dd>
+          </div>
+        )}
+      </dl>
+    </header>
+
+    {hero && (
+      <div class="case-study__hero" data-reveal="image" data-reveal-initial>
+        <MediaFrame
+          src={hero.src}
+          srcSet={mediaSet(hero)}
+          sizes="(min-width: 64rem) 40vw, 100vw"
+          alt={hero.alt}
+          decorative={hero.decorative}
+          width={hero.width}
+          height={hero.height}
+          focalPoint={hero.focalPoint}
+          credit={hero.credit}
+          loading="eager"
+          layout="landscape"
+          fit="natural"
+        />
+      </div>
+    )}
+
+    <div class="case-study__body">
+      {hasOverview && (
+        <section class="case-study__section" aria-labelledby="case-overview">
+          <SectionHeading
+            id="case-overview"
+            eyebrow="01 · Overview"
+            title="Overview"
+            level={2}
+            reveal
+          />
+          <div class="case-study__prose" data-reveal-group>
+            {project.summary && (
+              <p data-reveal="story-block">{project.summary}</p>
+            )}
+            {project.role && (
+              <div class="case-study__role" data-reveal="story-block">
+                <h3>Role</h3>
+                <p>{project.role}</p>
+                {project.targetRoleRelevance.length > 0 && (
+                  <ul class="case-study__disciplines">
+                    {project.targetRoleRelevance.map((role) => (
+                      <li>
+                        <Tag>{role}</Tag>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            {!project.role && project.targetRoleRelevance.length > 0 && (
+              <div class="case-study__role" data-reveal="story-block">
+                <h3>Role</h3>
+                <ul class="case-study__disciplines">
+                  {project.targetRoleRelevance.map((role) => (
+                    <li>
+                      <Tag>{role}</Tag>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {hasApproach && (
+        <section class="case-study__section" aria-labelledby="case-approach">
+          <SectionHeading
+            id="case-approach"
+            eyebrow="02 · Approach"
+            title="Approach"
+            level={2}
+            reveal
+          />
+          <div class="case-study__prose" data-reveal-group>
+            {project.insight && (
+              <div data-reveal="story-block">
+                <h3>The human insight</h3>
+                <p>{project.insight}</p>
+              </div>
+            )}
+            {project.intention && (
+              <div data-reveal="story-block">
+                <h3>The feeling to create</h3>
+                <p>{project.intention}</p>
+              </div>
+            )}
+            {project.opportunity && (
+              <div data-reveal="story-block">
+                <h3>The opportunity</h3>
+                <p>{project.opportunity}</p>
+              </div>
+            )}
+            {project.idea && (
+              <div data-reveal="story-block">
+                <h3>The idea</h3>
+                <p>{project.idea}</p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {hasExperience && (
+        <section class="case-study__section" aria-labelledby="case-experience">
+          <SectionHeading
+            id="case-experience"
+            eyebrow="03 · Experience"
+            title="Experience"
+            level={2}
+            reveal
+          />
+          {project.experience && (
+            <div class="case-study__prose" data-reveal-group>
+              {paragraphs(project.experience).map((paragraph) => (
+                <p data-reveal="story-block">{paragraph}</p>
+              ))}
+            </div>
+          )}
+          {project.chapters.map((chapter) => (
+            <section
+              class="case-study__chapter"
+              id={`chapter-${chapter.id}`}
+              aria-labelledby={`chapter-title-${chapter.id}`}
+            >
+              <h3 id={`chapter-title-${chapter.id}`} data-reveal="story-block">
+                {chapter.title}
+              </h3>
+              <div class="case-study__prose" data-reveal-group>
+                {paragraphs(chapter.body).map((paragraph) => (
+                  <p data-reveal="story-block">{paragraph}</p>
+                ))}
+              </div>
+              {galleryGroups(byChapter(chapter.id)).map(
+                ({ placements, portraitPair }) => (
+                  <div
+                    class:list={[
+                      'case-study__gallery',
+                      portraitPair && 'case-study__gallery--portrait-pair',
+                    ]}
+                  >
+                    {placements.map((placement) => {
+                      const item = imageFor(placement.mediaId);
+                      return (
+                        item && (
+                          <div data-reveal="image">
+                            <MediaFrame
+                              src={item.src}
+                              srcSet={mediaSet(item)}
+                              sizes="(min-width: 64rem) 44vw, 100vw"
+                              alt={item.alt}
+                              decorative={item.decorative}
+                              width={item.width}
+                              height={item.height}
+                              focalPoint={item.focalPoint}
+                              credit={item.credit}
+                              caption={placement.caption ?? undefined}
+                              layout={placement.layout}
+                              parallax
+                            />
+                          </div>
+                        )
+                      );
+                    })}
+                  </div>
+                ),
+              )}
+            </section>
+          ))}
+          {galleryGroups(looseGallery).map(({ placements, portraitPair }) => (
+            <div
+              class:list={[
+                'case-study__gallery',
+                portraitPair && 'case-study__gallery--portrait-pair',
+              ]}
+            >
+              {placements.map((placement) => {
+                const item = imageFor(placement.mediaId);
+                return (
+                  item && (
+                    <div data-reveal="image">
+                      <MediaFrame
+                        src={item.src}
+                        srcSet={mediaSet(item)}
+                        sizes="(min-width: 64rem) 44vw, 100vw"
+                        alt={item.alt}
+                        decorative={item.decorative}
+                        width={item.width}
+                        height={item.height}
+                        focalPoint={item.focalPoint}
+                        credit={item.credit}
+                        caption={placement.caption ?? undefined}
+                        layout={placement.layout}
+                        parallax
+                      />
+                    </div>
+                  )
+                );
+              })}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {hasImpact && (
+        <section class="case-study__section" aria-labelledby="case-impact">
+          <SectionHeading
+            id="case-impact"
+            eyebrow="04 · Impact and credits"
+            title="Impact and credits"
+            level={2}
+            reveal
+          />
+          {project.metrics.length > 0 && (
+            <div class="case-study__metrics" data-reveal-group>
+              {project.metrics.map((metric) => (
+                <div data-reveal="story-block">
+                  <Metric value={metric.value} label={metric.label} />
+                </div>
+              ))}
+            </div>
+          )}
+          {project.takeaway && (
+            <div class="case-study__learning" data-reveal="story-block">
+              <h3>Learning</h3>
+              <p>{project.takeaway}</p>
+            </div>
+          )}
+          {project.credits.length > 0 && (
+            <div class="case-study__credit-list">
+              <h3>With thanks</h3>
+              <ul class="case-study__credits" data-reveal-group>
+                {project.credits.map((credit) => (
+                  <li data-reveal="story-block">
+                    <strong>{credit.name}</strong>
+                    <span>{credit.contribution}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
+    </div>
+
+    <nav
+      class="case-study__pagination"
+      aria-label="Featured project navigation"
+      data-reveal="pagination"
+    >
+      {previous ? (
+        <ActionLink
+          href={routeHref(
+            `${preview ? '/dev/work' : '/work'}/${previous.slug}/`,
+          )}
+          label={`← Previous · ${previous.editorialTitle ?? previous.title}`}
+        />
+      ) : (
+        <span />
+      )}
+      <ActionLink href={routeHref(featuredHref)} label="All featured work" />
+      {next ? (
+        <ActionLink
+          href={routeHref(`${preview ? '/dev/work' : '/work'}/${next.slug}/`)}
+          label={`Next · ${next.editorialTitle ?? next.title} →`}
+        />
+      ) : (
+        <span />
+      )}
+    </nav>
+  </article>
+</SiteLayout>

@@ -1,6 +1,6 @@
-# Working portfolio copy
+# Portfolio copy and publication status
 
-This is an editorial draft based on the approved project inventory and current brief. It is not final publication copy. The five featured project summaries are also stored in `src/data/projects.json`; each record remains `draft`, so none of this project copy enters the public build. Claims about dates, Katherine's precise role, collaborators, outcomes, and media rights stay out until they are verified.
+This working copy uses Katherine’s questionnaire and the supplied case-study material. The five featured records in `src/data/projects.json` contain the current approved story copy, reported outcomes, and media placements. The featured release remains coordinated: publish all five together after the media manifest is present and its references, permissions, and presentation placements validate.
 
 ## Homepage positioning
 
@@ -8,24 +8,26 @@ This is an editorial draft based on the approved project inventory and current b
 
 Brand experience, community, and partnerships shaped by the moments that bring people together.
 
-## Short bio draft
+## Short bio
 
 Katherine Kalill works across brand experience, community, and partnerships in sport, fashion, and culture. Her work explores how thoughtful experiences can bring people together around shared interests and ideas.
 
-This positioning uses only the approved disciplines and tone. Add employment history, role seniority, dates, and specific outcomes after Katherine reviews the questionnaire and supplies an up-to-date resume.
+This remains a short discipline-based introduction. Employment dates, seniority, education, and an up-to-date resume have not been supplied; do not add them by inference.
 
-## Featured project summaries
+## Featured stories
 
-The current drafts are in the corresponding `summary` fields in `src/data/projects.json`:
+The featured order is fixed: All City Mile × Rebel Relays; Your Mothers Run Crew; Freaks of Nature × Alba Optics × Runaway Milano; Mom, You Deserve Your Flowers; Women’s Self-Defense Initiative.
 
-- All City Mile × Rebel Relays: community and competition, with participation and fundraising figures pending reconciliation.
-- Your Mothers Run Crew: founder-led community and partner activations, with role and participation details pending.
-- Freaks of Nature × Alba Optics × Runaway Milano: an independent Milan collaboration, with date, partner roles, and attendance pending.
-- Mom, You Deserve Your Flowers: a retail and emotional-storytelling concept, with role and measured outcomes pending.
-- Women's Self-Defense Initiative: practical programming through a New Balance and REI partnership, with participation and sales outcomes pending.
+- **All City Mile × Rebel Relays:** 2025, Seattle. The questionnaire confirms 300+ runners, 30+ volunteers, eight heats plus relays, sold-out registration, and $5,000 raised for Girls on the Run. The older 225-participant/$3,500+ and 275% growth figures are excluded because they conflict or lack a clear baseline. Photo credit: Cooper Reid.
+- **Your Mothers Run Crew:** Katherine founded the women-only Austin monthly run community, developed its logo and brand strategy, and led sold-out New Balance collaborations with Goop and Little Words Project in August and November 2024. The exact month-to-partner mapping is not supplied, so the copy does not assign the dates to an activation; attendance is not stated. Supplied images and the selected Goop still are cleared for public use; no credit is requested.
+- **Freaks of Nature × Alba Optics × Runaway Milano:** February 20 in Milan; year not supplied. Katherine coordinated the event for Freaks of Nature through Katherine Kalill Productions and delivered two reels. Fifty places sold out; that is capacity, not attendance. Do not infer the year from the Olympic Torch route. Supplied images are cleared; no credit is requested.
+- **Mom, You Deserve Your Flowers:** May 10, 2025, Seattle. Katherine pitched and planned the New Balance/Athletic Form collaboration, created event branding and graphics, developed a limited 200-shirt drop, and coordinated event details. The event sold out and generated 60+ organic posts. These figures do not establish attendance or sales attribution.
+- **Women’s Self-Defense Initiative:** March 16, 2025, Seattle. Katherine planned and managed the New Balance initiative with REI and community partners; the event sold out. The questionnaire reports 225% year-over-year New Balance sales growth at REI Seattle in March 2025 versus March 2024. The copy explicitly presents this as concurrent retail performance, not an outcome caused by the event. The 420% year-to-date figure is excluded because its comparison wording remains inconsistent.
 
-These are starting summaries, not complete case studies. Insight, intention, execution, Katherine's contribution, verified results, and takeaways need project-specific review before publication.
+The records keep a distinct insight, intention, opportunity, idea, personal role, and event experience. No personal learning was supplied, so takeaways remain empty rather than inventing one.
 
-## Archive copy status
+## Archive drafts
 
-Archive records currently carry concise project names and only the operating context established in the inventory. iRestore is a completed three-month social media community-management contract. Other archive summaries, role descriptions, dates, and outcomes remain unwritten where the current source does not establish them; do not infer them from folder names.
+The existing Western Canada / Oak Bay record is the appropriate archive entry for the Oak Bay Half Marathon and Rebel v5 activation. The supplied case-study material describes retail training, ambassador content, an 80-runner shakeout, a four-day social takeover, nine reels, and account-level reach/viewership changes. Keep it a draft until its media is assigned and the year and metric provenance are confirmed. The distinct Sara Anfuso and Super Jock ’n Jill urban hike is written to the existing `urban-hike-sara` draft record; its reported attendance and demo-pair figures remain pending review. Do not create duplicate projects or M5 routes here.
+
+Other archive records remain drafts unless their facts, ownership context, and selection are supported. Mark academic concepts, contracts, personal work, and owned platforms clearly if they are later selected. The resume, instructor identity, exact August/November partner-date mapping, and REI sales baseline/window evidence are still outstanding.

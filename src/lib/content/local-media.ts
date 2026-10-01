@@ -7,21 +7,23 @@ export function validateLocalMediaFiles(media: Media[]): string[] {
   const issues: string[] = [];
 
   for (const item of media) {
-    const filePath = resolve(publicRoot, item.src.slice(1));
-    let isFile = false;
-    try {
-      isFile = statSync(filePath).isFile();
-    } catch {
-      // A missing path is invalid media.
-    }
-    if (
-      (filePath !== publicRoot &&
-        !filePath.startsWith(`${publicRoot}${sep}`)) ||
-      !isFile
-    ) {
-      issues.push(
-        `Media ${item.id} does not resolve to a file in public/: ${item.src}`,
-      );
+    for (const source of [item.src, ...item.variants.map(({ src }) => src)]) {
+      const filePath = resolve(publicRoot, source.slice(1));
+      let isFile = false;
+      try {
+        isFile = statSync(filePath).isFile();
+      } catch {
+        // A missing path is invalid media.
+      }
+      if (
+        (filePath !== publicRoot &&
+          !filePath.startsWith(`${publicRoot}${sep}`)) ||
+        !isFile
+      ) {
+        issues.push(
+          `Media ${item.id} does not resolve to a file in public/: ${source}`,
+        );
+      }
     }
   }
 

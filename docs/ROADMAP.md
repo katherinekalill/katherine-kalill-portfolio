@@ -1,76 +1,74 @@
-# Portfolio Roadmap
+# Portfolio roadmap and acceptance readiness
 
-## Milestone 0 - Foundation and decisions
+## Milestone 0 — Foundation and decisions
 
-- Confirm creative brief, target roles, featured projects, public contact details, and launch constraints.
-- Configure the private repository, milestones, issues, and planning documentation.
-- Confirm GitHub Pages visibility requirements before launch.
+**Confirmed v1 constraints:** default GitHub Pages URL; private repository development with permission to make the repository public at launch; no custom domain or analytics; public LinkedIn and email; phone omitted; downloadable resume planned; Astro, strict TypeScript, and accessible custom parallax. The visual reference and balanced editorial/community tone are recorded in the project brief.
 
-Confirmed: Aldo Mazzilli reference; balanced editorial/community tone; public LinkedIn (https://www.linkedin.com/in/katherine-kalill/); public email (katherinerkalill@gmail.com); phone omitted for privacy; private development with permission to make the repository public at launch; default GitHub Pages URL (https://katherinekalill.github.io/katherine-kalill-portfolio/); no custom domain for v1; no analytics; downloadable resume; Astro, strict TypeScript, and custom accessible parallax. No employer or client restrictions are currently known. Publication permission for the supplied Drive assets is recorded separately from per-file ownership and credit evidence.
+- **#1 Brief and launch constraints:** recorded in the project plan.
+- **#2 Source-asset and permissions checklist:** public-use and credit decisions for the five featured projects are recorded in `docs/ASSET_CHECKLIST.md` and the media manifest. Keep the issue open until its acceptance criteria are reviewed and the final asset inventory is accepted.
+- **#3 Repository and milestone workflow:** already configured; do not infer issue closure from this summary.
 
-The five projects remain provisional until the asset, role, and evidence audit. Resume file is pending. Per-asset ownership, photographer credits, and third-party permissions remain to be verified. Do not close M0/#2 until its evidence acceptance criteria are met.
+## Milestone 1 — Content strategy and information architecture
 
-## Milestone 1 - Content strategy and information architecture
+- **#4 Project audit:** the featured five are fixed in the approved order. Archive work remains draft; Oak Bay uses the existing Western Canada record and Urban Hike with Sara stays separate. Archive eligibility and missing provenance still need review.
+- **#5 Sitemap and recruiter journeys:** approved structure is documented in `docs/INFORMATION_ARCHITECTURE.md`. The archive, About, and resume work belongs to M5.
+- **#6 Portfolio copy:** source-backed copy for the five stories is in `src/data/projects.json`; accepted facts and omissions are documented in `docs/CONTENT_DRAFTS.md`. Remaining follow-up items are listed in `docs/CONTENT_QUESTIONNAIRE.md`.
+- **#8 Typed project and media model:** working-tree schema, loader, publication gate, and case-study presentation fields are implemented. Issue acceptance checks have not been recorded here.
 
-- Audit all work and finalize the featured five versus archive.
-- Approve the sitemap and recruiter journeys.
-- Define a typed project and media model.
-- Draft concise portfolio copy from available evidence; prepare project questions for Katherine; verify remaining dates, roles, credits, and claims from her responses and source records.
-- Keep M1/#8 open until the M2 scaffold runs its content schema and publication checks.
+Do not close M1 issues solely because copy, documents, or implementation exist. Record issue-specific evidence against each acceptance criterion first.
 
-## Milestone 2 - Technical scaffold and visual system
+## Milestone 2 — Technical scaffold and visual system
 
-- Scaffold Astro with strict TypeScript, linting, formatting, and tests using Node 24 LTS.
-- Implement the editorial design system and responsive component primitives.
-- Implement accessible parallax and motion that respect reduced-motion preferences.
-- Build a non-production foundation review page so every visual primitive and motion behavior can be reviewed without publishing draft work.
+Astro, strict TypeScript, the editorial design system, and accessible motion/navigation primitives are implemented in the working tree. The design references and ten-part source framework are recorded in `docs/DESIGN_REFERENCES.md`. Issues #9 and #10 remain open for manual acceptance; this implementation status does not record their acceptance.
 
-The M1 questionnaire and content-model specification are in `docs/CONTENT_QUESTIONNAIRE.md` and `docs/CONTENT_MODEL.md`. The approved sitemap and recruiter journeys are in `docs/INFORMATION_ARCHITECTURE.md`. The copy draft is in `docs/CONTENT_DRAFTS.md`; private source/evidence records are not stored in this public-capable repository.
+## Milestone 3 — Homepage experience
 
-## Milestone 3 - Homepage experience
+- **#11 Homepage narrative:** implemented with approved positioning, capabilities, featured work, and contact content. Issue #11 remains open for manual acceptance and Katherine’s editorial review.
+- **Homepage collaborators:** fine-pointer desktop previews show only on the hovered or focused row, keyboard focus takes precedence, and touch layouts retain one static thumbnail per row. Credit notes derive from available credited media; manual acceptance remains pending.
+- **#12 Navigation and transitions:** implemented, including keyboard/touch behavior and reduced-motion handling. Issue #12 remains open for manual acceptance.
 
-- Build the hero, point of view, featured work sequence, capabilities, and closing contact area.
-- Build accessible navigation, responsive behavior, and restrained page transitions.
+## Milestone 4 — Featured case studies
 
-Implemented: the production homepage uses only approved positioning, capabilities, email, and LinkedIn; the `/dev/homepage/` review page presents the provisional five-story order with synthetic images and an explicit review banner. Featured work and project-context range remain unpublished until all five stories have verified content and approved media. The navigation supports keyboard, touch, no-JavaScript links, current-section state, and browser history/scroll restoration. Native page transitions leave destination content visible immediately and turn off under reduced motion. The `/dev/story/` route is a temporary navigation fixture; production story routes belong to M4. M3 issue closure still requires Katherine's content and visual review for #11; #12's production case-study navigation depends on M4 routes.
+- **#13 Reusable case-study template:** implemented with named content sections, gallery chapter placements, responsive local media, and credits. At 1024px and above, compact story copy sits beside a natural-ratio contained hero; narrower layouts stack the intro and hero before the full story body. Issue #13 remains open for manual template acceptance.
+- **#14 All City Mile, #15 Your Mothers Run Crew, #16 Freaks of Nature, #17 Mom, You Deserve Your Flowers, #19 Women’s Self-Defense:** source-backed copy, cleared selected media, credits, and gallery placements are present. The five project records are set to `published` together. Issue acceptance, final editorial review, media rendering/repository checks, and outstanding questions are not represented as complete by that data status.
 
-## Milestone 4 - Featured case studies
+Known follow-ups remain: month-to-partner mapping for Your Mothers Run Crew, the Freaks event year, underlying REI comparison values/window, instructor name/credit preference, resume and factual bio, and archive selection/provenance. Do not close the related issues until criteria are met; omission of a nonessential unknown from public copy does not resolve the evidence request.
 
-- Build the reusable case-study template.
-- Publish and verify the five featured project stories.
+## Milestone 5 — Archive, profile, resume, contact
 
-## Milestone 5 - Archive, profile, resume, and contact
+Archive, About, capabilities, resume download, and remaining contact experience are not claimed complete here. Oak Bay is only a sourced, non-featured draft in the existing record; no M5 route is added by this content update.
 
-- Build the filterable visual archive.
-- Build About and capabilities content.
-- Add resume download and public contact details.
+## Milestone 6 — Quality and launch
 
-## Milestone 6 - Quality and launch
-
-- Complete accessibility, performance, SEO, privacy, and automated-test work.
-- Configure GitHub Pages deployment.
-- Complete final editorial QA and tag `v1.0.0`.
-
-## Case-study framework
-
-1. Context
-2. Human insight
-3. Emotional intention
-4. Opportunity or constraint
-5. The idea
-6. Katherine's role
-7. Experience and execution
-8. Measurable impact
-9. What changed or what was learned
-10. Credits and collaborators
+Accessibility, performance, privacy/SEO, automated validation, GitHub Pages deployment, and final QA remain separate acceptance work. No test or issue closure is implied by the content updates.
 
 ## Quality gates
 
-- No invented metrics, unsupported claims, or ambiguous authorship.
-- No confidential or unapproved assets.
-- No dead code, unused dependencies, placeholder starter files, or console errors.
-- Keyboard access, WCAG AA contrast, semantic headings, alt text, and reduced-motion support.
-- Responsive QA from 320px mobile through wide desktop.
-- Target Lighthouse mobile scores: Performance 90+, Accessibility 95+, Best Practices 95+, SEO 95+.
-- Browser support: current Safari, Chrome, and Firefox plus current iPhone-size Safari behavior.
-- Performance budget proposal: no unnecessary client framework, no scroll-hijacking library, and no unoptimized original photography shipped to production.
+- Meet WCAG AA contrast and keyboard access; use semantic headings and meaningful alt text; respect reduced-motion preferences.
+- Review responsive behavior from 320px mobile through wide desktop, including current Safari, Chrome, Firefox, and iPhone-size Safari.
+- Target Lighthouse mobile scores of Performance 90+, Accessibility 95+, Best Practices 95+, and SEO 95+.
+- Keep SEO, sharing, and privacy decisions explicit; do not add analytics without a separate approved decision.
+- Do not ship unoptimized original photography or unnecessary client-side framework code.
+- Do not include unsupported claims, private evidence, confidential material, or uncleared assets in production.
+
+## Case-study editorial framework
+
+1. Context
+2. Human insight
+3. Intention
+4. Opportunity
+5. Idea
+6. Katherine’s role
+7. Experience and execution
+8. Measurable impact
+9. Learning, only when supplied
+10. Credits and collaborators
+
+## Release guardrails
+
+- Keep the featured order fixed: All City Mile, Your Mothers Run Crew, Freaks of Nature, You Deserve Your Flowers, Women’s Self-Defense.
+- Keep the five featured stories in a coordinated release.
+- Do not infer the Freaks year or assign Your Mothers Run Crew’s August/November dates to individual activations.
+- Describe REI’s 225% comparison as concurrent March year-over-year retail growth, not event-caused; omit the conflicting 420% figure.
+- Omit All City Mile’s 275% growth claim because the baseline is unclear; use the questionnaire’s corrected 300+ runners, 30+ volunteers, sold-out status, and $5,000 Girls on the Run figure.
+- Keep source PDFs, local originals, private evidence, and private file paths out of tracked documentation and the production site.

@@ -1,0 +1,140 @@
+---
+import { homepageCollaborators } from '../data/homepage-collaborators';
+import { routeHref } from '../lib/site';
+import MediaFrame from './MediaFrame.astro';
+
+interface MediaItem {
+  id: string;
+  src: string;
+  width: number;
+  height: number;
+  focalPoint: { x: number; y: number };
+  alt: string;
+  credit: string | null;
+  variants: Array<{ src: string; width: number; height: number }>;
+}
+
+interface ProjectItem {
+  slug: string;
+  mediaIds?: string[];
+  chapters?: Array<{ id: string }>;
+}
+
+interface Props {
+  media: MediaItem[];
+  projects: ProjectItem[];
+  preview?: boolean;
+}
+
+const { media, projects, preview = false } = Astro.props;
+const allCityMileCredits = [
+  ...new Set(
+    homepageCollaborators
+      .filter(({ projectSlug }) => projectSlug === 'all-city-mile')
+      .flatMap(({ mediaIds }) => mediaIds)
+      .map((id) => media.find((item) => item.id === id)?.credit)
+      .filter((credit): credit is string => Boolean(credit)),
+  ),
+];
+const allCityMileCreditNote =
+  !preview && allCityMileCredits.length
+    ? `All City Mile photography: ${allCityMileCredits.join(', ')}.`
+    : undefined;
+const allCityMileCreditNoteId = allCityMileCreditNote
+  ? 'all-city-mile-photo-credit'
+  : undefined;
+
+if (!preview) {
+  for (const collaborator of homepageCollaborators) {
+    const project = projects.find(
+      ({ slug }) => slug === collaborator.projectSlug,
+    );
+    if (!project)
+      throw new Error(
+        `Missing collaborator project: ${collaborator.projectSlug}`,
+      );
+    if (
+      collaborator.chapterId &&
+      !project.chapters?.some(({ id }) => id === collaborator.chapterId)
+    ) {
+      throw new Error(
+        `Missing collaborator chapter: ${collaborator.chapterId}`,
+      );
+    }
+    if (collaborator.mediaIds.some((id) => !project.mediaIds?.includes(id))) {
+      throw new Error(`Unassigned collaborator media for ${collaborator.name}`);
+    }
+  }
+}
+---
+
+<div class="collaborator-list-group">
+  <ul class="collaborator-list" aria-label="Brands and collaborators">
+    {homepageCollaborators.map((collaborator) => {
+      const images = collaborator.mediaIds
+        .map((id) => media.find((item) => item.id === id))
+        .filter((item): item is MediaItem => item !== undefined);
+      return (
+        <li class="collaborator-list__item">
+          <a
+            class="collaborator-list__link"
+            href={routeHref(
+              `${preview ? '/dev' : ''}/work/${collaborator.projectSlug}/${
+                collaborator.chapterId
+                  ? `#chapter-${collaborator.chapterId}`
+                  : ''
+              }`,
+            )}
+            aria-describedby={
+              collaborator.projectSlug === 'all-city-mile'
+                ? allCityMileCreditNoteId
+                : undefined
+            }
+          >
+            <span class="collaborator-list__copy">
+              <span class="collaborator-list__name">{collaborator.name}</span>
+              <span class="collaborator-list__relationship">
+                {collaborator.relationship}
+              </span>
+            </span>
+            <span class="collaborator-list__previews" aria-hidden="true">
+              {images.map((image, imageIndex) => (
+                <span
+                  class:list={[
+                    'collaborator-list__preview',
+                    imageIndex > 0 && 'collaborator-list__preview--secondary',
+                  ]}
+                >
+                  <MediaFrame
+                    src={image.src}
+                    srcSet={
+                      image.variants.length > 0
+                        ? [image, ...image.variants]
+                            .map(
+                              (variant) =>
+                                `${routeHref(variant.src)} ${variant.width}w`,
+                            )
+                            .join(', ')
+                        : undefined
+                    }
+                    sizes="(min-width: 80rem) 12vw, (min-width: 48rem) 16vw, 24vw"
+                    alt=""
+                    decorative
+                    width={image.width}
+                    height={image.height}
+                    focalPoint={image.focalPoint}
+                  />
+                </span>
+              ))}
+            </span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+  {allCityMileCreditNote && (
+    <p class="collaborator-list__credit" id={allCityMileCreditNoteId}>
+      {allCityMileCreditNote}
+    </p>
+  )}
+</div>

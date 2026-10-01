@@ -10,7 +10,7 @@ export const homepageCopy = {
       'Good experiences begin with how they make people feel. A clear intention, thoughtful partnerships, and considered details can turn that feeling into shared connection.',
   },
   range: {
-    eyebrow: 'The operating range',
+    eyebrow: 'Brands and collaborators',
     title: 'From global brands to independent communities',
     description:
       'Different scales, shared interests, and one human reason to gather.',

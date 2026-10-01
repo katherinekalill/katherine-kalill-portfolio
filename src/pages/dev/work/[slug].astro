@@ -1,0 +1,30 @@
+---
+import CaseStudy from '../../../components/CaseStudy.astro';
+import {
+  caseStudyFixtures,
+  fixtureMedia,
+} from '../../../lib/content/case-study-fixtures';
+
+export function getStaticPaths() {
+  if (!import.meta.env.DEV && process.env.FOUNDATION_PREVIEW !== '1') return [];
+  return caseStudyFixtures.map((project, index) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      media: fixtureMedia(project),
+      previous: caseStudyFixtures[index - 1],
+      next: caseStudyFixtures[index + 1],
+    },
+  }));
+}
+
+const { project, media, previous, next } = Astro.props;
+---
+
+<CaseStudy
+  project={project}
+  media={media}
+  previous={previous}
+  next={next}
+  preview
+/>

@@ -4,12 +4,17 @@ interface Props {
   title: string;
   level?: 2 | 3;
   id?: string;
+  reveal?: boolean;
 }
-const { eyebrow, title, level = 2, id } = Astro.props;
+const { eyebrow, title, level = 2, id, reveal = false } = Astro.props;
 const Heading = `h${level}` as const;
 ---
 
 {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-<Heading id={id} class={`section-heading section-heading--${level}`}>
+<Heading
+  id={id}
+  class={`section-heading section-heading--${level}`}
+  data-reveal={reveal ? 'story-heading' : undefined}
+>
   {title}
 </Heading>

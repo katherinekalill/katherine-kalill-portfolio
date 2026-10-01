@@ -2,157 +2,520 @@
   {
     "id": "all-city-mile",
     "slug": "all-city-mile",
-    "status": "draft",
+    "status": "published",
     "featured": true,
     "featuredOrder": 1,
     "title": "All City Mile × Rebel Relays",
     "editorialTitle": "Making Competition Feel Like Community",
     "clientPlatform": "New Balance × Rebel Relays",
-    "operatingContext": "Global brand · community · product launch",
-    "location": null,
-    "year": null,
-    "disciplines": ["Brand experience", "Community", "Events"],
-    "summary": "A New Balance and Rebel Relays experience framed around making competition feel like community. The available materials point to an event connected to community and product launch; the event details and reported participation and fundraising figures still need confirmation.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
+    "operatingContext": "New Balance field marketing · community event · product launch",
+    "location": "Seattle",
+    "year": 2025,
+    "disciplines": [
+      "Brand experience",
+      "Community",
+      "Events",
+      "Product launch"
+    ],
+    "summary": "New Balance revived Seattle’s All City Mile at UW Husky Track in 2025. The sold-out event welcomed 300+ runners across eight heats and relays, supported by 30+ volunteers, and raised $5,000 for Girls on the Run.",
+    "insight": "Seattle runners still cared about the All City Mile, a community event that had been inactive for several years. New Balance needed an introduction to its new Rebel shoe that felt rooted in local running culture.",
+    "intention": "Revive a beloved local event while creating an authentic setting for runners to experience the New Balance Rebel and supporting Girls on the Run.",
+    "opportunity": "Pair a new running shoe launch with the return of an established community event, giving runners a reason to race, gather, and try the product.",
+    "idea": "Bring the All City Mile back to UW Husky Track as a race-like community expo, with multiple heats, partner activations, and a Rebel-only relay.",
+    "role": "As New Balance Field Marketing Specialist, I conceptualized, planned, and executed the event. I cultivated the partner network, led event logistics and volunteer coordination, and helped shape the event identity and promotion.",
+    "experience": "A month-long campaign used New Balance, partner, and personal channels. A pre-event Intro to Rebel run helped build momentum. On race day, eight heats made space for runners of different abilities; a relay required participants to wear the Rebel. Shokz, Nuun, Super Jock ’n Jill, CSRD, and Athletic Form contributed partner activations. More than 30 volunteers supported operations.",
+    "metrics": [
+      {
+        "value": "300+",
+        "label": "runners at the 2025 Seattle event",
+        "verification": "verified"
+      },
+      {
+        "value": "30+",
+        "label": "event volunteers",
+        "verification": "verified"
+      },
+      {
+        "value": "$5,000",
+        "label": "raised for Girls on the Run",
+        "verification": "verified"
+      },
+      {
+        "value": "Sold out",
+        "label": "event registration",
+        "verification": "verified"
+      }
+    ],
     "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
+    "mediaIds": ["all-city-mile-hero", "all-city-mile-huddle"],
+    "credits": [
+      {
+        "name": "New Balance",
+        "contribution": "Employer and event sponsor"
+      },
+      {
+        "name": "Shokz",
+        "contribution": "Contributing event partner"
+      },
+      {
+        "name": "Nuun",
+        "contribution": "Contributing event partner"
+      },
+      {
+        "name": "Super Jock ’n Jill",
+        "contribution": "Contributing event partner"
+      },
+      {
+        "name": "CSRD",
+        "contribution": "Community partner"
+      },
+      {
+        "name": "Athletic Form",
+        "contribution": "Community partner"
+      },
+      {
+        "name": "Cooper Reid",
+        "contribution": "Event photographer"
+      }
+    ],
+    "confidentiality": "clear",
     "targetRoleRelevance": [
       "Brand experience",
       "Community marketing",
       "Event marketing"
-    ]
+    ],
+    "chapters": [
+      {
+        "id": "race-day-format",
+        "title": "A race-day format with room to gather",
+        "body": "The event included a kids’ dash and a relay that gave runners another chance to try the Rebel. Recovery stations and run-form clinics added practical value for participants."
+      }
+    ],
+    "presentation": {
+      "heroMediaId": "all-city-mile-hero",
+      "gallery": [
+        {
+          "mediaId": "all-city-mile-huddle",
+          "layout": "landscape",
+          "caption": "Runners join a huddle at the track.",
+          "chapterId": "race-day-format"
+        }
+      ]
+    }
   },
   {
     "id": "your-mothers-run-crew",
     "slug": "your-mothers-run-crew",
-    "status": "draft",
+    "status": "published",
     "featured": true,
     "featuredOrder": 2,
     "title": "Your Mothers Run Crew",
     "editorialTitle": "Building a Community People Return To",
-    "clientPlatform": "Your Mothers Run Crew",
-    "operatingContext": "Owned community · founder-led · partnerships",
-    "location": null,
-    "year": null,
-    "disciplines": ["Community", "Partnerships", "Events"],
-    "summary": "A founder-led running community explored through partnerships with Goop and Little Words Project. The available folders establish the partner context; the activation details, Katherine’s role, and any participation outcomes remain to be confirmed.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
+    "clientPlatform": "Your Mothers Run Crew × New Balance × Goop × Little Words Project",
+    "operatingContext": "Founder-led community · owned brand · brand partnerships",
+    "location": "Austin, Texas",
+    "year": 2024,
+    "disciplines": ["Community", "Brand strategy", "Partnerships", "Events"],
+    "summary": "I founded Your Mothers Run Crew in Austin as a women-only monthly running community built around the buddy system before and after dark. In 2024, I led sold-out New Balance collaborations with Goop and Little Words Project, pairing a run or walk with distinct in-store gatherings.",
+    "insight": "Women running before or after dark can benefit from a community that makes looking out for one another part of the ritual.",
+    "intention": "Create a recurring, welcoming run community and extend its social ritual through relevant partner experiences.",
+    "opportunity": "A monthly run followed by a gathering could turn a shared running practice into a durable community and a platform for collaboration.",
+    "idea": "I founded the crew, developed its logo and brand strategy, and shaped a monthly run-and-gather format that grew from post-run dumplings to panels and brand collaborations.",
+    "role": "I founded and led the community, created its logo and brand strategy, and served as planner, community lead, and liaison among the brands. I proposed the concepts and marketing execution plans for both activations.",
+    "experience": "The crew paired its monthly run with a gathering afterward, growing from post-run dumplings into panels and brand collaborations. In 2024, the community hosted sold-out New Balance collaborations with Goop and Little Words Project.",
+    "metrics": [
+      {
+        "value": "2",
+        "label": "sold-out partner activations in 2024",
+        "verification": "verified"
+      }
+    ],
     "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
+    "mediaIds": [
+      "mothers-lwp-hero",
+      "mothers-lwp-bracelets",
+      "mothers-lwp-display",
+      "mothers-lwp-table",
+      "mothers-goop-run-still"
+    ],
+    "credits": [
+      {
+        "name": "New Balance",
+        "contribution": "Event partner and product support"
+      },
+      {
+        "name": "Goop",
+        "contribution": "In-store event partner and gathering experience"
+      },
+      {
+        "name": "Little Words Project",
+        "contribution": "In-store event partner and bracelet-making experience"
+      }
+    ],
+    "confidentiality": "clear",
     "targetRoleRelevance": [
       "Community marketing",
       "Partnerships marketing",
       "Events marketing"
-    ]
+    ],
+    "chapters": [
+      {
+        "id": "goop",
+        "title": "Goop: from the run to the store",
+        "body": "After the run, guests gathered in store for tacos, massages, facials, snacks, and Goop giveaways. New Balance provided head-to-toe outfits."
+      },
+      {
+        "id": "little-words-project",
+        "title": "Little Words Project: make something together",
+        "body": "After a run or walk, participants met at the store to make custom bracelets. New Balance supplied swag and demo shoes; the gathering included brunch, mimosas, and a DJ."
+      }
+    ],
+    "presentation": {
+      "heroMediaId": "mothers-lwp-hero",
+      "gallery": [
+        {
+          "mediaId": "mothers-lwp-bracelets",
+          "layout": "portrait",
+          "caption": "Run crew members share their bracelets.",
+          "chapterId": "little-words-project"
+        },
+        {
+          "mediaId": "mothers-lwp-display",
+          "layout": "detail",
+          "caption": "Little Words Project bracelets arranged beneath the neon sign.",
+          "chapterId": "little-words-project"
+        },
+        {
+          "mediaId": "mothers-lwp-table",
+          "layout": "portrait",
+          "caption": "Event drinks and materials set out on a table.",
+          "chapterId": "little-words-project"
+        },
+        {
+          "mediaId": "mothers-goop-run-still",
+          "layout": "portrait",
+          "caption": "Runners pass Little Brother Coffee & Kolaches.",
+          "chapterId": "goop"
+        }
+      ]
+    }
   },
   {
     "id": "freaks-of-nature",
     "slug": "freaks-of-nature",
-    "status": "draft",
+    "status": "published",
     "featured": true,
     "featuredOrder": 3,
     "title": "Freaks of Nature × Alba Optics × Runaway Milano",
     "editorialTitle": "Creating a Reason to Gather",
     "clientPlatform": "Freaks of Nature × Alba Optics × Runaway Milano",
-    "operatingContext": "Independent collaboration · Milan · experiential",
-    "location": "Milan",
+    "operatingContext": "Independent brand collaboration · community event · content production",
+    "location": "Milan, Italy",
     "year": null,
-    "disciplines": ["Partnerships", "Community", "Experiential"],
-    "summary": "An independent Milan collaboration bringing Freaks of Nature, Alba Optics, and Runaway Milano into an experiential project. Event photography is available; the date, partner contributions, attendance, and results remain to be confirmed.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
+    "disciplines": [
+      "Partnerships",
+      "Community",
+      "Experiential",
+      "Content production"
+    ],
+    "summary": "For Freaks of Nature, I coordinated a Milan community event with Alba Optics and local running store Runaway Milano. A sold-out 50-place morning run paired two short-form videos with an outdoor-inspired gathering at Runaway Milano.",
+    "insight": "Freaks of Nature and Milan-based Alba Optics shared an outdoor-minded audience, while Runaway Milano brought an established local running community.",
+    "intention": "Introduce Freaks of Nature to runners in Milan through a locally grounded collaboration and create social content around the community event.",
+    "opportunity": "A local running store and an aligned Milan eyewear brand could make the collaboration relevant to runners while connecting the partners’ communities.",
+    "idea": "The “Back In Bed — Eat, Sleep, Run” concept brought a dawn run together with Alba Optics’ bed-and-surfboard van installation, product demos, giveaways, coffee, and croissants.",
+    "role": "Working through Katherine Kalill Productions on behalf of Freaks of Nature, I coordinated the community event and delivered two reels: an event introduction and a recap.",
+    "experience": "The February 20 event started at Runaway Milano with 50 spots and sold out. Participants received custom tees for a route past Milan’s Olympic Torch before returning for the van photo moment, product demos, Freaks of Nature samples and giveaways, coffee, and croissants. Alba Optics supplied the branded van experience; Runaway Milano provided the local store and community setting.",
+    "metrics": [
+      {
+        "value": "50 spots",
+        "label": "event capacity; registration sold out",
+        "verification": "verified"
+      },
+      {
+        "value": "2 reels",
+        "label": "planned and delivered for the collaboration",
+        "verification": "verified"
+      }
+    ],
     "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
+    "mediaIds": [
+      "freaks-of-nature-hero",
+      "freaks-of-nature-run",
+      "freaks-of-nature-campaign",
+      "freaks-of-nature-partners"
+    ],
+    "credits": [
+      {
+        "name": "Freaks of Nature",
+        "contribution": "Client and event partner"
+      },
+      {
+        "name": "Alba Optics",
+        "contribution": "Event partner; supplied the van installation and eyewear"
+      },
+      {
+        "name": "Runaway Milano",
+        "contribution": "Local running-store and community partner"
+      }
+    ],
+    "confidentiality": "clear",
     "targetRoleRelevance": [
       "Partnerships marketing",
       "Experiential marketing",
       "Community marketing"
-    ]
+    ],
+    "chapters": [
+      {
+        "id": "shared-outdoor-culture",
+        "title": "Find the overlap",
+        "body": "Freaks of Nature and Milan-based Alba Optics shared an outdoor-minded audience. Katherine chose local running store Runaway Milano for its strong community presence and helped shape the collaboration around those connections."
+      },
+      {
+        "id": "back-in-bed",
+        "title": "Back In Bed — Eat, Sleep, Run",
+        "body": "The February 20 Milan event offered 50 places and sold out. Runners met at Runaway Milano, wore custom tees on a route past Milan’s Olympic Torch, and returned for Alba Optics’ bed-and-surfboard van installation, demos, samples, coffee, and croissants."
+      },
+      {
+        "id": "event-content",
+        "title": "From introduction to recap",
+        "body": "Through Katherine Kalill Productions, Katherine coordinated the event for Freaks of Nature and delivered two reels: a city-run introduction and an event recap."
+      }
+    ],
+    "presentation": {
+      "heroMediaId": "freaks-of-nature-hero",
+      "gallery": [
+        {
+          "mediaId": "freaks-of-nature-run",
+          "layout": "portrait",
+          "caption": "Runners move through Milan on the event route.",
+          "chapterId": "back-in-bed"
+        },
+        {
+          "mediaId": "freaks-of-nature-campaign",
+          "layout": "portrait",
+          "caption": "Freaks of Nature’s event identity in use.",
+          "chapterId": "event-content"
+        },
+        {
+          "mediaId": "freaks-of-nature-partners",
+          "layout": "detail",
+          "caption": "Coffee and pastries after the run.",
+          "chapterId": "back-in-bed"
+        }
+      ]
+    }
   },
   {
     "id": "you-deserve-your-flowers",
     "slug": "you-deserve-your-flowers",
-    "status": "draft",
+    "status": "published",
     "featured": true,
     "featuredOrder": 4,
     "title": "Mom, You Deserve Your Flowers",
     "editorialTitle": "Turning a Retail Moment Into a Personal Gesture",
-    "clientPlatform": null,
-    "operatingContext": "Global brand · emotional storytelling · retail",
-    "location": null,
-    "year": null,
-    "disciplines": ["Brand experience", "Retail", "Storytelling"],
-    "summary": "A retail and emotional-storytelling concept built around the gesture of giving flowers. Event photos and video are available; Katherine’s responsibilities, collaborators, timing, and any measured outcomes remain to be confirmed.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
+    "clientPlatform": "New Balance × Athletic Form",
+    "operatingContext": "New Balance community event leadership · community partnership · product trial",
+    "location": "Seattle, Washington",
+    "year": 2025,
+    "disciplines": [
+      "Brand experience",
+      "Community",
+      "Retail",
+      "Partnerships",
+      "Events"
+    ],
+    "summary": "For New Balance, I developed a Mother’s Day partnership with Seattle gym Athletic Form to introduce a Hyrox audience to running shoes. The May 10, 2025 event sold out and paired shoe demos and a high-energy workout with bouquets, custom event branding, and brunch.",
+    "insight": "Athletic Form’s Hyrox community included running in its training, making it a relevant audience for race-day shoes. The Mother’s Day setting also made room for recognition through a shared workout and the gesture of giving flowers.",
+    "intention": "Create an event that connected New Balance running shoes with a new local audience through a welcoming, celebratory experience.",
+    "opportunity": "A Mother’s Day gathering could bridge Athletic Form’s Hyrox community and New Balance’s running range through shared movement and thoughtful hospitality.",
+    "idea": "“Mom, You Deserve Your Flowers” combined a Hyrox workout and shoe demos with a build-your-own bouquet area, a limited custom tee drop, a DJ, and brunch.",
+    "role": "As New Balance Community Event Leader, I developed the Athletic Form partnership, pitched the concept, created its branding and graphics, designed a limited 200-shirt drop, planned the event and ticketing workflow, and coordinated activation details.",
+    "experience": "Guests could try New Balance shoes, take part in a high-energy Hyrox workout, build a bouquet, and gather for brunch with a DJ. Katherine coordinated signage, release timing, ticket sales, and partner touchpoints. The event generated more than 60 organic social posts; Athletic Form received professional event photos and video for community use.",
+    "metrics": [
+      {
+        "value": "Sold out",
+        "label": "May 10, 2025 event",
+        "verification": "verified"
+      },
+      {
+        "value": "200 shirts",
+        "label": "limited event-branded drop created",
+        "verification": "verified"
+      },
+      {
+        "value": "60+",
+        "label": "organic social posts from the event day",
+        "verification": "verified"
+      }
+    ],
     "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
+    "mediaIds": [
+      "you-deserve-flowers-hero",
+      "you-deserve-flowers-activation",
+      "you-deserve-flowers-display",
+      "you-deserve-flowers-bouquets",
+      "you-deserve-flowers-team"
+    ],
+    "credits": [
+      {
+        "name": "Athletic Form",
+        "contribution": "Community and event partner; professional event photography and video"
+      }
+    ],
+    "confidentiality": "clear",
     "targetRoleRelevance": [
       "Brand experience",
       "Retail marketing",
       "Events marketing"
-    ]
+    ],
+    "chapters": [
+      {
+        "id": "event-activation",
+        "title": "A layered event experience",
+        "body": "The activation balanced product trial with hospitality: shoe demos, a build-your-own bouquet area, branded tees, coaching-staff product placement, a DJ, and brunch."
+      },
+      {
+        "id": "community-response",
+        "title": "A visible community response",
+        "body": "More than 60 organic posts came from the day. Athletic Form received the professional event photos and video for its community channels."
+      }
+    ],
+    "presentation": {
+      "heroMediaId": "you-deserve-flowers-hero",
+      "gallery": [
+        {
+          "mediaId": "you-deserve-flowers-activation",
+          "layout": "portrait",
+          "caption": "Participants take part in the event activation.",
+          "chapterId": "event-activation"
+        },
+        {
+          "mediaId": "you-deserve-flowers-display",
+          "layout": "landscape",
+          "caption": "New Balance products featured at the community event.",
+          "chapterId": "event-activation"
+        },
+        {
+          "mediaId": "you-deserve-flowers-bouquets",
+          "layout": "portrait",
+          "caption": "Bouquets prepared for the Mother’s Day gathering.",
+          "chapterId": "event-activation"
+        },
+        {
+          "mediaId": "you-deserve-flowers-team",
+          "layout": "portrait",
+          "caption": "Event collaborators after the activation.",
+          "chapterId": "community-response"
+        }
+      ]
+    }
   },
   {
     "id": "womens-self-defense",
     "slug": "womens-self-defense",
-    "status": "draft",
+    "status": "published",
     "featured": true,
     "featuredOrder": 5,
     "title": "Women’s Self-Defense Initiative",
     "editorialTitle": "Using Brand Purpose to Create Practical Impact",
     "clientPlatform": "New Balance × REI",
-    "operatingContext": "Partnership · women’s sport · purpose-led",
-    "location": null,
-    "year": null,
-    "disciplines": ["Partnerships", "Community", "Purpose"],
-    "summary": "A New Balance and REI partnership centered on practical self-defense programming for women. Event photography is available; participation, partner contributions, and the reported sales change remain to be verified before use.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
+    "operatingContext": "New Balance event management · retail partnership · women’s community programming",
+    "location": "Seattle, Washington",
+    "year": 2025,
+    "disciplines": [
+      "Partnerships",
+      "Community",
+      "Purpose-led brand experience",
+      "Events"
+    ],
+    "summary": "For New Balance, I planned and managed a March 16, 2025 women’s self-defense event with REI in Seattle. Timed within REI’s member-sale weekend and the launch of the Hierro trail shoe, it paired a demo run with a runner-focused self-defense class and sold out.",
+    "insight": "A trail shoe launch and Women’s History Month created an opportunity to offer women runners a useful community experience alongside product trial.",
+    "intention": "Help participants feel welcomed and cared for while introducing New Balance’s new Hierro trail shoe in a relevant retail setting.",
+    "opportunity": "Pair a product demo with practical instruction, community leaders, and retail staff preparation during REI’s existing sale weekend.",
+    "idea": "A demo run with New Balance Hierro shoes led into a self-defense class designed for runners, with REI, CSRD, local community leaders, and women-owned businesses involved.",
+    "role": "As New Balance event manager, I pitched the initiative and led its planning and execution: coordinating with REI and community groups, arranging the class and event details, developing graphics, preparing brand touchpoints, and seeding community leaders.",
+    "experience": "The sold-out March 16, 2025 event in Seattle paired a Hierro demo run with a runner-focused self-defense class. Katherine coordinated REI and community partners, event details, and New Balance brand touchpoints. REI hosted during its member-sale weekend; the New Balance sales comparison is reported separately as concurrent retail performance.",
+    "metrics": [
+      {
+        "value": "Sold out",
+        "label": "March 16, 2025 event",
+        "verification": "verified"
+      },
+      {
+        "value": "225%",
+        "label": "year-over-year increase in New Balance sales at REI Seattle in March 2025 vs March 2024; concurrent with the event, not attributed to it",
+        "verification": "verified"
+      }
+    ],
     "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
+    "mediaIds": [
+      "womens-self-defense-hero",
+      "womens-self-defense-event",
+      "womens-self-defense-activity",
+      "womens-self-defense-lesson",
+      "womens-self-defense-partner"
+    ],
+    "credits": [
+      {
+        "name": "REI",
+        "contribution": "Retail and event partner"
+      },
+      {
+        "name": "CSRD",
+        "contribution": "Community partner"
+      },
+      {
+        "name": "Self-defense instructor",
+        "contribution": "Delivered the self-defense class"
+      }
+    ],
+    "confidentiality": "clear",
     "targetRoleRelevance": [
       "Partnerships marketing",
       "Community marketing",
       "Purpose-led brand experience"
-    ]
+    ],
+    "chapters": [
+      {
+        "id": "community-led-event",
+        "title": "Make the program useful to runners",
+        "body": "The self-defense instructor brought 30 years of experience. Community leaders served as pacers, and the event also included women-owned businesses, personal-safety alarms, and support from Poppi."
+      },
+      {
+        "id": "retail-context",
+        "title": "Keep retail performance in context",
+        "body": "New Balance sales at REI Seattle were reported 225% higher in March 2025 than in March 2024. The comparison is concurrent with the event; it is not presented as an event-attributed result."
+      }
+    ],
+    "presentation": {
+      "heroMediaId": "womens-self-defense-hero",
+      "gallery": [
+        {
+          "mediaId": "womens-self-defense-event",
+          "layout": "portrait",
+          "caption": "Participants arrive together for the event.",
+          "chapterId": "community-led-event"
+        },
+        {
+          "mediaId": "womens-self-defense-activity",
+          "layout": "detail",
+          "caption": "A collaborative activity during the event.",
+          "chapterId": "community-led-event"
+        },
+        {
+          "mediaId": "womens-self-defense-lesson",
+          "layout": "portrait",
+          "caption": "An instructor demonstrates a self-defense hold as the class watches.",
+          "chapterId": "community-led-event"
+        },
+        {
+          "mediaId": "womens-self-defense-partner",
+          "layout": "landscape",
+          "caption": "New Balance and partner information at the event.",
+          "chapterId": "retail-context"
+        }
+      ]
+    }
   },
   {
     "id": "western-canada-market-expansion",
@@ -160,26 +523,80 @@
     "status": "draft",
     "featured": false,
     "featuredOrder": null,
-    "title": "Western Canada / Oak Bay Market Expansion",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Pending verification",
-    "location": null,
+    "title": "Oak Bay Half Marathon × New Balance Rebel v5",
+    "editorialTitle": "Making a Race Weekend Feel Like a Brand Takeover",
+    "clientPlatform": "New Balance × Oak Bay Half Marathon × Frontrunners",
+    "operatingContext": "New Balance market activation · retail partnership · event and social content",
+    "location": "Victoria, British Columbia",
     "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
+    "disciplines": [
+      "Brand experience",
+      "Retail partnerships",
+      "Events",
+      "Social content"
+    ],
+    "summary": "A New Balance race-weekend activation around the Oak Bay Half Marathon and Rebel v5 launch paired retail training, ambassador content, a community shakeout run, and a coordinated social takeover with local retail partner Frontrunners.",
+    "insight": "A race weekend and new shoe launch offered a chance to connect product education, local retail, community trial, and partner social channels.",
+    "intention": "Build a sustained New Balance presence across the race weekend and give runners and retail partners useful product and event experiences.",
+    "opportunity": "Coordinate content and in-person touchpoints across the Oak Bay Half Marathon and Frontrunners so the event, product launch, and local partner reinforced one another.",
+    "idea": "A four-day plan paired ambassador-led content, an 80-runner shakeout, real-time partner social posts, and a finish-line activation.",
+    "role": "Katherine trained retail partners on the Rebel v5, storyboarded and directed content shoots, coordinated the ambassador experience and shakeout run, managed real-time content for the Oak Bay Half and Frontrunners Instagram accounts, and organized the finish-line activation.",
+    "experience": "The activation included a private ambassador shoot and team dinner, a track content session, and a finish-line poster station where runners could stamp their race times. Nine reels were edited and posted in real time over the weekend. The source material reports account-level reach and viewership changes over five days; it does not establish sales or attribute those changes to one activity.",
+    "metrics": [
+      {
+        "value": "80",
+        "label": "runners at the shakeout run",
+        "verification": "pending"
+      },
+      {
+        "value": "9",
+        "label": "reels posted across partner accounts over race weekend",
+        "verification": "pending"
+      },
+      {
+        "value": "+1,301.4%",
+        "label": "Oak Bay Half Instagram viewership change over five days",
+        "verification": "pending"
+      },
+      {
+        "value": "+1,466.4%",
+        "label": "Oak Bay Half Instagram profile visits change over five days",
+        "verification": "pending"
+      },
+      {
+        "value": "+236.1%",
+        "label": "Frontrunners Instagram profile visits change over five days",
+        "verification": "pending"
+      },
+      {
+        "value": "+173.2%",
+        "label": "Frontrunners Instagram accounts reached change over five days",
+        "verification": "pending"
+      }
+    ],
     "takeaway": null,
     "mediaIds": [],
-    "credits": [],
+    "credits": [
+      {
+        "name": "Oak Bay Half Marathon",
+        "contribution": "Race and social channel partner"
+      },
+      {
+        "name": "Frontrunners",
+        "contribution": "Retail and social channel partner"
+      }
+    ],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [
+      "Event marketing",
+      "Retail partnerships",
+      "Social content strategy"
+    ],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "irestore",
@@ -206,7 +623,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "super-jock-n-jill",
@@ -233,7 +655,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "rad",
@@ -260,7 +687,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "for-all-mothers",
@@ -287,7 +719,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "personal-platform",
@@ -314,7 +751,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "zegna-la",
@@ -325,10 +767,10 @@
     "title": "Zegna LA VIP Experience",
     "editorialTitle": null,
     "clientPlatform": "Zegna",
-    "operatingContext": "VIP experience",
+    "operatingContext": "Academic concept",
     "location": "Los Angeles",
     "year": null,
-    "disciplines": [],
+    "disciplines": ["Academic concept"],
     "summary": null,
     "insight": null,
     "intention": null,
@@ -341,7 +783,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "world-cup-la-store",
@@ -352,10 +799,10 @@
     "title": "World Cup LA Store Activation",
     "editorialTitle": null,
     "clientPlatform": null,
-    "operatingContext": "Retail activation",
+    "operatingContext": "Academic concept",
     "location": "Los Angeles",
     "year": null,
-    "disciplines": [],
+    "disciplines": ["Academic concept", "Retail activation"],
     "summary": null,
     "insight": null,
     "intention": null,
@@ -368,7 +815,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "new-balance-community-retail",
@@ -395,7 +847,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "luxury-concepts",
@@ -410,7 +867,7 @@
     "location": null,
     "year": null,
     "disciplines": [],
-    "summary": null,
+    "summary": "Academic concept work includes Jacquemus brand strategy, Rick Owens fashion-show casting, Valentino Rock Stud launch strategy, and Dalfilo fashion-week activation strategy. Archive selection and presentation details remain to be confirmed.",
     "insight": null,
     "intention": null,
     "opportunity": null,
@@ -422,7 +879,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "canada",
@@ -449,7 +911,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "canada-1",
@@ -476,7 +943,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "latinas-history-month",
@@ -503,7 +975,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "seattle-marathon",
@@ -530,7 +1007,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "sjj-50",
@@ -557,7 +1039,12 @@
     "mediaIds": [],
     "credits": [],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   },
   {
     "id": "urban-hike-sara",
@@ -565,25 +1052,63 @@
     "status": "draft",
     "featured": false,
     "featuredOrder": null,
-    "title": "Urban Hike with Sara",
-    "editorialTitle": null,
-    "clientPlatform": "Sara",
-    "operatingContext": "Pending verification",
-    "location": null,
+    "title": "Urban Hike with Sara Anfuso",
+    "editorialTitle": "Connecting a New Audience to a Local Run Store",
+    "clientPlatform": "New Balance × Super Jock ’n Jill × Sara Anfuso",
+    "operatingContext": "New Balance retail partnership · creator collaboration · community event",
+    "location": "Seattle, Washington",
     "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "experience": null,
-    "role": null,
-    "metrics": [],
+    "disciplines": [
+      "Retail partnerships",
+      "Community",
+      "Creator marketing",
+      "Events"
+    ],
+    "summary": "A New Balance partnership with creator Sara Anfuso and Seattle specialty retailer Super Jock ’n Jill used a long-term content relationship and an urban hike to bring a younger audience into the local running store.",
+    "insight": "Super Jock ’n Jill’s legacy and New Balance’s independent heritage created common ground for an authentic partnership, while Sara’s urban-hike community could introduce the store to people who had not visited before.",
+    "intention": "Build a trusted local partnership and connect Sara’s audience to the experience of a neighborhood run specialty store.",
+    "opportunity": "A patient creator relationship and an in-person event could bridge digital discovery and a local retail visit without centering immediate sales.",
+    "idea": "Engage Sara over several months, then bring the partnership together in a store-to-store urban hike with shoe demos and a welcoming post-hike gathering.",
+    "experience": "The collaboration included Sara’s New Balance product use and a shoe-fitting visit at Super Jock ’n Jill, followed by an urban hike beginning and ending at the store. The event included more than 40 demo pairs, coffee and donuts, and co-branded staff shirts. The supplied case-study material reports more than 200 participants, mostly a new and younger audience; that attendance claim remains pending source review.",
+    "role": "Katherine identified and cultivated the creator partnership, supported long-term product seeding, coordinated content and the store visit, and managed event logistics for the urban hike.",
+    "metrics": [
+      {
+        "value": "200+",
+        "label": "reported urban-hike participants; source review pending",
+        "verification": "pending"
+      },
+      {
+        "value": "40+",
+        "label": "pairs of shoes available to demo; source review pending",
+        "verification": "pending"
+      }
+    ],
     "takeaway": null,
     "mediaIds": [],
-    "credits": [],
+    "credits": [
+      {
+        "name": "Sara Anfuso",
+        "contribution": "Creator and community partner"
+      },
+      {
+        "name": "Super Jock ’n Jill",
+        "contribution": "Local retail and event partner"
+      },
+      {
+        "name": "New Balance",
+        "contribution": "Brand partner"
+      }
+    ],
     "confidentiality": "pending",
-    "targetRoleRelevance": []
+    "targetRoleRelevance": [
+      "Retail partnerships",
+      "Creator marketing",
+      "Community marketing"
+    ],
+    "chapters": [],
+    "presentation": {
+      "heroMediaId": null,
+      "gallery": []
+    }
   }
 ]

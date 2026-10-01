@@ -1,71 +1,50 @@
-# Project Inventory
+# Project inventory and readiness
 
-## Provisional featured five
+## Featured five
 
-Final selection depends on the Milestone 1 evidence, permissions, and asset audit. Metrics below are not publication-ready unless explicitly marked verified.
+The order is fixed for v1: All City Mile × Rebel Relays; Your Mothers Run Crew; Freaks of Nature × Alba Optics × Runaway Milano; Mom, You Deserve Your Flowers; Women’s Self-Defense Initiative. Their source-backed draft copy is in `src/data/projects.json`. The five records must switch from `draft` to `published` together after the manifest contains the assigned cleared media and the release checks pass.
 
-### Making Competition Feel Like Community
+### All City Mile × Rebel Relays
 
-**Project:** All City Mile x Rebel Relays  
-**Context:** Global brand / community / product launch  
-**Evidence:** Drive folder contains event photographs and screenshots. Existing materials conflict between 225 participants / $3.5K+ raised and 300+ runners / $2.5K raised. The event/year, race versus pre-run counts, and fundraising source remain unresolved; do not publish these figures until reconciled.
+**Context:** New Balance field marketing, community event, product launch; Seattle, 2025. Katherine conceptualized, planned, and executed the event. The questionnaire supersedes conflicting earlier notes: 300+ runners, 30+ volunteers, eight heats plus relays, sold out, and $5,000 for Girls on the Run. The older 225-participant/$3,500+ and 275% growth figures are omitted. Credit Cooper Reid for photography.
 
-**Purpose:** Demonstrate localization, event leadership, product trial, community growth, and commercial awareness.
+### Your Mothers Run Crew
 
-### Building a Community People Return To
+**Context:** Katherine-founded women-only monthly Austin run community, organized around the buddy system before and after dark; founder, brand strategy, and partnerships. Two New Balance collaborations with Goop and Little Words Project sold out in August and November 2024; the respondent did not map each month to a partner, so the story does not assign the dates. Do not state attendance. The selected assets are cleared with no credit required.
 
-**Project:** Your Mothers Run Crew  
-**Context:** Owned community / founder-led / partnerships  
-**Evidence:** separate Goop and Little Words Project folders are available. The Goop folder currently lists video only. Confirm whether a still frame is an appropriate public image. Sold-out status, recurring participation, partner results, exact role, dates, credits, and ownership remain pending.
+### Freaks of Nature × Alba Optics × Runaway Milano
 
-**Purpose:** Demonstrate direct community building, recurring rituals, premium partnerships, and founder-level initiative.
+**Context:** Independent collaboration, Milan; February 20, year not supplied. Katherine coordinated on behalf of Freaks of Nature through Katherine Kalill Productions and delivered two reels. The event had 50 places and sold out; do not turn capacity into attendance or infer a year from the Olympic Torch reference. Selected assets are cleared with no credit required.
 
-### Creating a Reason to Gather
+### Mom, You Deserve Your Flowers
 
-**Project:** Freaks of Nature x Alba Optics x Runaway Milano  
-**Context:** Independent collaboration / Milan / experiential  
-**Evidence:** Drive folder contains event photography. Partner roles, participant count, capacity/sell-out status, organic-content results, exact role, dates, credits, and ownership remain pending verification.
+**Context:** New Balance community event leadership with Athletic Form, Seattle; May 10, 2025. Katherine pitched and planned the partnership, created graphics and event branding, developed a limited 200-shirt drop, and coordinated ticketing and activation details. The event sold out and generated 60+ organic posts. Do not state attendance or sales attribution. Selected assets are cleared with no credit required.
 
-**Purpose:** Demonstrate resourcefulness, local cultural understanding, partnership creation, and work outside major-brand infrastructure.
+### Women’s Self-Defense Initiative
 
-### Turning a Retail Moment Into a Personal Gesture
+**Context:** New Balance event management with REI and community partners, Seattle; March 16, 2025. The sold-out program paired a trail-shoe demo run with a runner-focused self-defense class during REI’s member-sale weekend. The questionnaire approves a 225% March 2025 vs March 2024 year-over-year New Balance sales comparison at REI Seattle; report it as concurrent retail growth, not caused by the event. Omit the conflicting 420% year-to-date wording. Selected assets are cleared with no credit required.
 
-**Project:** Mom, You Deserve Your Flowers  
-**Context:** Global brand / emotional storytelling / retail  
-**Evidence:** Drive folder contains event photographs and video. Attendance, consumer acquisition, exact role, dates, credits, and ownership remain pending verification.
+## Archive candidates
 
-**Purpose:** Demonstrate how human insight can connect product trial, gifting, movement, and retail.
+### Oak Bay Half Marathon × New Balance Rebel v5
 
-### Using Brand Purpose to Create Practical Impact
+Use the existing `western-canada-market-expansion` record for this separate, non-featured archive draft; do not add a duplicate or create a route. The supplied case-study material describes a Vancouver Island retail and event activation: partner product training, ambassador content, an 80-runner shakeout, a four-day takeover of Oak Bay Half and Frontrunners social accounts, nine reels, and reported five-day account changes. Keep the record in draft status until year, source details for the reported metrics, and media selection are resolved.
 
-**Project:** Women's Self-Defense Initiative with New Balance and REI  
-**Context:** Partnership / women's sport / purpose  
-**Evidence:** Drive folder contains event photography. Community participation and the reported 420% REI Seattle sales growth are unverified. Do not publish the sales figure until its source, definition, time period, baseline, absolute values, comparison window, and Katherine's attributable contribution are established.
+### Urban Hike with Sara Anfuso
 
-**Purpose:** Demonstrate mission-led programming, relevant partnership design, and measurable local impact.
+Use the existing `urban-hike-sara` record as a separate archive draft. The supplied case-study material describes a New Balance/Super Jock ’n Jill creator partnership, a store-linked urban hike, and a younger audience entering the local retailer. The reported 200+ participants and 40+ demo pairs remain pending source review; do not publish those metrics yet.
 
-## Visual archive
+### Other archive work
 
-- Western Canada / Oak Bay market expansion
-- iRestore three-month social media community-management contract
-- Super Jock 'n Jill creator and retail activation
-- RAD
-- For All Mothers
-- Personal platform, @kikhianti
-- Zegna LA VIP experience
-- World Cup LA store activation
-- Other New Balance community and retail activations
-- Luxury academic concepts including Valentino, Dalfilo, Rick Owens, Miu Miu, and Fendi
+Keep Urban Hike with Sara separate from Oak Bay. Other existing candidates include the iRestore three-month contract, Super Jock ’n Jill, RAD, For All Mothers, @kikhianti, Zegna, World Cup LA store activation, other New Balance work, academic luxury concepts, Canada, Latinas History Month, Seattle Marathon, and SJJ 50. The questionnaire identifies Zegna and the World Cup LA store activation as school projects; their existing records are labeled academic concepts. The existing Luxury Concepts record groups the named academic work: Jacquemus brand strategy, Rick Owens fashion-show casting, Valentino Rock Stud launch strategy, and Dalfilo fashion-week activation strategy. No separate project records or routes are added for those concepts. Do not infer roles, dates, results, ownership, or permissions from folder names. Clearly label contracts, academic work, personal platforms, and founder-owned work if selected.
 
-## Content rules
+## Current evidence gaps
 
-- Use editorial, insight-led titles on the homepage; show the client or platform as supporting context.
-- Separate measurable impact from the emotional narrative.
-- Label each operating context clearly: global brand, independent collaboration, community-led, contract, owned platform, or academic strategy.
-- State Katherine's role precisely and credit collaborators.
-- Mark every metric and image as verified, pending verification, or unavailable before publication.
-- Store employment context, exact role, collaborators, claim status, asset rights, and confidentiality status for every project.
+- Exact August/November mapping to the Goop and Little Words Project activations.
+- Freaks of Nature event year.
+- Exact REI comparison dates and underlying March sales baseline/values; keep the public metric qualified as the approved reported comparison.
+- Self-defense instructor’s name and any preferred individual credit.
+- Up-to-date resume and supported biographical details.
+- Oak Bay year, metric provenance, and selected public media.
 
-## Newly identified archive candidates
-
-The supplied Drive root additionally contains Canada, a second Canada folder, Latinas History Month Celebration, Seattle Marathon years 1 and 2, SJJ 50, and Urban Hike with Sara. Audit these and existing archive entries before deciding final archive coverage. Luxury Concepts is academic work and must be labeled academic if included. Drive folder presence does not establish authorship, rights, claims, or permission for every file.
+The questionnaire’s answers and the supplied case-study material are the basis for these drafts. This public-facing index records only relevant conclusions; source PDFs, asset original filenames, and private proof records belong in private storage.

@@ -1,11 +1,13 @@
 ---
 import ActionLink from '../components/ActionLink.astro';
 import SiteLayout from '../components/SiteLayout.astro';
+import { createSiteNavigation } from '../lib/navigation';
 ---
 
 <SiteLayout
   title="Page not found — Katherine Kalill"
   description="This portfolio page could not be found."
+  navigation={createSiteNavigation('/404')}
 >
   <section class="not-found shell">
     <p class="eyebrow">404 · Not found</p>

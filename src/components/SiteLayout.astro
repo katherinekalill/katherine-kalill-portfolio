@@ -2,31 +2,30 @@
 import '../styles/global.css';
 import { routeHref } from '../lib/site';
 import { siteConfig } from '../lib/site-config';
+import {
+  createSiteNavigation,
+  type SiteNavigationItem,
+} from '../lib/navigation';
 import Navigation from './Navigation.astro';
 import manropeFont from '../assets/fonts/manrope-latin-wght-normal.woff2?url';
-
-interface NavItem {
-  href: string;
-  label: string;
-  sectionId?: string;
-  current?: boolean;
-}
 
 interface Props {
   title: string;
   description: string;
-  navigation?: NavItem[];
+  navigation?: SiteNavigationItem[];
   homeHref?: string;
   homeIsCurrent?: boolean;
   reviewLabel?: string | undefined;
+  robots?: 'index,follow' | 'noindex,nofollow';
 }
 const {
   title,
   description,
-  navigation = [],
+  navigation = createSiteNavigation(Astro.url.pathname),
   homeHref = '/',
   homeIsCurrent = false,
   reviewLabel,
+  robots = 'index,follow',
 } = Astro.props;
 const canonical = Astro.site
   ? new URL(routeHref(Astro.url.pathname), Astro.site)
@@ -40,9 +39,11 @@ const canonical = Astro.site
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f6f3ed" />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content={robots} />
     <title>{title}</title>
-    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && robots === 'index,follow' && (
+      <link rel="canonical" href={canonical} />
+    )}
     <link
       rel="preload"
       href={manropeFont}
@@ -87,6 +88,9 @@ const canonical = Astro.site
     </footer>
     <script>
       import '../scripts/site-navigation';
+    </script>
+    <script>
+      import '../scripts/motion';
     </script>
   </body>
 </html>

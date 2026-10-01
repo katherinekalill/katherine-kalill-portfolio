@@ -1,17 +1,14 @@
 ---
 import { routeHref } from '../lib/site';
+import type { SiteNavigationItem } from '../lib/navigation';
 
 interface Props {
   label: string;
-  items: Array<{
-    href: string;
-    label: string;
-    sectionId?: string;
-    current?: boolean;
-  }>;
+  items: SiteNavigationItem[];
+  panelId?: string;
 }
 
-const { label, items } = Astro.props;
+const { label, items, panelId = 'site-navigation-items' } = Astro.props;
 ---
 
 <nav class="site-navigation" aria-label={label} data-site-navigation>
@@ -20,7 +17,7 @@ const { label, items } = Astro.props;
       class="site-navigation__toggle"
       type="button"
       aria-expanded="true"
-      aria-controls="site-navigation-items"
+      aria-controls={panelId}
       data-menu-toggle
       hidden
     >
@@ -28,16 +25,12 @@ const { label, items } = Astro.props;
       <span aria-hidden="true">+</span>
     </button>
   )}
-  <div
-    class="site-navigation__items"
-    id="site-navigation-items"
-    data-menu-panel
-  >
+  <div class="site-navigation__items" id={panelId} data-menu-panel>
     {items.map(({ href, label: linkLabel, sectionId, current }) => (
       <a
         href={href.startsWith('/') ? routeHref(href) : href}
         data-section-id={sectionId}
-        aria-current={current ? 'page' : undefined}
+        aria-current={current}
       >
         {linkLabel}
       </a>

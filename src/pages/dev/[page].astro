@@ -13,7 +13,7 @@ import { previewProjectProjection } from '../../lib/content/schema';
 
 export function getStaticPaths() {
   if (!import.meta.env.DEV && process.env.FOUNDATION_PREVIEW !== '1') return [];
-  return ['foundation', 'homepage', 'story'].map((page) => ({
+  return ['foundation', 'homepage'].map((page) => ({
     params: { page },
   }));
 }
@@ -29,6 +29,7 @@ const reviewProjects = previewProjectProjection(
   <SiteLayout
     title="Foundation review — Katherine Kalill"
     description="Temporary review fixture for the portfolio's design and motion foundations."
+    robots="noindex,nofollow"
   >
     <div class="shell foundation-preview">
       <section class="hero" aria-labelledby="foundation-title">
@@ -78,6 +79,7 @@ const reviewProjects = previewProjectProjection(
             <Metric value="—" label="Use verified outcomes only" />
             <Navigation
               label="Foundation review"
+              panelId="foundation-review-navigation-items"
               items={[
                 { href: '/', label: 'Home' },
                 { href: '#motion-title', label: 'Motion review' },
@@ -121,12 +123,7 @@ const reviewProjects = previewProjectProjection(
         </div>
       </section>
     </div>
-    <script>
-      import '../../scripts/motion';
-    </script>
   </SiteLayout>
-) : page === 'homepage' ? (
-  <HomeExperience preview projects={reviewProjects} />
 ) : (
-  <HomeExperience preview reviewStory />
+  <HomeExperience preview projects={reviewProjects} />
 )}

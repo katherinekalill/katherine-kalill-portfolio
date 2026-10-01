@@ -14,6 +14,41 @@ export const creditSchema = z
   .object({ name: z.string().min(1), contribution: z.string().min(1) })
   .strict();
 
+export const caseStudyChapterSchema = z
+  .object({
+    id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    title: z.string().min(1),
+    body: z.string().min(1),
+  })
+  .strict();
+
+export const projectPresentationSchema = z
+  .object({
+    heroMediaId: z.string().min(1).nullable(),
+    gallery: z.array(
+      z
+        .object({
+          mediaId: z.string().min(1),
+          layout: z.enum(['portrait', 'landscape', 'full-bleed', 'detail']),
+          caption: z.string().min(1).nullable(),
+          chapterId: z
+            .string()
+            .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+            .nullable(),
+        })
+        .strict(),
+    ),
+  })
+  .strict();
+
+export const responsiveVariantSchema = z
+  .object({
+    src: z.string().regex(/^\/(?!\/)(?!.*(?:^|\/)\.\.?\/)[^\s?#]+$/),
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  })
+  .strict();
+
 export const projectSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -38,6 +73,8 @@ export const projectSchema = z
     experience: z.string().min(1).nullable(),
     metrics: z.array(metricSchema),
     takeaway: z.string().min(1).nullable(),
+    chapters: z.array(caseStudyChapterSchema),
+    presentation: projectPresentationSchema,
     mediaIds: z.array(z.string().min(1)),
     credits: z.array(creditSchema),
     confidentiality: z.enum(['clear', 'pending', 'restricted']),
@@ -82,6 +119,7 @@ export const mediaSchema = z
     creditBasis: z.enum(['required', 'not-required', 'pending']),
     permission: z.enum(['approved', 'pending', 'unavailable']),
     posterId: z.string().min(1).nullable(),
+    variants: z.array(responsiveVariantSchema),
   })
   .strict()
   .superRefine((media, ctx) => {
@@ -91,6 +129,33 @@ export const mediaSchema = z
         message: 'Aspect ratio must match the media dimensions.',
         path: ['aspectRatio'],
       });
+    }
+    if (
+      new Set([media.width, ...media.variants.map(({ width }) => width)])
+        .size !==
+      media.variants.length + 1
+    )
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Responsive media widths must be unique.',
+        path: ['variants'],
+      });
+    for (const [index, variant] of media.variants.entries()) {
+      if (variant.width >= media.width)
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Responsive variants must be smaller than the source.',
+          path: ['variants', index, 'width'],
+        });
+      if (
+        Math.abs(variant.width / variant.height - media.aspectRatio) > 0.005
+      ) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Responsive variants must preserve the media aspect ratio.',
+          path: ['variants', index],
+        });
+      }
     }
     if (!media.decorative && !media.alt.trim()) {
       ctx.addIssue({
@@ -139,6 +204,24 @@ export function validateContent(projects: Project[], media: Media[]): string[] {
     }
     if (new Set(record.mediaIds).size !== record.mediaIds.length)
       issues.push(`Project ${record.id} repeats a media reference.`);
+    const chapterIds = new Set(record.chapters.map(({ id }) => id));
+    if (chapterIds.size !== record.chapters.length)
+      issues.push(`Project ${record.id} repeats a chapter id.`);
+    for (const mediaId of [
+      record.presentation.heroMediaId,
+      ...record.presentation.gallery.map(({ mediaId: id }) => id),
+    ]) {
+      if (mediaId && !record.mediaIds.includes(mediaId))
+        issues.push(
+          `Project ${record.id} presentation references unassigned media: ${mediaId}`,
+        );
+    }
+    for (const { chapterId } of record.presentation.gallery) {
+      if (chapterId && !chapterIds.has(chapterId))
+        issues.push(
+          `Project ${record.id} gallery references missing chapter: ${chapterId}`,
+        );
+    }
     for (const mediaId of record.mediaIds) {
       if (!media.some((item) => item.id === mediaId))
         issues.push(
@@ -153,16 +236,31 @@ export function validateContent(projects: Project[], media: Media[]): string[] {
       if (
         !record.role ||
         !record.operatingContext ||
-        !record.year ||
         !record.location ||
         !record.summary
       )
         issues.push(
-          `Published project ${record.id} needs a verified role, operating context, year, location, and summary.`,
+          `Published project ${record.id} needs a verified role, operating context, location, and summary.`,
         );
       if (record.mediaIds.length === 0)
         issues.push(
           `Published project ${record.id} needs at least one cleared media item.`,
+        );
+      const heroMedia = record.presentation.heroMediaId
+        ? media.find((item) => item.id === record.presentation.heroMediaId)
+        : record.mediaIds
+            .map((id) => media.find((item) => item.id === id))
+            .find(
+              (item) =>
+                item?.kind === 'image' && item.permission === 'approved',
+            );
+      if (
+        !heroMedia ||
+        heroMedia.kind !== 'image' ||
+        heroMedia.permission !== 'approved'
+      )
+        issues.push(
+          `Published project ${record.id} needs an approved image hero.`,
         );
       if (record.targetRoleRelevance.length === 0)
         issues.push(
@@ -181,6 +279,13 @@ export function validateContent(projects: Project[], media: Media[]): string[] {
         if (item && item.creditBasis === 'pending')
           issues.push(
             `Published project ${record.id} uses media with pending credit review: ${mediaId}`,
+          );
+      }
+      for (const { mediaId } of record.presentation.gallery) {
+        const item = media.find((candidate) => candidate.id === mediaId);
+        if (item && item.kind !== 'image')
+          issues.push(
+            `Published project ${record.id} gallery media must be an image: ${mediaId}`,
           );
       }
     }
@@ -235,6 +340,8 @@ export function publicProjectProjection(projects: Project[]) {
         .filter((metric) => metric.verification === 'verified')
         .map(({ value, label }) => ({ value, label })),
       takeaway: project.takeaway,
+      chapters: project.chapters,
+      presentation: project.presentation,
       mediaIds: project.mediaIds,
       credits: project.credits,
     }));
@@ -265,7 +372,10 @@ export function publicMediaProjection(
 ) {
   return media
     .filter(
-      (item) => usedMediaIds.has(item.id) && item.permission === 'approved',
+      (item) =>
+        usedMediaIds.has(item.id) &&
+        item.kind === 'image' &&
+        item.permission === 'approved',
     )
     .map((item) => ({
       id: item.id,
@@ -279,5 +389,41 @@ export function publicMediaProjection(
       focalPoint: item.focalPoint,
       credit: item.credit,
       posterId: item.posterId,
+      variants: item.variants,
     }));
+}
+
+export const featuredProjectOrder = [
+  'all-city-mile',
+  'your-mothers-run-crew',
+  'freaks-of-nature',
+  'you-deserve-your-flowers',
+  'womens-self-defense',
+] as const;
+
+export function featuredRelease(projects: Project[]) {
+  const featured = projects
+    .filter((project) => project.featured)
+    .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+  const actual = featured.map((project) => project.slug);
+  if (
+    actual.length !== featuredProjectOrder.length ||
+    actual.some((slug, index) => slug !== featuredProjectOrder[index])
+  ) {
+    throw new Error(
+      `Featured projects must match the approved order: ${featuredProjectOrder.join(', ')}.`,
+    );
+  }
+  if (featured.some((project, index) => project.featuredOrder !== index + 1))
+    throw new Error('Featured projects must use sequential order from 1 to 5.');
+  const published = featured.filter(
+    (project) => project.status === 'published',
+  );
+  if (published.length === 0)
+    return { published: false as const, projects: [] };
+  if (published.length !== featured.length)
+    throw new Error(
+      'Featured stories must be published together after editorial and rights approval.',
+    );
+  return { published: true as const, projects: featured };
 }

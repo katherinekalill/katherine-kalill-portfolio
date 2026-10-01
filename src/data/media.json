@@ -1,1 +1,687 @@
-[]
+[
+  {
+    "id": "all-city-mile-hero",
+    "kind": "image",
+    "src": "/work/all-city-mile-hero.webp",
+    "width": 1290,
+    "height": 852,
+    "aspectRatio": 1.514085,
+    "alt": "Runners gather behind an All City Mile banner on the track.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": "Cooper Reid",
+    "creditBasis": "required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/all-city-mile-hero-960.webp",
+        "width": 960,
+        "height": 634
+      },
+      {
+        "src": "/work/all-city-mile-hero-640.webp",
+        "width": 640,
+        "height": 423
+      }
+    ]
+  },
+  {
+    "id": "all-city-mile-huddle",
+    "kind": "image",
+    "src": "/work/all-city-mile-huddle.webp",
+    "width": 1290,
+    "height": 846,
+    "aspectRatio": 1.524823,
+    "alt": "Runners stack their hands in a circle on the track.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": "Cooper Reid",
+    "creditBasis": "required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/all-city-mile-huddle-960.webp",
+        "width": 960,
+        "height": 630
+      },
+      {
+        "src": "/work/all-city-mile-huddle-640.webp",
+        "width": 640,
+        "height": 420
+      }
+    ]
+  },
+  {
+    "id": "mothers-lwp-hero",
+    "kind": "image",
+    "src": "/work/mothers-lwp-hero.webp",
+    "width": 1067,
+    "height": 1600,
+    "aspectRatio": 0.666875,
+    "alt": "Two runners talk at a post-run gathering.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.1
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/mothers-lwp-hero-960.webp",
+        "width": 960,
+        "height": 1440
+      },
+      {
+        "src": "/work/mothers-lwp-hero-640.webp",
+        "width": 640,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "mothers-lwp-bracelets",
+    "kind": "image",
+    "src": "/work/mothers-lwp-bracelets.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "Run crew members stack their wrists together, showing bracelets.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/mothers-lwp-bracelets-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/mothers-lwp-bracelets-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/mothers-lwp-bracelets-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "mothers-lwp-display",
+    "kind": "image",
+    "src": "/work/mothers-lwp-display.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "Little Words Project bracelets displayed beneath a neon sign.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/mothers-lwp-display-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/mothers-lwp-display-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/mothers-lwp-display-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "mothers-lwp-table",
+    "kind": "image",
+    "src": "/work/mothers-lwp-table.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "Drinks and event materials arranged on a table outside a storefront.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/mothers-lwp-table-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/mothers-lwp-table-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/mothers-lwp-table-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "mothers-goop-run-still",
+    "kind": "image",
+    "src": "/work/mothers-goop-run-still.webp",
+    "width": 1080,
+    "height": 1920,
+    "aspectRatio": 0.5625,
+    "alt": "Runners pass Little Brother Coffee & Kolaches during the Goop run.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.43
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/mothers-goop-run-still-960.webp",
+        "width": 960,
+        "height": 1707
+      },
+      {
+        "src": "/work/mothers-goop-run-still-640.webp",
+        "width": 640,
+        "height": 1138
+      }
+    ]
+  },
+  {
+    "id": "freaks-of-nature-hero",
+    "kind": "image",
+    "src": "/work/freaks-of-nature-hero.webp",
+    "width": 1290,
+    "height": 969,
+    "aspectRatio": 1.331269,
+    "alt": "Freaks of Nature run crew members pose together on a city street.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/freaks-of-nature-hero-960.webp",
+        "width": 960,
+        "height": 721
+      },
+      {
+        "src": "/work/freaks-of-nature-hero-640.webp",
+        "width": 640,
+        "height": 481
+      }
+    ]
+  },
+  {
+    "id": "freaks-of-nature-run",
+    "kind": "image",
+    "src": "/work/freaks-of-nature-run.webp",
+    "width": 1290,
+    "height": 1719,
+    "aspectRatio": 0.750436,
+    "alt": "Freaks of Nature runners move through a city street.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.46
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/freaks-of-nature-run-960.webp",
+        "width": 960,
+        "height": 1279
+      },
+      {
+        "src": "/work/freaks-of-nature-run-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "freaks-of-nature-campaign",
+    "kind": "image",
+    "src": "/work/freaks-of-nature-campaign.webp",
+    "width": 1290,
+    "height": 1719,
+    "aspectRatio": 0.750436,
+    "alt": "A runner wearing a Back to Bed shirt holds a product bottle.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.45
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/freaks-of-nature-campaign-960.webp",
+        "width": 960,
+        "height": 1279
+      },
+      {
+        "src": "/work/freaks-of-nature-campaign-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "freaks-of-nature-partners",
+    "kind": "image",
+    "src": "/work/freaks-of-nature-partners.webp",
+    "width": 1290,
+    "height": 1935,
+    "aspectRatio": 0.666667,
+    "alt": "A run crew member serves pastries at a table.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/freaks-of-nature-partners-960.webp",
+        "width": 960,
+        "height": 1440
+      },
+      {
+        "src": "/work/freaks-of-nature-partners-640.webp",
+        "width": 640,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-hero",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-hero.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "People gather inside a store for the run crew event.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.52
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-hero-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/you-deserve-flowers-hero-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/you-deserve-flowers-hero-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-activation",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-activation.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "Participants take part in a group activity inside a store.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-activation-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/you-deserve-flowers-activation-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/you-deserve-flowers-activation-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-display",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-display.webp",
+    "width": 1920,
+    "height": 1440,
+    "aspectRatio": 1.333333,
+    "alt": "New Balance products displayed at a local retail event.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-display-1440.webp",
+        "width": 1440,
+        "height": 1080
+      },
+      {
+        "src": "/work/you-deserve-flowers-display-960.webp",
+        "width": 960,
+        "height": 720
+      },
+      {
+        "src": "/work/you-deserve-flowers-display-640.webp",
+        "width": 640,
+        "height": 480
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-bouquets",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-bouquets.webp",
+    "width": 1013,
+    "height": 1350,
+    "aspectRatio": 0.75037,
+    "alt": "Colorful bouquets arranged in a flower shop.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-bouquets-960.webp",
+        "width": 960,
+        "height": 1279
+      },
+      {
+        "src": "/work/you-deserve-flowers-bouquets-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-team",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-team.webp",
+    "width": 1013,
+    "height": 1350,
+    "aspectRatio": 0.75037,
+    "alt": "Three event collaborators pose together after the activation.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-team-960.webp",
+        "width": 960,
+        "height": 1279
+      },
+      {
+        "src": "/work/you-deserve-flowers-team-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "womens-self-defense-hero",
+    "kind": "image",
+    "src": "/work/womens-self-defense-hero.webp",
+    "width": 1920,
+    "height": 1440,
+    "aspectRatio": 1.333333,
+    "alt": "Participants gather for a women’s self-defense event.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/womens-self-defense-hero-1440.webp",
+        "width": 1440,
+        "height": 1080
+      },
+      {
+        "src": "/work/womens-self-defense-hero-960.webp",
+        "width": 960,
+        "height": 720
+      },
+      {
+        "src": "/work/womens-self-defense-hero-640.webp",
+        "width": 640,
+        "height": 480
+      }
+    ]
+  },
+  {
+    "id": "womens-self-defense-event",
+    "kind": "image",
+    "src": "/work/womens-self-defense-event.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "Participants walk together outside the event venue.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/womens-self-defense-event-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/womens-self-defense-event-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/womens-self-defense-event-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "womens-self-defense-activity",
+    "kind": "image",
+    "src": "/work/womens-self-defense-activity.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "Participants work together around a table of bracelets.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.48
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/womens-self-defense-activity-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/womens-self-defense-activity-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/womens-self-defense-activity-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "womens-self-defense-lesson",
+    "kind": "image",
+    "src": "/work/womens-self-defense-lesson.webp",
+    "width": 1920,
+    "height": 2560,
+    "aspectRatio": 0.75,
+    "alt": "An instructor demonstrates a self-defense hold as the class watches.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/womens-self-defense-lesson-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/womens-self-defense-lesson-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/womens-self-defense-lesson-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "womens-self-defense-partner",
+    "kind": "image",
+    "src": "/work/womens-self-defense-partner.webp",
+    "width": 1920,
+    "height": 1440,
+    "aspectRatio": 1.333333,
+    "alt": "New Balance event materials and partner information displayed on a table.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/womens-self-defense-partner-1440.webp",
+        "width": 1440,
+        "height": 1080
+      },
+      {
+        "src": "/work/womens-self-defense-partner-960.webp",
+        "width": 960,
+        "height": 720
+      },
+      {
+        "src": "/work/womens-self-defense-partner-640.webp",
+        "width": 640,
+        "height": 480
+      }
+    ]
+  }
+]

@@ -4,6 +4,8 @@ import {
   projectSchema,
   previewProjectProjection,
   publicProjectProjection,
+  featuredProjectOrder,
+  featuredRelease,
   validateContent,
 } from './schema';
 
@@ -30,6 +32,8 @@ const draft = {
   experience: null,
   metrics: [],
   takeaway: null,
+  chapters: [],
+  presentation: { heroMediaId: null, gallery: [] },
   mediaIds: [],
   credits: [],
   confidentiality: 'pending' as const,
@@ -46,9 +50,76 @@ describe('content publication gate', () => {
       'Published project sample has unresolved confidentiality.',
     );
     expect(validateContent([published], [])).toContain(
-      'Published project sample needs a verified role, operating context, year, location, and summary.',
+      'Published project sample needs a verified role, operating context, location, and summary.',
     );
     expect(validateContent([published], [])).not.toHaveLength(0);
+  });
+
+  it('allows a published project to omit an unverified year when other gates pass', () => {
+    const published = {
+      ...draft,
+      status: 'published' as const,
+      role: 'Led the community event experience',
+      operatingContext: 'A neighborhood running event',
+      location: 'New York, NY',
+      summary: 'A welcoming event for local runners.',
+      year: null,
+      targetRoleRelevance: ['Experiential strategy'],
+      mediaIds: ['approved-photo'],
+      presentation: { heroMediaId: 'approved-photo', gallery: [] },
+      confidentiality: 'clear' as const,
+    };
+    const approvedPhoto = {
+      id: 'approved-photo',
+      kind: 'image' as const,
+      src: '/approved-photo.webp',
+      width: 1200,
+      height: 800,
+      aspectRatio: 1.5,
+      alt: 'Runners gathering at the start',
+      decorative: false,
+      focalPoint: { x: 0.5, y: 0.5 },
+      credit: null,
+      creditBasis: 'not-required' as const,
+      permission: 'approved' as const,
+      posterId: null,
+      variants: [],
+    };
+
+    expect(validateContent([published], [approvedPhoto])).toEqual([]);
+    expect(
+      validateContent(
+        [published],
+        [{ ...approvedPhoto, permission: 'pending' as const }],
+      ),
+    ).toContain(
+      'Published project sample uses media without approved permission: approved-photo',
+    );
+    expect(
+      validateContent(
+        [published],
+        [{ ...approvedPhoto, creditBasis: 'pending' as const }],
+      ),
+    ).toContain(
+      'Published project sample uses media with pending credit review: approved-photo',
+    );
+    expect(
+      validateContent(
+        [
+          {
+            ...published,
+            metrics: [
+              {
+                value: '120%',
+                label: 'growth',
+                verification: 'pending' as const,
+              },
+            ],
+          },
+        ],
+        [approvedPhoto],
+      ),
+    ).toContain('Published project sample contains an unverified metric.');
   });
 
   it('rejects media with invalid dimensions, crop, or unhelpful alt text', () => {
@@ -66,6 +137,7 @@ describe('content publication gate', () => {
       creditBasis: 'pending',
       permission: 'pending',
       posterId: null,
+      variants: [],
     };
     expect(mediaSchema.safeParse(invalid).success).toBe(false);
   });
@@ -85,6 +157,7 @@ describe('content publication gate', () => {
       creditBasis: 'not-required',
       permission: 'approved',
       posterId: null,
+      variants: [],
     };
     expect(mediaSchema.safeParse(media).success).toBe(false);
     expect(
@@ -170,5 +243,86 @@ describe('content publication gate', () => {
     expect(validateContent([featuredA, featuredB], [])).toContain(
       'Project b references missing media: missing',
     );
+  });
+
+  it('requires gallery and hero media to be assigned to the project', () => {
+    const invalid = projectSchema.parse({
+      ...draft,
+      chapters: [{ id: 'chapter', title: 'Chapter', body: 'Copy' }],
+      presentation: {
+        heroMediaId: 'hero',
+        gallery: [
+          {
+            mediaId: 'photo',
+            layout: 'portrait',
+            caption: null,
+            chapterId: 'missing',
+          },
+        ],
+      },
+    });
+    expect(validateContent([invalid], [])).toContain(
+      'Project sample presentation references unassigned media: hero',
+    );
+    expect(validateContent([invalid], [])).toContain(
+      'Project sample presentation references unassigned media: photo',
+    );
+    expect(validateContent([invalid], [])).toContain(
+      'Project sample gallery references missing chapter: missing',
+    );
+  });
+
+  it('keeps featured production routes behind the coordinated five story release', () => {
+    const projects = featuredProjectOrder.map((slug, index) => ({
+      ...draft,
+      id: slug,
+      slug,
+      featured: true,
+      featuredOrder: index + 1,
+    }));
+    expect(featuredRelease(projects).published).toBe(false);
+    expect(() =>
+      featuredRelease(
+        projects.map((project, index) => ({
+          ...project,
+          status: index === 0 ? ('published' as const) : project.status,
+        })),
+      ),
+    ).toThrow('published together');
+    expect(
+      featuredRelease(
+        projects.map((project) => ({
+          ...project,
+          status: 'published' as const,
+        })),
+      ).published,
+    ).toBe(true);
+    expect(() => featuredRelease(projects.slice(1))).toThrow('approved order');
+  });
+
+  it('accepts responsive variants only when they preserve source proportions', () => {
+    const source = {
+      id: 'photo',
+      kind: 'image',
+      src: '/photo.webp',
+      width: 1200,
+      height: 800,
+      aspectRatio: 1.5,
+      alt: 'A community gathering',
+      decorative: false,
+      focalPoint: { x: 0.5, y: 0.5 },
+      credit: null,
+      creditBasis: 'not-required',
+      permission: 'approved',
+      posterId: null,
+      variants: [{ src: '/photo-600.webp', width: 600, height: 400 }],
+    };
+    expect(mediaSchema.safeParse(source).success).toBe(true);
+    expect(
+      mediaSchema.safeParse({
+        ...source,
+        variants: [{ src: '/photo-600.webp', width: 600, height: 300 }],
+      }).success,
+    ).toBe(false);
   });
 });

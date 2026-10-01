@@ -1,34 +1,8 @@
 ---
 import HomeExperience from '../components/HomeExperience.astro';
-import { getCollection } from 'astro:content';
-import mediaManifest from '../data/media.json';
-import {
-  mediaSchema,
-  publicMediaProjection,
-  publicProjectProjection,
-  validateContent,
-  type Media,
-  type Project,
-} from '../lib/content/schema';
-import { validateLocalMediaFiles } from '../lib/content/local-media';
+import { loadSiteContent } from '../lib/content/site-content';
 
-const projectEntries = await getCollection('projects');
-const projects: Project[] = projectEntries.map(({ data }) => data);
-const media: Media[] = mediaManifest.map((record) => mediaSchema.parse(record));
-const contentIssues = [
-  ...validateContent(projects, media),
-  ...validateLocalMediaFiles(media),
-];
-if (contentIssues.length > 0)
-  throw new Error(
-    `Portfolio content validation failed: ${contentIssues.join('; ')}`,
-  );
-const safeProjects = publicProjectProjection(projects);
-const safeMedia = publicMediaProjection(
-  media,
-  new Set(safeProjects.flatMap((project) => project.mediaIds)),
-);
-const featured = safeProjects.filter((project) => project.featured);
+const { featured, media } = await loadSiteContent();
 ---
 
-<HomeExperience projects={featured} media={safeMedia} />
+<HomeExperience projects={featured} media={media} />

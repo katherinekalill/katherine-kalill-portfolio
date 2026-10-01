@@ -66,7 +66,9 @@ const initializeNavigation = () => {
       : (settledTargetLink ??
         (atPageEnd
           ? lastVisible.at(-1)
-          : (passed.at(-1) ?? lastVisible.at(-1))));
+          : (passed.at(-1) ??
+            lastVisible.at(-1) ??
+            (window.scrollY <= 1 ? sectionLinks[0] : undefined))));
     for (const { link } of sectionLinks) link.removeAttribute('aria-current');
     current?.link.setAttribute('aria-current', 'location');
   };
@@ -220,7 +222,14 @@ const initializeNavigation = () => {
 
     event.preventDefault();
     if (destination.hash !== window.location.hash) {
-      window.history.pushState(window.history.state, '', destination.href);
+      const currentState = window.history.state;
+      const nextState =
+        currentState &&
+        typeof currentState === 'object' &&
+        !Array.isArray(currentState)
+          ? { ...currentState }
+          : {};
+      window.history.pushState(nextState, '', destination.href);
     }
     for (const { link: item } of sectionLinks)
       item.removeAttribute('aria-current');
