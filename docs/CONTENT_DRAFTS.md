@@ -12,7 +12,7 @@ Brand experience, community, and partnerships shaped by the moments that bring p
 
 Katherine Kalill works across brand experience, community, and partnerships in sport, fashion, and culture. Her work explores how thoughtful experiences can bring people together around shared interests and ideas.
 
-This remains a short discipline-based introduction. Employment dates, seniority, education, and an up-to-date resume have not been supplied; do not add them by inference.
+The About page uses a narrative rather than a dated timeline. Supported biographical details from the supplied resume include experience as a New Balance Field Events & Account Marketing Manager, a contract Social Media & Community Marketing Consultant for iRestore, and a Commercial Account Manager at VMware; brand, event, and content strategy under Katherine Kalill Productions; founding the Austin women’s Your Mothers Run Crew; and @kikhianti, a lifestyle-led running, travel, fashion, and life-abroad platform. It may say that Katherine’s studies include communications and branding with a luxury focus at Milano Fashion Institute. Do not imply graduation, a current role, or current location. No resume PDF, address, or phone number is published; LinkedIn is the detailed career-history link.
 
 ## Featured stories
 
@@ -28,6 +28,8 @@ The records keep a distinct insight, intention, opportunity, idea, personal role
 
 ## Archive drafts
 
+The initial `/archive/` index lists only the five currently published stories in the featured release. It does not expose the other project records as archive entries. Add work only after its facts, role and ownership context, metrics, media, credits, and permissions are approved.
+
 The existing Western Canada / Oak Bay record is the appropriate archive entry for the Oak Bay Half Marathon and Rebel v5 activation. The supplied case-study material describes retail training, ambassador content, an 80-runner shakeout, a four-day social takeover, nine reels, and account-level reach/viewership changes. Keep it a draft until its media is assigned and the year and metric provenance are confirmed. The distinct Sara Anfuso and Super Jock ’n Jill urban hike is written to the existing `urban-hike-sara` draft record; its reported attendance and demo-pair figures remain pending review. Do not create duplicate projects or M5 routes here.
 
-Other archive records remain drafts unless their facts, ownership context, and selection are supported. Mark academic concepts, contracts, personal work, and owned platforms clearly if they are later selected. The resume, instructor identity, exact August/November partner-date mapping, and REI sales baseline/window evidence are still outstanding.
+Other archive records remain drafts unless their facts, ownership context, and selection are supported. Mark academic concepts, contracts, personal work, and owned platforms clearly if they are later selected. The instructor identity, exact August/November partner-date mapping, and REI sales baseline/window evidence are still outstanding. Do not publish resume metrics whose definitions or evidence remain unclear, including the unresolved 275% and 420% claims.

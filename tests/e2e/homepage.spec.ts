@@ -102,7 +102,7 @@ test('homepage review presents all seven sections and the confirmed story order'
     'A reason to come together.',
     'From global brands to independent communities',
     'Bring people closer to the things they care about.',
-    'A wider collection of work is taking shape.',
+    'Explore more work.',
     'The Business of Human Connection',
   ]);
 
@@ -567,22 +567,21 @@ test('section links scroll smoothly, focus destinations, and preserve history', 
     );
   });
 
-  const capabilitiesLink = page.locator('[data-section-id="capabilities"]');
-  await capabilitiesLink.click();
-  await expect(page).toHaveURL(/#capabilities$/);
-  await expect(page.locator('#capabilities')).toBeFocused();
+  const workLink = page.locator('[data-section-id="work"]');
+  await workLink.click();
+  await expect(page).toHaveURL(/#work$/);
+  await expect(page.locator('#work')).toBeFocused();
   await page.waitForTimeout(250);
   expect(
     await page
-      .locator('#capabilities')
+      .locator('#work')
       .evaluate((element) => element.getBoundingClientRect().top),
   ).toBeGreaterThan(150);
   await expect
     .poll(() =>
       page.evaluate(() =>
         Math.abs(
-          document.querySelector('#capabilities')!.getBoundingClientRect().top -
-            112,
+          document.querySelector('#work')!.getBoundingClientRect().top - 112,
         ),
       ),
     )
@@ -596,20 +595,17 @@ test('section links scroll smoothly, focus destinations, and preserve history', 
       (position) => position > 0 && position < finalPosition - 10,
     ),
   ).toBe(true);
-  await expect(capabilitiesLink).toHaveAttribute('aria-current', 'location');
+  await expect(workLink).toHaveAttribute('aria-current', 'location');
 
-  await capabilitiesLink.click();
-  await expect(page).toHaveURL(/#capabilities$/);
+  await workLink.click();
+  await expect(page).toHaveURL(/#work$/);
   await page.goBack();
   await expect(page).toHaveURL(/\/dev\/homepage\/$/);
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-  await capabilitiesLink.focus();
+  await workLink.focus();
   await page.keyboard.press('Enter');
-  await expect(page.locator('#capabilities')).toBeFocused();
-  await expect(page.locator('#capabilities')).toHaveCSS(
-    'outline-style',
-    'solid',
-  );
+  await expect(page.locator('#work')).toBeFocused();
+  await expect(page.locator('#work')).toHaveCSS('outline-style', 'solid');
 });
 
 test('each featured story animates its initial title, metadata, and hero', async ({
@@ -931,11 +927,11 @@ test('reduced-motion and no-JavaScript section navigation stay immediate', async
   });
   const noScriptPage = await noScriptContext.newPage();
   await noScriptPage.goto(previewPath);
-  await noScriptPage.locator('[data-section-id="capabilities"]').click();
-  await expect(noScriptPage).toHaveURL(/#capabilities$/);
+  await noScriptPage.locator('[data-section-id="work"]').click();
+  await expect(noScriptPage).toHaveURL(/#work$/);
   await expect(
     noScriptPage.getByRole('heading', {
-      name: 'Bring people closer to the things they care about.',
+      name: 'A reason to come together.',
     }),
   ).toBeInViewport();
   await noScriptContext.close();

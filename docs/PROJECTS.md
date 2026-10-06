@@ -26,6 +26,8 @@ The order is fixed for v1: All City Mile × Rebel Relays; Your Mothers Run Crew;
 
 ## Archive candidates
 
+The initial `/archive/` index contains the five currently published stories only. The following candidate records remain drafts and are not included in the public index until their facts, category fit, ownership context, metric evidence, media, and permissions are cleared. In particular, do not add the current contract or academic concepts to the filterable archive based only on their presence in the content collection.
+
 ### Oak Bay Half Marathon × New Balance Rebel v5
 
 Use the existing `western-canada-market-expansion` record for this separate, non-featured archive draft; do not add a duplicate or create a route. The supplied case-study material describes a Vancouver Island retail and event activation: partner product training, ambassador content, an 80-runner shakeout, a four-day takeover of Oak Bay Half and Frontrunners social accounts, nine reels, and reported five-day account changes. Keep the record in draft status until year, source details for the reported metrics, and media selection are resolved.
@@ -44,7 +46,7 @@ Keep Urban Hike with Sara separate from Oak Bay. Other existing candidates inclu
 - Freaks of Nature event year.
 - Exact REI comparison dates and underlying March sales baseline/values; keep the public metric qualified as the approved reported comparison.
 - Self-defense instructor’s name and any preferred individual credit.
-- Up-to-date resume and supported biographical details.
+- Stronger source evidence for the unresolved claims described above; do not use resume figures with unclear definitions or comparison periods.
 - Oak Bay year, metric provenance, and selected public media.
 
-The questionnaire’s answers and the supplied case-study material are the basis for these drafts. This public-facing index records only relevant conclusions; source PDFs, asset original filenames, and private proof records belong in private storage.
+The questionnaire’s answers, supplied resume, and supplied case-study material are the basis for these drafts. The supported role and study facts selected for About are summarized in `docs/CONTENT_DRAFTS.md`. The resume remains private source material: do not store its PDF, private path, address, phone number, or unclear metrics in the repository. LinkedIn is the public career-history link; About copy uses no dated role timeline and makes no graduation, enrollment, current-role, or current-location claim.

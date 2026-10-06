@@ -16,7 +16,7 @@ The site combines fashion-level art direction and restrained parallax with warm,
 4. Mom, You Deserve Your Flowers
 5. Women's Self-Defense Initiative with New Balance and REI
 
-The standard homepage links to all five case studies as one coordinated release. Unknown dates stay unlisted. Other professional, contract, community, owned-platform, and academic work is outside the current release.
+The homepage features all five approved case studies as one coordinated release. The `/archive/` index initially contains only those five published stories; other professional, contract, community, owned-platform, and academic records stay out until their ownership, facts, media, and permissions are cleared. Unknown dates stay unlisted.
 
 ## Audience and target roles
 
@@ -84,12 +84,12 @@ Run the full validation sequence with `npm run check`. To inspect a production b
 - Hosting: GitHub Pages at `https://katherinekalill.github.io/katherine-kalill-portfolio/`, with the repository kept private during development and allowed to become public at launch
 - Domain: default GitHub Pages URL for v1
 - Analytics: omitted by default unless explicitly approved
-- Resume: downloadable in v1
+- Career details: the About page links to LinkedIn for the full professional history; no resume PDF or download is published
 - Framework: Astro with strict TypeScript, typed content collections, custom accessible parallax, and reduced-motion support
 
 The owner approved the supplied Drive assets for use on the public portfolio and in a public repository. Credit the selected All City Mile photos to Cooper Reid; the other selected supplied media is approved without required attribution. No additional asset permission or credit approvals are pending for these selections, and no employer or client restrictions are known.
 
-M1 working artifacts: [asset checklist](docs/ASSET_CHECKLIST.md), [copyable project questionnaire](docs/CONTENT_QUESTIONNAIRE.md), [positioning and content drafts](docs/CONTENT_DRAFTS.md), [sitemap and recruiter journeys](docs/INFORMATION_ARCHITECTURE.md), and [typed content model](docs/CONTENT_MODEL.md).
+M1 working artifacts: [asset checklist](docs/ASSET_CHECKLIST.md), [content follow-ups](docs/CONTENT_QUESTIONNAIRE.md), [positioning and content drafts](docs/CONTENT_DRAFTS.md), [sitemap and recruiter journeys](docs/INFORMATION_ARCHITECTURE.md), and [typed content model](docs/CONTENT_MODEL.md).
 
 ## Delivery workflow
 
@@ -106,4 +106,4 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the complete delivery plan, [docs/PRO
 
 ## Status
 
-The five case studies and their homepage links are implemented in the working tree. Manual verification is pending; deployment is not confirmed.
+M0–M4 implementation is in the local commit history. The homepage, five case studies, archive, and About experience are present locally; M5 changes remain uncommitted. Automated acceptance, Katherine’s editorial review, and deployment are tracked separately, and no issue closure is implied.

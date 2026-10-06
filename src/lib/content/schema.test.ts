@@ -15,6 +15,8 @@ const draft = {
   status: 'draft' as const,
   featured: false,
   featuredOrder: null,
+  archiveCategories: [],
+  workContext: null,
   title: 'Sample',
   editorialTitle: null,
   clientPlatform: null,
@@ -55,10 +57,31 @@ describe('content publication gate', () => {
     expect(validateContent([published], [])).not.toHaveLength(0);
   });
 
+  it('requires archive categories and a work context for published projects', () => {
+    const published = {
+      ...draft,
+      status: 'published' as const,
+      role: 'Led the community event experience',
+      operatingContext: 'A neighborhood running event',
+      location: 'New York, NY',
+      summary: 'A welcoming event for local runners.',
+      targetRoleRelevance: ['Experiential strategy'],
+      confidentiality: 'clear' as const,
+    };
+    expect(validateContent([published], [])).toContain(
+      'Published project sample needs archive categories and a work context.',
+    );
+  });
+
   it('allows a published project to omit an unverified year when other gates pass', () => {
     const published = {
       ...draft,
       status: 'published' as const,
+      archiveCategories: ['community', 'experiences'] as [
+        'community',
+        'experiences',
+      ],
+      workContext: 'professional' as const,
       role: 'Led the community event experience',
       operatingContext: 'A neighborhood running event',
       location: 'New York, NY',
@@ -87,6 +110,19 @@ describe('content publication gate', () => {
     };
 
     expect(validateContent([published], [approvedPhoto])).toEqual([]);
+    for (const workContext of [
+      'professional',
+      'contract',
+      'owned',
+      'academic',
+    ] as const) {
+      const contextualProject = { ...published, workContext };
+      expect(projectSchema.safeParse(contextualProject).success).toBe(true);
+      expect(validateContent([contextualProject], [approvedPhoto])).toEqual([]);
+    }
+    expect(
+      projectSchema.safeParse({ ...published, workContext: 'unknown' }).success,
+    ).toBe(false);
     expect(
       validateContent(
         [published],
@@ -188,6 +224,24 @@ describe('content publication gate', () => {
     expect(publicRecord).not.toHaveProperty('internalSource');
     expect(publicRecord).not.toHaveProperty('confidentialityEvidence');
     expect(publicRecord).not.toHaveProperty('confidentiality');
+  });
+
+  it('projects all published stories for the archive, including nonfeatured ones', () => {
+    const archiveStory = {
+      ...draft,
+      status: 'published' as const,
+      archiveCategories: ['community', 'digital'] as ['community', 'digital'],
+      workContext: 'academic' as const,
+      featured: false,
+      featuredOrder: null,
+    };
+    const [publicStory] = publicProjectProjection([archiveStory]);
+    expect(publicStory).toMatchObject({
+      slug: 'sample',
+      featured: false,
+      archiveCategories: ['community', 'digital'],
+      workContext: 'academic',
+    });
   });
 
   it('keeps preview story cards limited to a safe display whitelist', () => {

@@ -1,0 +1,114 @@
+---
+import ActionLink from './ActionLink.astro';
+import ContactLinks from './ContactLinks.astro';
+import SiteLayout from './SiteLayout.astro';
+import { profileContent } from '../data/profile';
+import '../styles/about.css';
+import { siteConfig } from '../lib/site-config';
+import { Image } from 'astro:assets';
+import headshot from '../assets/profile/katherine-kalill-headshot.jpg';
+
+const title = `About — ${siteConfig.name}`;
+---
+
+<SiteLayout title={title} description={profileContent.introduction}>
+  <article class="about-page shell" aria-labelledby="about-title">
+    <header class="about-page__intro" id="about-intro">
+      <figure class="about-page__portrait" data-reveal="story-block">
+        <Image
+          src={headshot}
+          alt="Katherine Kalill"
+          width={960}
+          height={720}
+          widths={[320, 480, 640, 960]}
+          sizes="(min-width: 80rem) 31.5rem, (min-width: 48rem) calc(40vw - 2.5rem), min(20rem, 100vw - 2rem)"
+          format="webp"
+          quality={82}
+          loading="eager"
+        />
+      </figure>
+      <div class="about-page__intro-copy">
+        <p class="eyebrow" data-reveal="story-meta">
+          {profileContent.eyebrow}
+        </p>
+        <h1 class="section-heading" id="about-title" data-reveal="story-title">
+          {profileContent.title}
+        </h1>
+        <p class="about-page__lead" data-reveal="story-block">
+          {profileContent.introduction}
+        </p>
+      </div>
+    </header>
+
+    <div class="about-page__sections">
+      {profileContent.sections.map((section) => (
+        <section id={section.id} aria-labelledby={`${section.id}-title`}>
+          <div class="about-page__section-heading" data-reveal="story-meta">
+            <p class="eyebrow">{section.eyebrow}</p>
+            <h2 class="section-heading" id={`${section.id}-title`}>
+              {section.title}
+            </h2>
+          </div>
+          <div class="about-page__prose" data-reveal-group>
+            {section.paragraphs.map((paragraph) => (
+              <p data-reveal="story-block">
+                {typeof paragraph === 'string' ? (
+                  paragraph
+                ) : (
+                  <>
+                    {paragraph.before}
+                    <a href={paragraph.href} rel="me">
+                      {paragraph.label}
+                    </a>
+                    {paragraph.after}
+                  </>
+                )}
+              </p>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <section
+      class="about-page__capabilities"
+      id="about-capabilities"
+      aria-labelledby="about-capabilities-title"
+    >
+      <p class="eyebrow">How I work</p>
+      <h2 class="section-heading" id="about-capabilities-title">
+        Capabilities in practice
+      </h2>
+      <div class="about-page__capability-grid">
+        {profileContent.capabilities.map((capability) => (
+          <article class="about-page__capability">
+            <h3>{capability.title}</h3>
+            <p>{capability.description}</p>
+            <ul aria-label={`Related stories: ${capability.title}`}>
+              {capability.evidence.map(({ href, label }) => (
+                <li>
+                  <ActionLink href={href} label={label} />
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section
+      class="about-page__contact"
+      id="about-contact"
+      aria-labelledby="about-contact-title"
+      data-reveal
+    >
+      <div>
+        <p class="eyebrow">Start a conversation</p>
+        <h2 class="section-heading" id="about-contact-title">
+          Let’s make a moment matter.
+        </h2>
+      </div>
+      <ContactLinks label="Contact Katherine" />
+    </section>
+  </article>
+</SiteLayout>

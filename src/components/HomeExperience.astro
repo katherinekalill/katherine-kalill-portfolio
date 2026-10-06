@@ -6,6 +6,7 @@ import {
 } from '../data/homepage-teasers';
 import { siteConfig } from '../lib/site-config';
 import { routeHref } from '../lib/site';
+import ContactLinks from './ContactLinks.astro';
 import ActionLink from './ActionLink.astro';
 import FeaturedStory from './FeaturedStory.astro';
 import HomepageCollaborators from './HomepageCollaborators.astro';
@@ -292,12 +293,18 @@ const title = usePreview
         Archive destination deferred until the verified projects are ready.
       </p>
     )}
+    {!usePreview && <ActionLink href="/archive/" label="Browse all work" />}
   </section>
 
-  <section class="about-close shell section" id="about">
+  <section
+    class="about-close shell section"
+    aria-label="About Katherine Kalill"
+  >
     <div data-reveal>
       <p class="eyebrow">{homepageCopy.about.eyebrow}</p>
-      <h2 class="section-heading">{homepageCopy.about.title}</h2>
+      <h2 class="section-heading" id="home-about-title">
+        {homepageCopy.about.title}
+      </h2>
       {usePreview ? (
         <p class="section-copy">
           <span class="review-note__label">
@@ -306,10 +313,10 @@ const title = usePreview
           {homepageCopy.about.description}
         </p>
       ) : (
-        <p class="section-copy">
-          Katherine founded an Austin women’s monthly run crew and brings that
-          community work into brand and partnership programs.
-        </p>
+        <p class="section-copy">{homepageCopy.about.description}</p>
+      )}
+      {!usePreview && (
+        <ActionLink href="/about/" label="Read more about my work" />
       )}
     </div>
     <div class="about-close__contact" id="contact" data-reveal>
@@ -319,15 +326,7 @@ const title = usePreview
           {homepageCopy.contact.title}
         </h3>
       </div>
-      <div class="about-close__links">
-        {siteConfig.email && (
-          <ActionLink
-            href={`mailto:${siteConfig.email}`}
-            label={siteConfig.email}
-          />
-        )}
-        <ActionLink href={siteConfig.linkedin} label="Connect on LinkedIn" />
-      </div>
+      <ContactLinks label="Contact Katherine" />
     </div>
   </section>
 </SiteLayout>

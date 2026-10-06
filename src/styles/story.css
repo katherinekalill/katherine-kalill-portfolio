@@ -163,6 +163,10 @@
   margin-inline: auto;
 }
 
+.case-study__credit-list #credits {
+  scroll-margin-block-start: 7rem;
+}
+
 .case-study__credits {
   max-width: 56rem;
   margin-inline: auto;

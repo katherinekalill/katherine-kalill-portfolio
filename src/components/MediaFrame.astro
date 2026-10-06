@@ -16,6 +16,7 @@ interface Props {
   loading?: 'eager' | 'lazy';
   srcSet?: string | undefined;
   sizes?: string | undefined;
+  ratio?: number;
   layout?: 'portrait' | 'landscape' | 'full-bleed' | 'detail';
   fit?: 'cover' | 'natural';
   hoverZoom?: boolean;
@@ -34,11 +35,12 @@ const {
   loading = 'lazy',
   srcSet,
   sizes,
+  ratio,
   layout,
   fit = 'cover',
   hoverZoom = false,
 } = Astro.props;
-const mediaAspect = width / height;
+const mediaAspect = ratio ?? width / height;
 ---
 
 <figure
@@ -51,7 +53,7 @@ const mediaAspect = width / height;
 >
   <div
     class="media-frame__content"
-    style={`aspect-ratio: ${width} / ${height}`}
+    style={`aspect-ratio: ${ratio ?? `${width} / ${height}`}`}
   >
     {typeof src === 'string' ? (
       <div

@@ -134,7 +134,7 @@ test('production home and five published stories work under the project base', a
   const home = await page.goto(`${base}/`);
   expect(home?.status()).toBe(200);
   await expect(page.getByRole('main')).toBeVisible();
-  await expect(page.locator('#range')).toBeVisible();
+  await expect(page.locator('.homepage-range')).toBeVisible();
   await expect(
     page
       .locator('[data-project-id="all-city-mile"]')
@@ -143,13 +143,19 @@ test('production home and five published stories work under the project base', a
     'New Balance field marketing · community event · product launch',
   );
   await expect(page.locator('#archive')).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Browse all work' }),
+  ).toHaveAttribute('href', `${base}/archive/`);
+  await expect(
+    page.getByRole('link', { name: 'Read more about my work' }),
+  ).toHaveAttribute('href', `${base}/about/`);
   const homeNav = page.locator('[data-site-navigation] a');
-  await expect(homeNav).toHaveText(['Work', 'Capabilities', 'Contact']);
+  await expect(homeNav).toHaveText(['Work', 'About', 'Contact']);
   expect(
     await homeNav.evaluateAll((links) =>
       links.map((link) => link.getAttribute('href')),
     ),
-  ).toEqual(['#work', '#capabilities', '#contact']);
+  ).toEqual(['#work', `${base}/about/`, '#contact']);
   await expect(homeNav.nth(0)).toHaveAttribute('aria-current', 'location');
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -157,13 +163,29 @@ test('production home and five published stories work under the project base', a
     `https://katherinekalill.github.io${base}/`,
   );
   await expect(
-    page.getByRole('link', { name: 'LinkedIn', exact: true }),
+    page
+      .getByRole('navigation', { name: 'Contact Katherine' })
+      .getByRole('link', { name: /LinkedIn/ }),
+  ).toHaveAttribute('href', 'https://www.linkedin.com/in/katherine-kalill/');
+  await expect(
+    page.getByRole('contentinfo').getByRole('link', { name: /LinkedIn/ }),
   ).toHaveAttribute('href', 'https://www.linkedin.com/in/katherine-kalill/');
   await expect(
     page
       .getByRole('contentinfo')
       .getByRole('link', { name: 'katherinerkalill@gmail.com' }),
   ).toHaveAttribute('href', 'mailto:katherinerkalill@gmail.com');
+  await expect(
+    page.getByRole('contentinfo').getByRole('link', { name: 'Archive' }),
+  ).toHaveAttribute('href', `${base}/archive/`);
+  await expect(
+    page.getByRole('contentinfo').getByRole('link', { name: 'About' }),
+  ).toHaveAttribute('href', `${base}/about/`);
+  await expect(
+    page
+      .getByRole('contentinfo')
+      .getByRole('link', { name: /Photo credit · All City Mile/ }),
+  ).toHaveAttribute('href', `${base}/work/all-city-mile/#credits`);
 
   const cards = page.locator('[data-project-id]');
   await expect(cards).toHaveCount(slugs.length);
@@ -184,7 +206,7 @@ test('production home and five published stories work under the project base', a
   const navHrefs = await nav.evaluateAll((links) =>
     links.map((link) => link.getAttribute('href')),
   );
-  expect(navHrefs).toEqual(['#work', '#capabilities', '#contact']);
+  expect(navHrefs).toEqual(['#work', `${base}/about/`, '#contact']);
   for (const href of navHrefs) {
     expect(href).toBeTruthy();
   }
@@ -239,12 +261,12 @@ test('production home and five published stories work under the project base', a
     expect(response?.status(), `${path} should be published`).toBe(200);
     await expect(page.locator('main h1')).toBeVisible();
     const storyNav = page.locator('[data-site-navigation] a');
-    await expect(storyNav).toHaveText(['Work', 'Capabilities', 'Contact']);
+    await expect(storyNav).toHaveText(['Work', 'About', 'Contact']);
     expect(
       await storyNav.evaluateAll((links) =>
         links.map((link) => link.getAttribute('href')),
       ),
-    ).toEqual([`${base}/#work`, `${base}/#capabilities`, `${base}/#contact`]);
+    ).toEqual([`${base}/#work`, `${base}/about/`, `${base}/#contact`]);
     await expect(storyNav.nth(0)).toHaveAttribute('aria-current', 'location');
     await expect(storyNav.nth(1)).not.toHaveAttribute('aria-current');
     await expect(storyNav.nth(2)).not.toHaveAttribute('aria-current');
@@ -315,10 +337,12 @@ test('production home and five published stories work under the project base', a
       );
   }
 
-  // Check every same-site link target and every raster source actually emitted
-  // on the five public pages, including responsive srcset candidates.
+  // Check every same-site link target and every raster source emitted on public
+  // pages, including responsive srcset candidates.
   const routePaths = [
     `${base}/`,
+    `${base}/archive/`,
+    `${base}/about/`,
     ...slugs.map((slug) => `${base}/work/${slug}/`),
   ];
   const routeIds = new Map<string, Set<string>>();
@@ -764,6 +788,287 @@ test('each published story runs its initial title, metadata, and image entrances
   }
 });
 
+test('archive filters, query history, empty category, and progressive enhancement work', async ({
+  page,
+  browser,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(`${base}/archive/`);
+  await expect(page.getByRole('heading', { name: 'Archive' })).toBeVisible();
+
+  const cards = page.locator('[data-archive-card]');
+  await expect(cards).toHaveCount(5);
+  await expect(page.locator('[data-archive-card] img')).toHaveCount(5);
+  expect(
+    await cards.evaluateAll((items) =>
+      items.map((item) =>
+        item.querySelector('a')?.getAttribute('href')?.split('/').at(-2),
+      ),
+    ),
+  ).toEqual(slugs);
+
+  const filters = page.locator('[data-archive-filters]');
+  await expect(filters).toBeVisible();
+  const buttons = filters.locator('[data-archive-filter]');
+  await expect(buttons).toHaveCount(8);
+  await expect(buttons).toHaveText([
+    'All',
+    'Community',
+    'Partnerships',
+    'Experiences',
+    'Digital',
+    'Retail',
+    'Luxury Strategy',
+    'Owned Platform',
+  ]);
+  const count = page.locator('[data-archive-count]');
+  const visibleSlugs = async () =>
+    cards.evaluateAll((items) =>
+      items
+        .filter((item) => !item.hasAttribute('hidden'))
+        .map((item) =>
+          item.querySelector('a')?.getAttribute('href')?.split('/').at(-2),
+        ),
+    );
+
+  for (const category of ['community', 'partnerships', 'experiences']) {
+    await page.locator(`[data-archive-filter="${category}"]`).click();
+    await expect(count).toHaveText('5 projects');
+    expect(await visibleSlugs()).toEqual(slugs);
+  }
+
+  await page.locator('[data-archive-filter="digital"]').click();
+  await expect(page).toHaveURL(
+    new RegExp(`${base}/archive/\\?discipline=digital$`),
+  );
+  await expect(count).toHaveText('1 project');
+  await expect(buttons.nth(4)).toHaveAttribute('aria-pressed', 'true');
+  expect(await visibleSlugs()).toEqual(['freaks-of-nature']);
+
+  await page.locator('[data-archive-filter="retail"]').click();
+  await expect(page).toHaveURL(
+    new RegExp(`${base}/archive/\\?discipline=retail$`),
+  );
+  await expect(count).toHaveText('1 project');
+  expect(await visibleSlugs()).toEqual(['womens-self-defense']);
+  await page.goBack();
+  await expect(buttons.nth(4)).toHaveAttribute('aria-pressed', 'true');
+  expect(await visibleSlugs()).toEqual(['freaks-of-nature']);
+  await page.goForward();
+  await expect(buttons.nth(5)).toHaveAttribute('aria-pressed', 'true');
+  expect(await visibleSlugs()).toEqual(['womens-self-defense']);
+
+  await page.locator('[data-archive-filter="luxury-strategy"]').click();
+  await expect(page).toHaveURL(
+    new RegExp(`${base}/archive/\\?discipline=luxury-strategy$`),
+  );
+  await expect(count).toHaveText('0 projects');
+  await expect(page.locator('[data-archive-empty]')).toBeVisible();
+  await page.locator('[data-archive-reset]').focus();
+  await page.keyboard.press('Enter');
+  await expect(buttons.first()).toBeFocused();
+  await expect(page).toHaveURL(`${base}/archive/`);
+  await expect(count).toHaveText('5 projects');
+  await expect(page.locator('[data-archive-empty]')).toBeHidden();
+
+  await page.locator('[data-archive-filter="owned-platform"]').click();
+  await expect(count).toHaveText('1 project');
+  expect(await visibleSlugs()).toEqual(['your-mothers-run-crew']);
+
+  await page.goto(`${base}/archive/?discipline=not-a-category`);
+  await expect(buttons.first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(count).toHaveText('5 projects');
+  expect(await visibleSlugs()).toEqual(slugs);
+  await page.locator('[data-archive-filter="all"]').click();
+  await expect(page).toHaveURL(`${base}/archive/`);
+
+  await page.locator('[data-archive-filter="digital"]').focus();
+  await expect(page.locator('[data-archive-filter="digital"]')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(count).toHaveText('1 project');
+  await expect(page.locator('[data-archive-filter="digital"]')).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+
+  for (const [width, columns] of [
+    [390, 1],
+    [768, 2],
+    [1280, 3],
+  ] as const) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.locator('[data-archive-filter="all"]').click();
+    await expect
+      .poll(() =>
+        page
+          .locator('[data-archive-grid]')
+          .evaluate(
+            (grid) =>
+              getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+          ),
+      )
+      .toBe(columns);
+    expect(
+      await page.locator('body').evaluate((body) => body.scrollWidth),
+    ).toBeLessThanOrEqual(width);
+  }
+
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const archiveZoom = page
+    .locator('[data-archive-card]')
+    .first()
+    .locator('.media-frame__zoom--enabled');
+  await page.locator('[data-archive-card]').first().hover();
+  await expect(archiveZoom).toHaveCSS('transform', 'none');
+  await expect(archiveZoom).toHaveCSS('transition-duration', '0s');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  expect(accessibility.violations, 'archive accessibility').toEqual([]);
+
+  const noJsContext = await browser.newContext({
+    javaScriptEnabled: false,
+    viewport: { width: 390, height: 844 },
+  });
+  const noJsPage = await noJsContext.newPage();
+  await noJsPage.goto(`http://127.0.0.1:4321${base}/archive/`);
+  await expect(noJsPage.locator('[data-archive-filters]')).toBeHidden();
+  await expect(noJsPage.locator('[data-archive-card]')).toHaveCount(5);
+  for (const card of await noJsPage.locator('[data-archive-card]').all()) {
+    await expect(card).toBeVisible();
+  }
+  await noJsContext.close();
+
+  for (const draft of [
+    'western-canada-market-expansion',
+    'urban-hike-sara',
+    'luxury-concepts',
+  ]) {
+    const response = await page.request.get(
+      `http://127.0.0.1:4321${base}/work/${draft}/`,
+    );
+    expect(response.status(), `${draft} stays unpublished`).toBe(404);
+  }
+});
+
+test('About navigation, capability evidence, contact, credits, and approved bio boundaries work', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const response = await page.goto(`${base}/about/`);
+  expect(response?.status()).toBe(200);
+  await expect(
+    page.getByRole('heading', {
+      name: 'Katherine Kalill',
+      level: 1,
+    }),
+  ).toBeVisible();
+  const portrait = page.getByRole('img', { name: 'Katherine Kalill' });
+  await expect(portrait).toBeVisible();
+  await expect
+    .poll(() =>
+      portrait.evaluate(
+        (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+      ),
+    )
+    .toBe(true);
+
+  const nav = page.locator('[data-site-navigation] a');
+  await expect(nav).toHaveText(['Work', 'About', 'Contact']);
+  expect(
+    await nav.evaluateAll((links) =>
+      links.map((link) => link.getAttribute('href')),
+    ),
+  ).toEqual([`${base}/#work`, `${base}/about/`, `${base}/#contact`]);
+  await expect(nav.nth(0)).not.toHaveAttribute('aria-current');
+  await expect(nav.nth(1)).toHaveAttribute('aria-current', 'page');
+  await expect(nav.nth(2)).not.toHaveAttribute('aria-current');
+  await nav.nth(0).click();
+  await expect(page).toHaveURL(`${base}/#work`);
+  await expect(page.locator('#work')).toBeVisible();
+  await page.goto(`${base}/about/`);
+
+  const capabilities = page.locator(
+    '#about-capabilities .about-page__capability',
+  );
+  await expect(capabilities).toHaveCount(4);
+  const expectedEvidence = [
+    [`${base}/work/all-city-mile/`, `${base}/work/you-deserve-your-flowers/`],
+    [`${base}/work/your-mothers-run-crew/`, `${base}/work/freaks-of-nature/`],
+    [`${base}/work/all-city-mile/`, `${base}/work/womens-self-defense/`],
+    [
+      `${base}/work/freaks-of-nature/`,
+      `${base}/work/you-deserve-your-flowers/`,
+    ],
+  ];
+  for (const [index, capability] of (await capabilities.all()).entries()) {
+    expect(
+      await capability
+        .locator('a')
+        .evaluateAll((links) => links.map((link) => link.getAttribute('href'))),
+    ).toEqual(expectedEvidence[index]);
+  }
+
+  const aboutCopy = await page.locator('.about-page').innerText();
+  for (const fact of [
+    'New Balance',
+    'iRestore',
+    'Katherine Kalill Productions',
+    'VMware',
+    'Your Mothers Run Crew',
+    '@kikhianti',
+    'Milano Fashion Institute',
+  ]) {
+    expect(aboutCopy).toContain(fact);
+  }
+  expect(aboutCopy).not.toMatch(
+    /\b(?:graduated|graduation|currently enrolled)\b/i,
+  );
+  expect(aboutCopy).not.toMatch(/\b(?:275%|420%|1,400\+|50,000\+|1M\+)\b/i);
+  expect(await page.locator('.about-page a[href$=".pdf"]').count()).toBe(0);
+  await expect(page.locator('.about-page a[href^="tel:"]')).toHaveCount(0);
+
+  const contacts = page.getByRole('navigation', { name: 'Contact Katherine' });
+  await expect(
+    contacts.getByRole('link', { name: /@katherine|katherinerkalill/ }),
+  ).toHaveAttribute('href', 'mailto:katherinerkalill@gmail.com');
+  await expect(
+    contacts.getByRole('link', { name: /LinkedIn/ }),
+  ).toHaveAttribute('href', 'https://www.linkedin.com/in/katherine-kalill/');
+
+  const footer = page.getByRole('contentinfo');
+  await expect(footer.getByRole('link', { name: 'Archive' })).toHaveAttribute(
+    'href',
+    `${base}/archive/`,
+  );
+  await expect(footer.getByRole('link', { name: 'About' })).toHaveAttribute(
+    'href',
+    `${base}/about/`,
+  );
+  await expect(
+    footer.getByRole('link', { name: /Photo credit · All City Mile/ }),
+  ).toHaveAttribute('href', `${base}/work/all-city-mile/#credits`);
+
+  await nav.nth(2).click();
+  await expect(page).toHaveURL(`${base}/#contact`);
+  await expect(page.locator('#contact')).toBeVisible();
+  await page.goto(`${base}/about/`);
+
+  const accessibility = await new AxeBuilder({ page }).analyze();
+  expect(accessibility.violations, 'About accessibility').toEqual([]);
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 844 });
+    expect(
+      await page.locator('body').evaluate((body) => body.scrollWidth),
+      `About layout at ${width}px`,
+    ).toBeLessThanOrEqual(width);
+  }
+
+  await page.goto(`${base}/work/all-city-mile/#credits`);
+  await expect(page.locator('#credits')).toBeVisible();
+  await expect(page.locator('#credits')).toHaveText('With thanks');
+});
+
 test('published rail is ordered, labelled, and restores both scroll positions repeatedly', async ({
   page,
 }) => {
@@ -1050,14 +1355,14 @@ test('production output has a working not-found page', async ({ page }) => {
   );
   await expect(page.locator('[data-site-navigation] a')).toHaveText([
     'Work',
-    'Capabilities',
+    'About',
     'Contact',
   ]);
   expect(
     await page
       .locator('[data-site-navigation] a')
       .evaluateAll((links) => links.map((link) => link.getAttribute('href'))),
-  ).toEqual([`${base}/#work`, `${base}/#capabilities`, `${base}/#contact`]);
+  ).toEqual([`${base}/#work`, `${base}/about/`, `${base}/#contact`]);
   await expect(
     page.locator('[data-site-navigation] a[aria-current]'),
   ).toHaveCount(0);

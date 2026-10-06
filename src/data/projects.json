@@ -101,7 +101,9 @@
           "chapterId": "race-day-format"
         }
       ]
-    }
+    },
+    "archiveCategories": ["community", "partnerships", "experiences"],
+    "workContext": "professional"
   },
   {
     "id": "your-mothers-run-crew",
@@ -198,7 +200,14 @@
           "chapterId": "goop"
         }
       ]
-    }
+    },
+    "archiveCategories": [
+      "community",
+      "partnerships",
+      "experiences",
+      "owned-platform"
+    ],
+    "workContext": "owned"
   },
   {
     "id": "freaks-of-nature",
@@ -303,7 +312,14 @@
           "chapterId": "back-in-bed"
         }
       ]
-    }
+    },
+    "archiveCategories": [
+      "community",
+      "partnerships",
+      "experiences",
+      "digital"
+    ],
+    "workContext": "professional"
   },
   {
     "id": "you-deserve-your-flowers",
@@ -408,7 +424,9 @@
           "chapterId": "community-response"
         }
       ]
-    }
+    },
+    "archiveCategories": ["community", "partnerships", "experiences"],
+    "workContext": "professional"
   },
   {
     "id": "womens-self-defense",
@@ -515,7 +533,9 @@
           "chapterId": "retail-context"
         }
       ]
-    }
+    },
+    "archiveCategories": ["community", "partnerships", "experiences", "retail"],
+    "workContext": "professional"
   },
   {
     "id": "western-canada-market-expansion",

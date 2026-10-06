@@ -1,0 +1,59 @@
+---
+import MediaFrame from './MediaFrame.astro';
+import { routeHref } from '../lib/site';
+
+interface Props {
+  title: string;
+  client: string | null;
+  slug: string;
+  categories: string[];
+  workContext: 'professional' | 'contract' | 'owned' | 'academic';
+  media: {
+    src: string;
+    srcSet?: string;
+    alt: string;
+    decorative: boolean;
+    width: number;
+    height: number;
+    focalPoint: { x: number; y: number };
+    credit: string | null;
+  };
+}
+
+const { title, client, slug, categories, workContext, media } = Astro.props;
+const categoryList = categories.join(' ');
+const workContextLabel = {
+  professional: 'Professional work',
+  contract: 'Contract work',
+  owned: 'Owned platform',
+  academic: 'Academic concept',
+}[workContext];
+---
+
+<article
+  class="archive-card"
+  data-archive-card
+  data-categories={categoryList}
+  data-reveal="image"
+>
+  <a class="archive-card__link" href={routeHref(`/work/${slug}/`)}>
+    <MediaFrame
+      src={media.src}
+      srcSet={media.srcSet}
+      sizes="(min-width: 64rem) 30vw, (min-width: 48rem) 45vw, 100vw"
+      ratio={4 / 3}
+      alt={media.alt}
+      decorative={media.decorative}
+      width={media.width}
+      height={media.height}
+      focalPoint={media.focalPoint}
+      credit={media.credit}
+      hoverZoom
+    />
+    <span class="archive-card__copy">
+      {client && <span class="archive-card__client">{client}</span>}
+      <span class="archive-card__context">{workContextLabel}</span>
+      <span class="archive-card__title">{title}</span>
+    </span>
+  </a>
+</article>

@@ -27,13 +27,18 @@ export async function loadSiteContent() {
     );
 
   const release = featuredRelease(projects);
-  if (!release.published)
-    return { featured: [], media: [], published: false as const };
-
-  const safeProjects = publicProjectProjection(release.projects);
+  const publicProjects = publicProjectProjection(projects);
+  const featured = release.published
+    ? publicProjectProjection(release.projects)
+    : [];
   const safeMedia = publicMediaProjection(
     media,
-    new Set(safeProjects.flatMap((project) => project.mediaIds)),
+    new Set(publicProjects.flatMap((project) => project.mediaIds)),
   );
-  return { featured: safeProjects, media: safeMedia, published: true as const };
+  return {
+    projects: publicProjects,
+    featured,
+    media: safeMedia,
+    published: release.published,
+  };
 }

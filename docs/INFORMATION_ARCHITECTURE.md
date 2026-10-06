@@ -1,55 +1,49 @@
 # Information architecture and recruiter journeys
 
-## Sitemap
+## Public routes
 
-| Route                             | Purpose                                                               | Status              |
-| --------------------------------- | --------------------------------------------------------------------- | ------------------- |
-| `/`                               | Establish Katherine's positioning and lead into five featured stories | Implemented locally |
-| `/work/all-city-mile/`            | All City Mile × Rebel Relays case study                               | Implemented locally |
-| `/work/your-mothers-run-crew/`    | Your Mothers Run Crew case study                                      | Implemented locally |
-| `/work/freaks-of-nature/`         | Freaks of Nature × Alba Optics × Runaway Milano case study            | Implemented locally |
-| `/work/you-deserve-your-flowers/` | Mom, You Deserve Your Flowers case study                              | Implemented locally |
-| `/work/womens-self-defense/`      | Women's Self-Defense Initiative case study                            | Implemented locally |
-| `/archive/`                       | Secondary, filterable index of other verified work                    | Planned for M5      |
-| `/about/`                         | Biography, capabilities, resume download, LinkedIn, and public email  | Planned for M5      |
-| not found                         | Helpful 404 with a working link home                                  | Implemented locally |
+| Route                             | Purpose                                                                            | Local status |
+| --------------------------------- | ---------------------------------------------------------------------------------- | ------------ |
+| `/`                               | Positioning, five featured stories, capabilities, archive and About links, contact | Implemented  |
+| `/work/all-city-mile/`            | All City Mile × Rebel Relays case study                                            | Implemented  |
+| `/work/your-mothers-run-crew/`    | Your Mothers Run Crew case study                                                   | Implemented  |
+| `/work/freaks-of-nature/`         | Freaks of Nature × Alba Optics × Runaway Milano case study                         | Implemented  |
+| `/work/you-deserve-your-flowers/` | Mom, You Deserve Your Flowers case study                                           | Implemented  |
+| `/work/womens-self-defense/`      | Women’s Self-Defense Initiative case study                                         | Implemented  |
+| `/archive/`                       | Filterable index of the five currently published projects                          | Implemented  |
+| `/about/`                         | Narrative biography, experience, selected work, contact                            | Implemented  |
+| not found                         | Helpful 404 with a working link home                                               | Implemented  |
 
-The route configuration uses static output and trailing slashes. Local development and build configuration apply the project base path `/katherine-kalill-portfolio` exactly once; this does not indicate deployment.
+The public archive initially repeats the five published projects in the featured release. Draft projects and other professional, contract, owned-platform, or academic work remain excluded until their facts, role and ownership context, category fit, metrics, media, credits, and permissions are cleared. The site's static routes keep trailing slashes. Local and build configuration add the `/katherine-kalill-portfolio` base path exactly once; this does not indicate deployment.
+
+## Navigation and shared contact
+
+The shared primary navigation is **Work**, **About**, and **Contact**. Work links to `#work` on the homepage and back to the homepage's featured work from story and About pages. About links to `/about/`; Contact links to the homepage contact section. The active-page and active-section states follow the current route. The footer includes public email, LinkedIn, and a credit link to the All City Mile credits section. About and homepage contact blocks expose email and LinkedIn; no phone number or resume download is published.
 
 ## Recruiter journeys
 
-### Desktop
+### Homepage and selected work
 
-The six public routes are the homepage and five featured stories; the shared shell
-also serves the 404 page. Its Work, Capabilities, and Contact navigation is
-available on all six routes and on the 404 page, linking story pages back to
-homepage sections. The homepage journey starts with positioning and featured
-work; each featured card opens its case-study route in the local build. The
-featured projects use a horizontal portrait rail with collaborator imagery
-included in the related story content. The rail remains keyboard operable and
-its position can be restored without taking over native vertical page
-restoration. The Brands and collaborators list links to the related verified
-project or chapter. From 768px wide on fine-pointer devices, previews appear
-only for the hovered row or keyboard-focused row, with keyboard focus taking
-precedence; leaving or blurring the row hides them. Hover previews work without
-JavaScript. Touch layouts keep one static thumbnail per row. Case studies use a
-consistent four-section H2 hierarchy and retain the ten source fields in their project records, including
-learning only when supplied. Case studies link to the previous and next
-featured story and back to the featured work/contact sections. At 1024px and
-above, story copy and metadata sit beside a natural-ratio hero; below that
-breakpoint the intro and hero stack. The hero uses contain fitting with a
-480px/65svh desktop cap and a 360px/50svh stacked cap, while the full story
-body follows. About and archive navigation wait for their M5 pages. Deployment
-and final manual acceptance remain pending.
+The homepage leads from positioning and a point of view into a five-card horizontal rail in the approved story order. Each card links to its full case study. Native touch scrolling and links work without JavaScript; enhanced previous/next controls move one card, disable at the rail ends, respect reduced motion, and preserve rail position on browser back. The Brands and collaborators rows link to the related published story chapter. Fine-pointer desktop previews respond to hover and keyboard focus, with focus taking priority; touch and no-JavaScript views keep one static thumbnail per row. Photo credit for All City Mile remains outside image crops and attached to the relevant links.
 
-The non-production `/dev/homepage/` route remains a review fixture. Archive, About, and resume destinations are deferred to M5; no placeholder destination is published.
+Homepage links also lead to Archive and About. The archive CTA and About CTA do not create project records or imply that draft work is published.
 
-### Tablet
+### Archive
 
-Keep the same content order and navigation destinations. The M3 compact navigation has keyboard-operable open/close behavior and remains usable by touch. The featured rail supports touch, keyboard, and reduced-motion use; each project remains reachable without relying on hover. Touch layouts show one static collaborator thumbnail per row; fine-pointer desktop layouts reveal the hovered or focused row, with focus taking precedence. Case-study intro and hero stack below 1024px.
+The archive begins with the five currently published projects and eight single-select filter options: All, Community, Partnerships, Experiences, Digital, Retail, Luxury Strategy, and Owned Platform. A selected category is represented by the `discipline` query parameter. Browser back and forward restore the selected filter; choosing All removes that parameter. An empty category shows a reset action. Without JavaScript, filter controls stay hidden and all five project cards remain visible.
 
-### Mobile
+Current publication taxonomy assigns Community, Partnerships, and Experiences to all five projects; Digital to Freaks of Nature; Retail to Women’s Self-Defense; and Owned Platform to Your Mothers Run Crew. Luxury Strategy is intentionally empty. Do not fill empty categories by publishing academic concepts or draft work without the required review.
 
-Present one readable column with the positioning first and each featured project directly reachable. Navigation must be operable by touch and keyboard. The rail can be explored horizontally and respects reduced motion; content and one static collaborator thumbnail per row remain available without JavaScript. Case-study stories stack their intro and contained hero before the full story body. Archive filters remain usable without hover. Resume and LinkedIn remain obvious from About and the footer; omit phone and do not show a placeholder email.
+### About
 
-M2 primitives and layout behavior are implemented locally. The homepage and five case-study routes use the coordinated featured release and cleared local media in the build. Archive, About, and resume destinations remain M5 work. Deployment and issue acceptance checks remain outstanding; record their evidence before related issues close.
+The About page presents a concise narrative without an employment timeline. It may use supported experience at New Balance, iRestore, VMware, and Katherine Kalill Productions; founding Your Mothers Run Crew in Austin; the @kikhianti platform's running, travel, fashion, and life-abroad interests; and a neutral mention of studies in communications and branding with a luxury focus at Milano Fashion Institute. Do not imply graduation, current enrollment, a current role, or current location. LinkedIn is the link for detailed career history. Do not publish the supplied resume PDF, private file path, address, phone number, or unsupported resume metrics.
+
+The capabilities-in-practice section links to the five published stories as supporting examples. Contact links offer public email and LinkedIn. The All City Mile credit section has a stable `#credits` anchor.
+
+## Responsive and motion behavior
+
+At phone widths, present one readable column. Keep archive filter buttons operable by touch and keyboard when JavaScript is available; hiding hover-dependent behavior must not hide project details. At wider widths the archive grid expands to two columns and then three. Respect reduced-motion preferences for page navigation, image movement, and hover transitions. Check layout through 320px mobile and wide desktop viewports.
+
+## Delivery state
+
+M0–M4 implementation is in the local commit history. M5 route, profile, and documentation changes are being reviewed in the working tree. Automated acceptance, Katherine’s editorial review, issue closure, and deployment are separate steps; none is implied by local implementation.

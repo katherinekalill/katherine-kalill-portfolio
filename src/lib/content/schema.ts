@@ -1,6 +1,15 @@
 import { z } from 'astro/zod';
 
 export const verificationState = z.enum(['verified', 'pending', 'unavailable']);
+export const archiveCategory = z.enum([
+  'community',
+  'partnerships',
+  'experiences',
+  'digital',
+  'retail',
+  'luxury-strategy',
+  'owned-platform',
+]);
 
 export const metricSchema = z
   .object({
@@ -56,6 +65,11 @@ export const projectSchema = z
     status: z.enum(['draft', 'published']),
     featured: z.boolean(),
     featuredOrder: z.number().int().positive().nullable(),
+    archiveCategories: z.array(archiveCategory).default([]),
+    workContext: z
+      .enum(['professional', 'contract', 'owned', 'academic'])
+      .nullable()
+      .default(null),
     title: z.string().min(1),
     editorialTitle: z.string().min(1).nullable(),
     clientPlatform: z.string().min(1).nullable(),
@@ -179,7 +193,6 @@ export const siteSchema = z
     portfolioThesis: z.string().min(1),
     linkedin: z.url(),
     email: z.email().nullable(),
-    resume: z.string().min(1).nullable(),
   })
   .strict();
 
@@ -229,6 +242,10 @@ export function validateContent(projects: Project[], media: Media[]): string[] {
         );
     }
     if (record.status === 'published') {
+      if (record.archiveCategories.length === 0 || !record.workContext)
+        issues.push(
+          `Published project ${record.id} needs archive categories and a work context.`,
+        );
       if (record.confidentiality !== 'clear')
         issues.push(
           `Published project ${record.id} has unresolved confidentiality.`,
@@ -321,6 +338,8 @@ export function publicProjectProjection(projects: Project[]) {
       slug: project.slug,
       featured: project.featured,
       featuredOrder: project.featuredOrder,
+      archiveCategories: project.archiveCategories,
+      workContext: project.workContext,
       title: project.title,
       editorialTitle: project.editorialTitle,
       clientPlatform: project.clientPlatform,

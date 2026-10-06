@@ -1,0 +1,18 @@
+---
+import { siteConfig } from '../lib/site-config';
+
+interface Props {
+  label?: string;
+}
+
+const { label = 'Contact links' } = Astro.props;
+---
+
+<nav class="contact-links" aria-label={label}>
+  {siteConfig.email && (
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+  )}
+  <a href={siteConfig.linkedin} rel="me">
+    LinkedIn <span aria-hidden="true">↗</span>
+  </a>
+</nav>

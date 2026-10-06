@@ -1,3 +1,5 @@
+import { profileContent } from './profile';
+
 export const homepageCopy = {
   positioning: {
     description:
@@ -27,15 +29,14 @@ export const homepageCopy = {
   },
   archive: {
     eyebrow: 'More to explore',
-    title: 'A wider collection of work is taking shape.',
+    title: 'Explore more work.',
     description:
-      'The archive will bring together more work across community, culture, and experience.',
+      'Browse projects across community, sport, fashion, culture, and experience.',
   },
   about: {
     eyebrow: 'About',
     title: 'The Business of Human Connection',
-    description:
-      'Katherine Kalill works across brand experience, community, and partnerships in sport, fashion, and culture.',
+    description: profileContent.introduction,
   },
   contact: {
     eyebrow: 'Start a conversation',

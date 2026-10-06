@@ -78,12 +78,19 @@ const canonical = Astro.site
       <slot />
     </main>
     <footer class="site-footer">
-      {siteConfig.email && (
-        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-      )}
-      <a href={siteConfig.linkedin} rel="me">
-        LinkedIn <span aria-hidden="true">↗</span>
-      </a>
+      <nav class="site-footer__links" aria-label="Footer">
+        {siteConfig.email && (
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        )}
+        <a href={siteConfig.linkedin} rel="me">
+          LinkedIn <span aria-hidden="true">↗</span>
+        </a>
+        <a href={routeHref('/archive/')}>Archive</a>
+        <a href={routeHref('/about/')}>About</a>
+        <a href={routeHref('/work/all-city-mile/#credits')}>
+          Photo credit · All City Mile
+        </a>
+      </nav>
       <span>© {new Date().getFullYear()} Katherine Kalill</span>
     </footer>
     <script>

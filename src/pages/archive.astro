@@ -1,0 +1,117 @@
+---
+import ArchiveCard from '../components/ArchiveCard.astro';
+import SiteLayout from '../components/SiteLayout.astro';
+import '../styles/archive.css';
+import { loadSiteContent } from '../lib/content/site-content';
+import { routeHref } from '../lib/site';
+
+const categoryLabels = [
+  ['community', 'Community'],
+  ['partnerships', 'Partnerships'],
+  ['experiences', 'Experiences'],
+  ['digital', 'Digital'],
+  ['retail', 'Retail'],
+  ['luxury-strategy', 'Luxury Strategy'],
+  ['owned-platform', 'Owned Platform'],
+] as const;
+const content = await loadSiteContent();
+const mediaFor = (id: string) => content.media.find((item) => item.id === id);
+const archiveProjects = [...content.projects].sort((a, b) => {
+  if (a.featured !== b.featured) return a.featured ? -1 : 1;
+  if (a.featured && b.featured)
+    return (a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity);
+  return a.title.localeCompare(b.title) || a.slug.localeCompare(b.slug);
+});
+const cardFor = (project: (typeof content.projects)[number]) => {
+  const hero =
+    mediaFor(project.presentation.heroMediaId ?? '') ??
+    project.mediaIds.map(mediaFor).find((item) => item);
+  if (!hero) return undefined;
+  const srcSet = [hero, ...hero.variants]
+    .map((variant) => `${routeHref(variant.src)} ${variant.width}w`)
+    .join(', ');
+  return { project, hero: { ...hero, srcSet } };
+};
+const cards = archiveProjects.flatMap((project) => {
+  const card = cardFor(project);
+  return card ? [card] : [];
+});
+---
+
+<SiteLayout
+  title="Archive — Katherine Kalill"
+  description="A project archive spanning community, partnerships, experiences, digital, retail, luxury, strategy, and owned platform work."
+>
+  <section class="archive shell" aria-labelledby="archive-title">
+    <header class="archive__header">
+      <p class="eyebrow" data-reveal="story-meta">
+        Selected projects
+      </p>
+      <h1
+        class="section-heading archive__title"
+        id="archive-title"
+        data-reveal="story-title"
+      >
+        Archive
+      </h1>
+      <p class="archive__intro" data-reveal="story-meta">
+        Work across communities, partnerships, experiences, and the platforms
+        that bring them together.
+      </p>
+    </header>
+
+    <div class="archive__toolbar">
+      <nav
+        class="archive__filters"
+        aria-label="Filter projects by discipline"
+        data-archive-filters
+        hidden
+      >
+        <button
+          class="archive__filter"
+          type="button"
+          data-archive-filter="all"
+          aria-pressed="true"
+        >
+          All
+        </button>
+        {categoryLabels.map(([slug, label]) => (
+          <button
+            class="archive__filter"
+            type="button"
+            data-archive-filter={slug}
+            aria-pressed="false"
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+      <p class="archive__count" data-archive-count aria-live="polite">
+        {cards.length} {cards.length === 1 ? 'project' : 'projects'}
+      </p>
+    </div>
+
+    <p class="archive__empty" data-archive-empty hidden>
+      No projects in this discipline yet.
+      <button class="archive__reset" type="button" data-archive-reset>
+        Show all projects
+      </button>
+    </p>
+
+    <div class="archive__grid" data-archive-grid data-reveal-group>
+      {cards.map(({ project, hero }) => (
+        <ArchiveCard
+          title={project.editorialTitle ?? project.title}
+          client={project.clientPlatform}
+          slug={project.slug}
+          categories={project.archiveCategories}
+          workContext={project.workContext ?? 'professional'}
+          media={hero}
+        />
+      ))}
+    </div>
+  </section>
+  <script>
+    import '../scripts/archive-filter';
+  </script>
+</SiteLayout>
