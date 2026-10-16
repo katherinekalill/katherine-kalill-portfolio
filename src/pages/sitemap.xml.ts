@@ -12,9 +12,7 @@ const escapeXml = (value: string) =>
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site)
-    throw new Error(
-      'Astro.site must be configured to build the sitemap.',
-    );
+    throw new Error('Astro.site must be configured to build the sitemap.');
 
   const content = await loadSiteContent();
   const locations = [
