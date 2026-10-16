@@ -162,6 +162,47 @@ test('production home and five published stories work under the project base', a
     'href',
     `https://katherinekalill.github.io${base}/`,
   );
+  await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+    'content',
+    'website',
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+    'content',
+    'Katherine Kalill — The Business of Human Connection',
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    'content',
+    `https://katherinekalill.github.io${base}/work/freaks-of-nature-hero.webp`,
+  );
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    'content',
+    'summary_large_image',
+  );
+  const homeStructuredData = await page
+    .locator('script[type="application/ld+json"]')
+    .allTextContents();
+  const homeSchemaTypes = homeStructuredData.map(
+    (value) => (JSON.parse(value) as { '@type': string })['@type'],
+  );
+  expect(homeSchemaTypes).toEqual(['Person', 'WebSite']);
+
+  const sitemapResponse = await request.get(`${base}/sitemap.xml`);
+  expect(sitemapResponse.status()).toBe(200);
+  expect(sitemapResponse.headers()['content-type']).toMatch(/application\/xml/);
+  const sitemap = await sitemapResponse.text();
+  expect(sitemap).toContain(`https://katherinekalill.github.io${base}/`);
+  for (const slug of slugs) {
+    expect(sitemap).toContain(
+      `https://katherinekalill.github.io${base}/work/${slug}/`,
+    );
+  }
+  const robotsResponse = await request.get(`${base}/robots.txt`);
+  expect(robotsResponse.status()).toBe(200);
+  const robots = await robotsResponse.text();
+  expect(robots).toContain('Allow: /katherine-kalill-portfolio/');
+  expect(robots).toContain(
+    `Sitemap: https://katherinekalill.github.io${base}/sitemap.xml`,
+  );
   await expect(
     page
       .getByRole('navigation', { name: 'Contact Katherine' })
@@ -314,6 +355,20 @@ test('production home and five published stories work under the project base', a
       'href',
       `https://katherinekalill.github.io${path}`,
     );
+    if (index === 0) {
+      await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+        'content',
+        'article',
+      );
+      const storyStructuredData = await page
+        .locator('script[type="application/ld+json"]')
+        .allTextContents();
+      expect(
+        storyStructuredData.map(
+          (value) => (JSON.parse(value) as { '@type': string })['@type'],
+        ),
+      ).toEqual(['Person', 'WebSite', 'CreativeWork']);
+    }
     const pagination = page.getByRole('navigation', {
       name: 'Featured project navigation',
     });

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /katherine-kalill-portfolio/
+
+Sitemap: https://katherinekalill.github.io/katherine-kalill-portfolio/sitemap.xml
