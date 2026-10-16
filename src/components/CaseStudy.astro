@@ -88,6 +88,16 @@ const hasImpact = Boolean(
     description:
       project.summary ?? `${title} — selected work by Katherine Kalill.`,
   }}
+  shareImage={
+    hero
+      ? {
+          src: hero.src,
+          alt: hero.alt,
+          width: hero.width,
+          height: hero.height,
+        }
+      : null
+  }
   homeHref={homeHref}
   reviewLabel={
     preview

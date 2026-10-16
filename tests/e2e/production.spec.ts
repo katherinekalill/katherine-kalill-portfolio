@@ -85,6 +85,68 @@ const storyFacts = [
   ['Sold out', '200 shirts', '60+'],
   ['Sold out', '225%'],
 ];
+const projectMetadata = [
+  {
+    slug: 'all-city-mile',
+    name: 'Making Competition Feel Like Community',
+    description:
+      'New Balance revived Seattle’s All City Mile at UW Husky Track in 2025. The sold-out event welcomed 300+ runners across eight heats and relays, supported by 30+ volunteers, and raised $5,000 for Girls on the Run.',
+    image: {
+      src: '/work/all-city-mile-hero.webp',
+      alt: 'Runners gather behind an All City Mile banner on the track.',
+      width: 1290,
+      height: 852,
+    },
+  },
+  {
+    slug: 'your-mothers-run-crew',
+    name: 'Building a Community People Return To',
+    description:
+      'I founded Your Mothers Run Crew in Austin as a women-only monthly running community built around the buddy system before and after dark. In 2024, I led sold-out New Balance collaborations with Goop and Little Words Project, pairing a run or walk with distinct in-store gatherings.',
+    image: {
+      src: '/work/mothers-lwp-hero.webp',
+      alt: 'Two runners talk at a post-run gathering.',
+      width: 1067,
+      height: 1600,
+    },
+  },
+  {
+    slug: 'freaks-of-nature',
+    name: 'Creating a Reason to Gather',
+    description:
+      'For Freaks of Nature, I coordinated a Milan community event with Alba Optics and local running store Runaway Milano. A sold-out 50-place morning run paired two short-form videos with an outdoor-inspired gathering at Runaway Milano.',
+    image: {
+      src: '/work/freaks-of-nature-hero.webp',
+      alt: 'Freaks of Nature run crew members pose together on a city street.',
+      width: 1290,
+      height: 969,
+    },
+  },
+  {
+    slug: 'you-deserve-your-flowers',
+    name: 'Turning a Retail Moment Into a Personal Gesture',
+    description:
+      'For New Balance, I developed a Mother’s Day partnership with Seattle gym Athletic Form to introduce a Hyrox audience to running shoes. The May 10, 2025 event sold out and paired shoe demos and a high-energy workout with bouquets, custom event branding, and brunch.',
+    image: {
+      src: '/work/you-deserve-flowers-hero.webp',
+      alt: 'People gather inside a store for the run crew event.',
+      width: 1920,
+      height: 2560,
+    },
+  },
+  {
+    slug: 'womens-self-defense',
+    name: 'Using Brand Purpose to Create Practical Impact',
+    description:
+      'For New Balance, I planned and managed a March 16, 2025 women’s self-defense event with REI in Seattle. Timed within REI’s member-sale weekend and the launch of the Hierro trail shoe, it paired a demo run with a runner-focused self-defense class and sold out.',
+    image: {
+      src: '/work/womens-self-defense-hero.webp',
+      alt: 'Participants gather for a women’s self-defense event.',
+      width: 1920,
+      height: 1440,
+    },
+  },
+] as const;
 
 declare global {
   interface Window {
@@ -103,6 +165,42 @@ async function readProductionText(directory: string): Promise<string> {
     }),
   );
   return contents.join('\n');
+}
+
+async function readStructuredData(
+  page: import('@playwright/test').Page,
+): Promise<Array<Record<string, unknown>>> {
+  return page
+    .locator('script[type="application/ld+json"]')
+    .evaluateAll((scripts) =>
+      scripts.map(
+        (script) =>
+          JSON.parse(script.textContent ?? '') as Record<string, unknown>,
+      ),
+    );
+}
+
+function expectedPersonStructuredData() {
+  const personId = `https://katherinekalill.github.io${base}/#person`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': personId,
+    name: 'Katherine Kalill',
+    url: `https://katherinekalill.github.io${base}/about/`,
+    sameAs: ['https://www.linkedin.com/in/katherine-kalill/'],
+  };
+}
+
+function expectedWebsiteStructuredData() {
+  const personId = `https://katherinekalill.github.io${base}/#person`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Katherine Kalill',
+    url: `https://katherinekalill.github.io${base}/`,
+    publisher: { '@id': personId },
+  };
 }
 
 async function waitForEntranceAnimations(
@@ -178,27 +276,64 @@ test('production home and five published stories work under the project base', a
     'content',
     'summary_large_image',
   );
-  const homeStructuredData = await page
-    .locator('script[type="application/ld+json"]')
-    .allTextContents();
-  const homeSchemaTypes = homeStructuredData.map(
-    (value) => (JSON.parse(value) as { '@type': string })['@type'],
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+    'content',
+    'Freaks of Nature run crew members pose together on a city street.',
   );
-  expect(homeSchemaTypes).toEqual(['Person', 'WebSite']);
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute(
+    'content',
+    '1290',
+  );
+  await expect(
+    page.locator('meta[property="og:image:height"]'),
+  ).toHaveAttribute('content', '969');
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+    'content',
+    `https://katherinekalill.github.io${base}/work/freaks-of-nature-hero.webp`,
+  );
+  await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute(
+    'content',
+    'Freaks of Nature run crew members pose together on a city street.',
+  );
+  const homeStructuredData = await readStructuredData(page);
+  expect(homeStructuredData).toEqual([
+    expectedPersonStructuredData(),
+    expectedWebsiteStructuredData(),
+  ]);
 
   const sitemapResponse = await request.get(`${base}/sitemap.xml`);
   expect(sitemapResponse.status()).toBe(200);
   const sitemap = await sitemapResponse.text();
-  expect(sitemap).toContain('<?xml version="1.0"');
-  expect(sitemap).toContain(
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  const parsedSitemap = await page.evaluate((xml) => {
+    const document = new DOMParser().parseFromString(xml, 'application/xml');
+    return {
+      parseErrors: Array.from(document.getElementsByTagName('parsererror')).map(
+        (error) => error.textContent,
+      ),
+      rootName: document.documentElement.localName,
+      namespace: document.documentElement.namespaceURI,
+      locations: Array.from(
+        document.getElementsByTagNameNS(
+          'http://www.sitemaps.org/schemas/sitemap/0.9',
+          'loc',
+        ),
+      ).map((location) => location.textContent),
+    };
+  }, sitemap);
+  expect(parsedSitemap.parseErrors).toEqual([]);
+  expect(parsedSitemap.rootName).toBe('urlset');
+  expect(parsedSitemap.namespace).toBe(
+    'http://www.sitemaps.org/schemas/sitemap/0.9',
   );
-  expect(sitemap).toContain(`https://katherinekalill.github.io${base}/`);
-  for (const slug of slugs) {
-    expect(sitemap).toContain(
-      `https://katherinekalill.github.io${base}/work/${slug}/`,
-    );
-  }
+  const expectedSitemapLocations = [
+    `https://katherinekalill.github.io${base}/`,
+    `https://katherinekalill.github.io${base}/about/`,
+    `https://katherinekalill.github.io${base}/archive/`,
+    ...projectMetadata.map(
+      ({ slug }) => `https://katherinekalill.github.io${base}/work/${slug}/`,
+    ),
+  ].sort();
+  expect(parsedSitemap.locations.sort()).toEqual(expectedSitemapLocations);
   const robotsResponse = await request.get(`${base}/robots.txt`);
   expect(robotsResponse.status()).toBe(200);
   const robots = await robotsResponse.text();
@@ -358,20 +493,66 @@ test('production home and five published stories work under the project base', a
       'href',
       `https://katherinekalill.github.io${path}`,
     );
-    if (index === 0) {
-      await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
-        'content',
-        'article',
-      );
-      const storyStructuredData = await page
-        .locator('script[type="application/ld+json"]')
-        .allTextContents();
-      expect(
-        storyStructuredData.map(
-          (value) => (JSON.parse(value) as { '@type': string })['@type'],
-        ),
-      ).toEqual(['Person', 'WebSite', 'CreativeWork']);
-    }
+    const expectedProject = projectMetadata[index];
+    expect(expectedProject?.slug).toBe(slug);
+    await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+      'content',
+      'article',
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      'content',
+      `https://katherinekalill.github.io${path}`,
+    );
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      `${expectedProject?.name} — Katherine Kalill`,
+    );
+    await expect(
+      page.locator('meta[property="og:description"]'),
+    ).toHaveAttribute('content', expectedProject?.description ?? '');
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      `https://katherinekalill.github.io${base}${expectedProject?.image.src}`,
+    );
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+      'content',
+      expectedProject?.image.alt ?? '',
+    );
+    await expect(
+      page.locator('meta[property="og:image:width"]'),
+    ).toHaveAttribute('content', String(expectedProject?.image.width));
+    await expect(
+      page.locator('meta[property="og:image:height"]'),
+    ).toHaveAttribute('content', String(expectedProject?.image.height));
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+      'content',
+      `https://katherinekalill.github.io${base}${expectedProject?.image.src}`,
+    );
+    await expect(
+      page.locator('meta[name="twitter:image:alt"]'),
+    ).toHaveAttribute('content', expectedProject?.image.alt ?? '');
+    const personId = `https://katherinekalill.github.io${base}/#person`;
+    const storyStructuredData = await readStructuredData(page);
+    expect(storyStructuredData).toEqual([
+      expectedPersonStructuredData(),
+      expectedWebsiteStructuredData(),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: expectedProject?.name,
+        headline: expectedProject?.name,
+        description: expectedProject?.description,
+        url: `https://katherinekalill.github.io${path}`,
+        image: {
+          '@type': 'ImageObject',
+          url: `https://katherinekalill.github.io${base}${expectedProject?.image.src}`,
+          width: expectedProject?.image.width,
+          height: expectedProject?.image.height,
+          caption: expectedProject?.image.alt,
+        },
+        creator: { '@id': personId },
+      },
+    ]);
     const pagination = page.getByRole('navigation', {
       name: 'Featured project navigation',
     });
