@@ -82,6 +82,12 @@ const hasImpact = Boolean(
   description={
     project.summary ?? `${title} — selected work by Katherine Kalill.`
   }
+  ogType="article"
+  creativeWork={{
+    name: title,
+    description:
+      project.summary ?? `${title} — selected work by Katherine Kalill.`,
+  }}
   homeHref={homeHref}
   reviewLabel={
     preview
