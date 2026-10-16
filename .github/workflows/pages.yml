@@ -25,6 +25,7 @@ jobs:
       - run: npm run check:external-links
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     needs: validate
     runs-on: ubuntu-latest
     environment:
