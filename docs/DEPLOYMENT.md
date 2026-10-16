@@ -8,7 +8,7 @@ The intended production URL is <https://katherinekalill.github.io/katherine-kali
 2. In repository Settings → Pages, select GitHub Actions as the build and deployment source. Do not change repository visibility as part of routine deployment.
 3. Confirm the deployment workflow is present on `main` and the required CI checks are green.
 4. Manually run “Deploy portfolio to GitHub Pages” from Actions. The workflow first runs formatting, lint, typecheck, content validation, unit/browser tests, builds, and the external-link check; the deploy job cannot start unless all validation succeeds.
-5. After deployment, verify the homepage, `/archive/`, `/about/`, and each published `/work/<slug>/` route directly, including refreshes. Confirm HTTPS, the base path, favicon, sitemap, robots file, canonical URLs, Open Graph tags, and JSON-LD. Social preview tools can only be checked after the site is publicly reachable.
+5. After deployment, verify the homepage, `/archive/`, `/about/`, and each published `/work/<slug>/` route directly, including refreshes. Confirm HTTPS, the base path, favicon, sitemap, robots file, canonical URLs, Open Graph tags, and JSON-LD. Social preview tools can only be checked after the site is publicly reachable. The project-site `robots.txt` lives under the base path; this repository cannot publish the host-root `https://katherinekalill.github.io/robots.txt`, which is shared by project sites.
 
 ## Rollback
 

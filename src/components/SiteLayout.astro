@@ -67,6 +67,7 @@ const creativeWorkStructuredData = creativeWork
       creator: personId ? { '@id': personId } : undefined,
     }
   : undefined;
+/* eslint-disable astro/no-set-html-directive -- JSON-LD uses JSON.stringify with < escaped to prevent script termination. */
 const serializeStructuredData = (value: unknown) =>
   JSON.stringify(value).replace(/</g, '\\u003c');
 ---
