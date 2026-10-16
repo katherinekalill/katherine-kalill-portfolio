@@ -188,8 +188,11 @@ test('production home and five published stories work under the project base', a
 
   const sitemapResponse = await request.get(`${base}/sitemap.xml`);
   expect(sitemapResponse.status()).toBe(200);
-  expect(sitemapResponse.headers()['content-type']).toMatch(/application\/xml/);
   const sitemap = await sitemapResponse.text();
+  expect(sitemap).toContain('<?xml version="1.0"');
+  expect(sitemap).toContain(
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  );
   expect(sitemap).toContain(`https://katherinekalill.github.io${base}/`);
   for (const slug of slugs) {
     expect(sitemap).toContain(
