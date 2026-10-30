@@ -108,7 +108,7 @@ const projectMetadata = [
   },
   {
     slug: 'you-deserve-your-flowers',
-    name: 'Turning a Retail Moment Into a Personal Gesture',
+    name: 'Bridging Fashion Culture With a Passion for High Performance',
     description:
       'For New Balance, I developed a Mother’s Day partnership with Seattle gym Athletic Form to introduce a Hyrox audience to running shoes. The May 10, 2025 event sold out and paired shoe demos and a high-energy workout with bouquets, custom event branding, and brunch.',
     image: {
@@ -741,11 +741,8 @@ test('new archive case studies publish their supplied facts, imagery, and metada
     await expect(
       page.locator('meta[property="og:image:height"]'),
     ).toHaveAttribute('content', String(item.image.height));
-    const storyImages = page.locator(
-      `[data-case-study="${item.slug}"] img[alt]`,
-    );
     for (const alt of item.imageAlts) {
-      const image = storyImages.getByAltText(alt);
+      const image = story.getByAltText(alt);
       await expect(image).toBeVisible();
       await expect
         .poll(() =>
