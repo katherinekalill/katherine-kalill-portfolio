@@ -16,7 +16,7 @@ The site combines fashion-level art direction and restrained parallax with warm,
 4. Mom, You Deserve Your Flowers
 5. Women's Self-Defense Initiative with New Balance and REI
 
-The homepage features all five approved case studies as one coordinated release. The `/archive/` index initially contains only those five published stories; other professional, contract, community, owned-platform, and academic records stay out until their ownership, facts, media, and permissions are cleared. Unknown dates stay unlisted.
+The homepage features five approved case studies in their fixed order. The `/archive/` index contains those stories plus two archive-only projects: Joie Baby × For All Mothers — Cortina Olympics Coverage and USA Track Championships (2025, Eugene). The public source inventory contains these seven projects only.
 
 ## Audience and target roles
 
@@ -28,7 +28,7 @@ Primary role families:
 - Events and activations
 - Junior brand management
 
-Priority employer groups include performance and running brands (On, ASICS, Bandit, adidas), fashion and luxury houses (Prada, Miu Miu, Moncler, Off-White, Longchamp), and consumer technology or platform brands (Google, Microsoft, Revolut).
+The portfolio is oriented toward teams working across sport, fashion, culture, and consumer technology.
 
 ## Technical foundation
 
@@ -73,7 +73,7 @@ npx playwright install chromium firefox webkit
 npm run test:e2e
 ```
 
-After the coordinated release, the standard homepage links to all five `/work/<slug>/` case studies. Developer-only story fixtures are not needed for normal review.
+The homepage links to all five featured `/work/<slug>/` case studies. Developer-only story fixtures are not part of the public project inventory.
 
 Run the full validation sequence with `npm run check`. To inspect a production build locally, run `npm run build` followed by `npm run preview`, then open <http://localhost:4173/katherine-kalill-portfolio/>. The static preview server uses Vite's default port 4173; the development server uses 4321.
 
@@ -81,7 +81,7 @@ Run the full validation sequence with `npm run check`. To inspect a production b
 
 - Visual tone: balanced fashion-editorial and intimate/community-led
 - Public contact: <katherinerkalill@gmail.com> and LinkedIn at <https://www.linkedin.com/in/katherine-kalill/>; phone omitted for privacy
-- Hosting: GitHub Pages at `https://katherinekalill.github.io/katherine-kalill-portfolio/`, with the repository kept private during development and allowed to become public at launch
+- Hosting: GitHub Pages at `https://katherinekalill.github.io/katherine-kalill-portfolio/`
 - Domain: default GitHub Pages URL for v1
 - Analytics: omitted by default unless explicitly approved
 - Career details: the About page links to LinkedIn for the full professional history; no resume PDF or download is published
@@ -89,7 +89,7 @@ Run the full validation sequence with `npm run check`. To inspect a production b
 
 The owner approved the supplied Drive assets for use on the public portfolio and in a public repository. Credit the selected All City Mile photos to Cooper Reid; the other selected supplied media is approved without required attribution. No additional asset permission or credit approvals are pending for these selections, and no employer or client restrictions are known.
 
-M1 working artifacts: [asset checklist](docs/ASSET_CHECKLIST.md), [content follow-ups](docs/CONTENT_QUESTIONNAIRE.md), [positioning and content drafts](docs/CONTENT_DRAFTS.md), [sitemap and recruiter journeys](docs/INFORMATION_ARCHITECTURE.md), and [typed content model](docs/CONTENT_MODEL.md).
+Project documentation: [asset checklist](docs/ASSET_CHECKLIST.md), [public content safeguards](docs/CONTENT_QUESTIONNAIRE.md), [public content inventory](docs/CONTENT_DRAFTS.md), [sitemap and recruiter journeys](docs/INFORMATION_ARCHITECTURE.md), and [typed content model](docs/CONTENT_MODEL.md).
 
 ## Delivery workflow
 
@@ -102,8 +102,8 @@ Each milestone follows the same sequence:
 5. Resolve blockers and re-review.
 6. Commit and push only after acceptance criteria pass.
 
-See [docs/ROADMAP.md](docs/ROADMAP.md) for the complete delivery plan, [docs/PROJECTS.md](docs/PROJECTS.md) for the provisional project inventory, and [docs/ISSUE_INDEX.md](docs/ISSUE_INDEX.md) for the GitHub backlog map.
+See [docs/ROADMAP.md](docs/ROADMAP.md) for the delivery plan, [docs/PROJECTS.md](docs/PROJECTS.md) for the public project inventory, and [docs/ISSUE_INDEX.md](docs/ISSUE_INDEX.md) for the GitHub backlog map.
 
 ## Status
 
-M0–M4 implementation is in the local commit history. The homepage, five case studies, archive, and About experience are present locally; M5 changes remain uncommitted. Automated acceptance, Katherine’s editorial review, and deployment are tracked separately, and no issue closure is implied.
+The repository contains the homepage, five featured case studies, seven-project archive, and About experience. Automated acceptance, editorial review, and deployment are tracked separately; no issue closure or deployment is implied by this source snapshot.

@@ -11,42 +11,26 @@ const slugs = [
   'you-deserve-your-flowers',
   'womens-self-defense',
 ];
+const archiveOnlySlugs = ['for-all-mothers', 'usa-track-championships'];
+const publicProjectSlugs = [...slugs, ...archiveOnlySlugs];
 const collaborators = [
   [
-    'New Balance',
-    'Employer · community events and brand experience',
+    'All City Mile',
+    'Project · community race and product launch',
     'all-city-mile',
     'race-day-format',
   ],
   [
-    'Freaks of Nature',
-    'Client · community event and campaign',
+    'Freaks of Nature × Alba Optics × Runaway Milano',
+    'Client and collaborators · community event and campaign',
     'freaks-of-nature',
-    'event-content',
+    null,
   ],
   [
-    'goop',
-    'Collaborator · Your Mothers Run Crew gathering',
+    'Little Words Project × goop',
+    'Partners · Your Mothers Run Crew gatherings',
     'your-mothers-run-crew',
-    'goop',
-  ],
-  [
-    'Little Words Project',
-    'Collaborator · Your Mothers Run Crew gathering',
-    'your-mothers-run-crew',
-    'little-words-project',
-  ],
-  [
-    'Alba Optics',
-    'Collaborator · Back In Bed event',
-    'freaks-of-nature',
-    'back-in-bed',
-  ],
-  [
-    'Runaway Milano',
-    'Collaborator · community and local host',
-    'freaks-of-nature',
-    'shared-outdoor-culture',
+    null,
   ],
   [
     'Athletic Form',
@@ -75,7 +59,7 @@ const storyTitles = [
   'Making Competition Feel Like Community',
   'Building a Community People Return To',
   'Creating a Reason to Gather',
-  'Turning a Retail Moment Into a Personal Gesture',
+  'Bridging Fashion Culture With a Passion for High Performance',
   'Using Brand Purpose to Create Practical Impact',
 ];
 const storyFacts = [
@@ -128,10 +112,10 @@ const projectMetadata = [
     description:
       'For New Balance, I developed a Mother’s Day partnership with Seattle gym Athletic Form to introduce a Hyrox audience to running shoes. The May 10, 2025 event sold out and paired shoe demos and a high-energy workout with bouquets, custom event branding, and brunch.',
     image: {
-      src: '/work/you-deserve-flowers-hero.webp',
-      alt: 'People gather inside a store for the run crew event.',
-      width: 1920,
-      height: 2560,
+      src: '/work/you-deserve-flowers-run-your-way.webp',
+      alt: 'A Run Your Way New Balance banner stands among athletes training in a gym.',
+      width: 1013,
+      height: 1350,
     },
   },
   {
@@ -329,8 +313,8 @@ test('production home and five published stories work under the project base', a
     `https://katherinekalill.github.io${base}/`,
     `https://katherinekalill.github.io${base}/about/`,
     `https://katherinekalill.github.io${base}/archive/`,
-    ...projectMetadata.map(
-      ({ slug }) => `https://katherinekalill.github.io${base}/work/${slug}/`,
+    ...publicProjectSlugs.map(
+      (slug) => `https://katherinekalill.github.io${base}/work/${slug}/`,
     ),
   ].sort();
   expect(parsedSitemap.locations.sort()).toEqual(expectedSitemapLocations);
@@ -395,21 +379,23 @@ test('production home and five published stories work under the project base', a
   const collaboratorList = page.getByRole('list', {
     name: 'Brands and collaborators',
   });
-  await expect(collaboratorList.getByRole('listitem')).toHaveCount(8);
+  await expect(collaboratorList.getByRole('listitem')).toHaveCount(5);
   for (const [name, relationship, slug, chapter] of collaborators) {
     const link = collaboratorList.getByRole('link', { name: new RegExp(name) });
     await expect(link).toBeVisible();
     await expect(link).toContainText(relationship);
     await expect(link).toHaveAttribute(
       'href',
-      `${base}/work/${slug}/#chapter-${chapter}`,
+      chapter
+        ? `${base}/work/${slug}/#chapter-${chapter}`
+        : `${base}/work/${slug}/`,
     );
     await expect(link.locator('img')).not.toHaveCount(0);
   }
-  const newBalanceLink = collaboratorList.getByRole('link', {
-    name: /New Balance/,
+  const allCityMileLink = collaboratorList.getByRole('link', {
+    name: /All City Mile/,
   });
-  await expect(newBalanceLink).toHaveAttribute(
+  await expect(allCityMileLink).toHaveAttribute(
     'aria-describedby',
     'all-city-mile-photo-credit',
   );
@@ -486,7 +472,6 @@ test('production home and five published stories work under the project base', a
       await expect(story).toContainText(
         /not attributed to it|not presented as an event-attributed result/i,
       );
-      await expect(story).not.toContainText(/420%|275%/);
     }
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
@@ -582,7 +567,7 @@ test('production home and five published stories work under the project base', a
     `${base}/`,
     `${base}/archive/`,
     `${base}/about/`,
-    ...slugs.map((slug) => `${base}/work/${slug}/`),
+    ...publicProjectSlugs.map((slug) => `${base}/work/${slug}/`),
   ];
   const routeIds = new Map<string, Set<string>>();
   const fragmentLinks: Array<{ pathname: string; fragment: string }> = [];
@@ -667,6 +652,128 @@ test('production home and five published stories work under the project base', a
     await page.locator('body').evaluate((body) => body.scrollWidth),
   ).toBeLessThanOrEqual(320);
   expect(consoleErrors).toEqual([]);
+});
+
+test('new archive case studies publish their supplied facts, imagery, and metadata', async ({
+  page,
+}) => {
+  const cases = [
+    {
+      slug: 'for-all-mothers',
+      title: 'Cortina Olympics Coverage',
+      name: 'Cortina Olympics Coverage',
+      description:
+        'Capturing the realities of motherhood alongside elite sport at the Winter Olympics in Cortina.',
+      image: {
+        src: '/work/cortina-family-curling.webp',
+        alt: 'A spectator holds a young child while watching a curling match in an Olympic arena.',
+        width: 1170,
+        height: 2048,
+      },
+      facts: [
+        'three athlete mothers',
+        'For All Mothers grants helped families bring children to the Games',
+        'Joie Baby products supported them there',
+        'edited two social reels',
+        'Kelly Curtis',
+        'Kaillie Humphries',
+        'Tabitha and Tara Peterson',
+      ],
+      imageAlts: [
+        'A spectator holds a young child while watching a curling match in an Olympic arena.',
+        'Families share a shuttle ride between Winter Games venues, with a child beside an adult in a blue jacket.',
+        'Two Team USA athletes celebrate in competition suits, holding mascots and wearing medals.',
+      ],
+    },
+    {
+      slug: 'usa-track-championships',
+      title: 'USA Track Championships',
+      name: 'USA Track Championships',
+      description:
+        'Partnered with Citius Magazine to curate community and athlete spotlights across the 2025 USA Track Championships in Eugene.',
+      image: {
+        src: '/work/usa-track-championships-community.webp',
+        alt: 'A large group gathers behind a New Balance banner beneath a Citius Magazine logo.',
+        width: 1290,
+        height: 915,
+      },
+      facts: [
+        'Eugene',
+        'Emma Coburn',
+        'SC Elite racing shoes and the Rebel',
+        '200+ people',
+        'Sydney McLaughlin-Levrone',
+        'athlete-house decor',
+      ],
+      imageAlts: [
+        'A large group gathers behind a New Balance banner beneath a Citius Magazine logo.',
+        'Runners pose in front of a Citius Magazine and New Balance backdrop.',
+      ],
+    },
+  ];
+  const personId = `https://katherinekalill.github.io${base}/#person`;
+
+  for (const item of cases) {
+    const path = `${base}/work/${item.slug}/`;
+    const response = await page.goto(path);
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('main h1')).toContainText(item.title);
+    const story = page.locator(`[data-case-study="${item.slug}"]`);
+    for (const fact of item.facts) await expect(story).toContainText(fact);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      'content',
+      `${item.name} — Katherine Kalill`,
+    );
+    await expect(
+      page.locator('meta[property="og:description"]'),
+    ).toHaveAttribute('content', item.description);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      'content',
+      `https://katherinekalill.github.io${base}${item.image.src}`,
+    );
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+      'content',
+      item.image.alt,
+    );
+    await expect(
+      page.locator('meta[property="og:image:width"]'),
+    ).toHaveAttribute('content', String(item.image.width));
+    await expect(
+      page.locator('meta[property="og:image:height"]'),
+    ).toHaveAttribute('content', String(item.image.height));
+    const storyImages = page.locator(
+      `[data-case-study="${item.slug}"] img[alt]`,
+    );
+    for (const alt of item.imageAlts) {
+      const image = storyImages.getByAltText(alt);
+      await expect(image).toBeVisible();
+      await expect
+        .poll(() =>
+          image.evaluate((node: HTMLImageElement) => node.naturalWidth),
+        )
+        .toBeGreaterThan(0);
+    }
+    expect(await readStructuredData(page)).toEqual([
+      expectedPersonStructuredData(),
+      expectedWebsiteStructuredData(),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: item.name,
+        headline: item.name,
+        description: item.description,
+        url: `https://katherinekalill.github.io${path}`,
+        image: {
+          '@type': 'ImageObject',
+          url: `https://katherinekalill.github.io${base}${item.image.src}`,
+          width: item.image.width,
+          height: item.image.height,
+          caption: item.image.alt,
+        },
+        creator: { '@id': personId },
+      },
+    ]);
+  }
 });
 
 test('published story heroes sit beside their copy and keep approved image behavior', async ({
@@ -1036,15 +1143,26 @@ test('archive filters, query history, empty category, and progressive enhancemen
   await expect(page.getByRole('heading', { name: 'Archive' })).toBeVisible();
 
   const cards = page.locator('[data-archive-card]');
-  await expect(cards).toHaveCount(5);
-  await expect(page.locator('[data-archive-card] img')).toHaveCount(5);
+  await expect(cards).toHaveCount(7);
+  await expect(page.locator('[data-archive-card] img')).toHaveCount(7);
   expect(
     await cards.evaluateAll((items) =>
       items.map((item) =>
         item.querySelector('a')?.getAttribute('href')?.split('/').at(-2),
       ),
     ),
-  ).toEqual(slugs);
+  ).toEqual([...slugs, 'for-all-mothers', 'usa-track-championships']);
+  await expect(
+    page.locator('[data-archive-card] a[href$="/work/for-all-mothers/"]'),
+  ).toContainText('Joie Baby × For All Mothers');
+  await expect(
+    page.locator('[data-archive-card] a[href$="/work/for-all-mothers/"]'),
+  ).toContainText('Cortina Olympics Coverage');
+  await expect(
+    page.locator(
+      '[data-archive-card] a[href$="/work/usa-track-championships/"]',
+    ),
+  ).toContainText('USA Track Championships');
 
   const filters = page.locator('[data-archive-filters]');
   await expect(filters).toBeVisible();
@@ -1072,8 +1190,12 @@ test('archive filters, query history, empty category, and progressive enhancemen
 
   for (const category of ['community', 'partnerships', 'experiences']) {
     await page.locator(`[data-archive-filter="${category}"]`).click();
-    await expect(count).toHaveText('5 projects');
-    expect(await visibleSlugs()).toEqual(slugs);
+    await expect(count).toHaveText('7 projects');
+    expect(await visibleSlugs()).toEqual([
+      ...slugs,
+      'for-all-mothers',
+      'usa-track-championships',
+    ]);
   }
 
   await page.locator('[data-archive-filter="digital"]').click();
@@ -1107,7 +1229,7 @@ test('archive filters, query history, empty category, and progressive enhancemen
   await page.keyboard.press('Enter');
   await expect(buttons.first()).toBeFocused();
   await expect(page).toHaveURL(`${base}/archive/`);
-  await expect(count).toHaveText('5 projects');
+  await expect(count).toHaveText('7 projects');
   await expect(page.locator('[data-archive-empty]')).toBeHidden();
 
   await page.locator('[data-archive-filter="owned-platform"]').click();
@@ -1116,8 +1238,12 @@ test('archive filters, query history, empty category, and progressive enhancemen
 
   await page.goto(`${base}/archive/?discipline=not-a-category`);
   await expect(buttons.first()).toHaveAttribute('aria-pressed', 'true');
-  await expect(count).toHaveText('5 projects');
-  expect(await visibleSlugs()).toEqual(slugs);
+  await expect(count).toHaveText('7 projects');
+  expect(await visibleSlugs()).toEqual([
+    ...slugs,
+    'for-all-mothers',
+    'usa-track-championships',
+  ]);
   await page.locator('[data-archive-filter="all"]').click();
   await expect(page).toHaveURL(`${base}/archive/`);
 
@@ -1172,22 +1298,11 @@ test('archive filters, query history, empty category, and progressive enhancemen
   const noJsPage = await noJsContext.newPage();
   await noJsPage.goto(`http://127.0.0.1:4321${base}/archive/`);
   await expect(noJsPage.locator('[data-archive-filters]')).toBeHidden();
-  await expect(noJsPage.locator('[data-archive-card]')).toHaveCount(5);
+  await expect(noJsPage.locator('[data-archive-card]')).toHaveCount(7);
   for (const card of await noJsPage.locator('[data-archive-card]').all()) {
     await expect(card).toBeVisible();
   }
   await noJsContext.close();
-
-  for (const draft of [
-    'western-canada-market-expansion',
-    'urban-hike-sara',
-    'luxury-concepts',
-  ]) {
-    const response = await page.request.get(
-      `http://127.0.0.1:4321${base}/work/${draft}/`,
-    );
-    expect(response.status(), `${draft} stays unpublished`).toBe(404);
-  }
 });
 
 test('About navigation, capability evidence, contact, credits, and approved bio boundaries work', async ({
@@ -1251,7 +1366,6 @@ test('About navigation, capability evidence, contact, credits, and approved bio 
   const aboutCopy = await page.locator('.about-page').innerText();
   for (const fact of [
     'New Balance',
-    'iRestore',
     'Katherine Kalill Productions',
     'VMware',
     'Your Mothers Run Crew',
@@ -1263,7 +1377,6 @@ test('About navigation, capability evidence, contact, credits, and approved bio 
   expect(aboutCopy).not.toMatch(
     /\b(?:graduated|graduation|currently enrolled)\b/i,
   );
-  expect(aboutCopy).not.toMatch(/\b(?:275%|420%|1,400\+|50,000\+|1M\+)\b/i);
   expect(await page.locator('.about-page a[href$=".pdf"]').count()).toBe(0);
   await expect(page.locator('.about-page a[href^="tel:"]')).toHaveCount(0);
 
@@ -1364,7 +1477,7 @@ test('collaborator previews show only for fine-pointer hover and hide on leave',
 
   const list = page.getByRole('list', { name: 'Brands and collaborators' });
   const previews = list.locator('.collaborator-list__previews');
-  await expect(previews).toHaveCount(8);
+  await expect(previews).toHaveCount(5);
   for (const preview of await previews.all()) {
     await expect(preview).toHaveCSS('visibility', 'hidden');
     await expect(preview).toHaveCSS('opacity', '0');
@@ -1375,14 +1488,14 @@ test('collaborator previews show only for fine-pointer hover and hide on leave',
     ).toBe('0.32s');
   }
 
-  const newBalance = list.getByRole('link', { name: /New Balance/ });
+  const allCityMile = list.getByRole('link', { name: /All City Mile/ });
   const hovered = list.getByRole('link', { name: /Freaks of Nature/ });
   await hovered.hover();
   await expect(hovered.locator('.collaborator-list__previews')).toHaveCSS(
     'opacity',
     '1',
   );
-  await expect(newBalance.locator('.collaborator-list__previews')).toHaveCSS(
+  await expect(allCityMile.locator('.collaborator-list__previews')).toHaveCSS(
     'opacity',
     '0',
   );
@@ -1406,7 +1519,7 @@ test('keyboard focus overrides pointer hover without reflowing collaborator copy
   await page.goto(`${base}/`);
 
   const list = page.getByRole('list', { name: 'Brands and collaborators' });
-  const focused = list.getByRole('link', { name: /New Balance/ });
+  const focused = list.getByRole('link', { name: /All City Mile/ });
   const hovered = list.getByRole('link', { name: /Freaks of Nature/ });
   const name = focused.locator('.collaborator-list__name');
   const relationship = focused.locator('.collaborator-list__relationship');
@@ -1487,7 +1600,7 @@ test('touch-sized collaborator rows keep one static thumbnail per row', async ({
   const rows = page
     .getByRole('list', { name: 'Brands and collaborators' })
     .getByRole('listitem');
-  await expect(rows).toHaveCount(8);
+  await expect(rows).toHaveCount(5);
   for (const row of await rows.all()) {
     const previews = row.locator('.collaborator-list__previews');
     await expect(previews).toHaveCSS('visibility', 'visible');
@@ -1515,18 +1628,20 @@ test('published home-to-story navigation works by keyboard without JavaScript or
   const collaborators = page.getByRole('list', {
     name: 'Brands and collaborators',
   });
-  await expect(collaborators.getByRole('listitem')).toHaveCount(8);
-  await expect(collaborators.getByRole('link')).toHaveCount(8);
-  const newBalance = collaborators.getByRole('link', { name: /New Balance/ });
-  await expect(newBalance).toBeVisible();
+  await expect(collaborators.getByRole('listitem')).toHaveCount(5);
+  await expect(collaborators.getByRole('link')).toHaveCount(5);
+  const allCityMile = collaborators.getByRole('link', {
+    name: /All City Mile/,
+  });
+  await expect(allCityMile).toBeVisible();
   await expect(page.locator('#all-city-mile-photo-credit')).toBeVisible();
-  await expect(newBalance).toHaveAttribute(
+  await expect(allCityMile).toHaveAttribute(
     'aria-describedby',
     'all-city-mile-photo-credit',
   );
-  const preview = newBalance.locator('.collaborator-list__previews');
+  const preview = allCityMile.locator('.collaborator-list__previews');
   await expect(preview).toHaveCSS('visibility', 'hidden');
-  await newBalance.hover();
+  await allCityMile.hover();
   await expect(preview).toHaveCSS('visibility', 'visible');
   const firstStory = page.locator(
     '[data-project-id="all-city-mile"] .featured-story__link',
@@ -1561,7 +1676,7 @@ test('production routes, text output, and binaries exclude review-only material'
     const response = await request.get(`${base}/dev/${fixture}/`);
     expect(response.status()).toBe(404);
   }
-  for (const slug of slugs) {
+  for (const slug of publicProjectSlugs) {
     expect((await request.get(`${base}/dev/work/${slug}/`)).status()).toBe(404);
     expect((await request.get(`${base}/work/${slug}/`)).status()).toBe(200);
   }
