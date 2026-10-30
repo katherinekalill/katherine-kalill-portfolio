@@ -744,6 +744,7 @@ test('new archive case studies publish their supplied facts, imagery, and metada
     for (const alt of item.imageAlts) {
       const image = story.getByAltText(alt);
       await expect(image).toBeVisible();
+      await image.scrollIntoViewIfNeeded();
       await expect
         .poll(() =>
           image.evaluate((node: HTMLImageElement) => node.naturalWidth),
