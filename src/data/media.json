@@ -345,41 +345,6 @@
     ]
   },
   {
-    "id": "you-deserve-flowers-hero",
-    "kind": "image",
-    "src": "/work/you-deserve-flowers-hero.webp",
-    "width": 1920,
-    "height": 2560,
-    "aspectRatio": 0.75,
-    "alt": "People gather inside a store for the run crew event.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.5,
-      "y": 0.52
-    },
-    "credit": null,
-    "creditBasis": "not-required",
-    "permission": "approved",
-    "posterId": null,
-    "variants": [
-      {
-        "src": "/work/you-deserve-flowers-hero-1440.webp",
-        "width": 1440,
-        "height": 1920
-      },
-      {
-        "src": "/work/you-deserve-flowers-hero-960.webp",
-        "width": 960,
-        "height": 1280
-      },
-      {
-        "src": "/work/you-deserve-flowers-hero-640.webp",
-        "width": 640,
-        "height": 853
-      }
-    ]
-  },
-  {
     "id": "you-deserve-flowers-activation",
     "kind": "image",
     "src": "/work/you-deserve-flowers-activation.webp",
@@ -415,41 +380,6 @@
     ]
   },
   {
-    "id": "you-deserve-flowers-display",
-    "kind": "image",
-    "src": "/work/you-deserve-flowers-display.webp",
-    "width": 1920,
-    "height": 1440,
-    "aspectRatio": 1.333333,
-    "alt": "New Balance products displayed at a local retail event.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.5,
-      "y": 0.5
-    },
-    "credit": null,
-    "creditBasis": "not-required",
-    "permission": "approved",
-    "posterId": null,
-    "variants": [
-      {
-        "src": "/work/you-deserve-flowers-display-1440.webp",
-        "width": 1440,
-        "height": 1080
-      },
-      {
-        "src": "/work/you-deserve-flowers-display-960.webp",
-        "width": 960,
-        "height": 720
-      },
-      {
-        "src": "/work/you-deserve-flowers-display-640.webp",
-        "width": 640,
-        "height": 480
-      }
-    ]
-  },
-  {
     "id": "you-deserve-flowers-bouquets",
     "kind": "image",
     "src": "/work/you-deserve-flowers-bouquets.webp",
@@ -474,36 +404,6 @@
       },
       {
         "src": "/work/you-deserve-flowers-bouquets-640.webp",
-        "width": 640,
-        "height": 853
-      }
-    ]
-  },
-  {
-    "id": "you-deserve-flowers-team",
-    "kind": "image",
-    "src": "/work/you-deserve-flowers-team.webp",
-    "width": 1013,
-    "height": 1350,
-    "aspectRatio": 0.75037,
-    "alt": "Three event collaborators pose together after the activation.",
-    "decorative": false,
-    "focalPoint": {
-      "x": 0.5,
-      "y": 0.48
-    },
-    "credit": null,
-    "creditBasis": "not-required",
-    "permission": "approved",
-    "posterId": null,
-    "variants": [
-      {
-        "src": "/work/you-deserve-flowers-team-960.webp",
-        "width": 960,
-        "height": 1279
-      },
-      {
-        "src": "/work/you-deserve-flowers-team-640.webp",
         "width": 640,
         "height": 853
       }
@@ -681,6 +581,391 @@
         "src": "/work/womens-self-defense-partner-640.webp",
         "width": 640,
         "height": 480
+      }
+    ]
+  },
+  {
+    "id": "all-city-mile-community",
+    "kind": "image",
+    "src": "/work/all-city-mile-community.webp",
+    "width": 2048,
+    "height": 1366,
+    "aspectRatio": 1.499268,
+    "alt": "Runners gather shoulder to shoulder for a group photo at the All City Mile community race.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/all-city-mile-community-1440.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "/work/all-city-mile-community-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/work/all-city-mile-community-640.webp",
+        "width": 640,
+        "height": 427
+      }
+    ]
+  },
+  {
+    "id": "all-city-mile-bib",
+    "kind": "image",
+    "src": "/work/all-city-mile-bib.webp",
+    "width": 1366,
+    "height": 2048,
+    "aspectRatio": 0.666992,
+    "alt": "A hand holds a numbered All City Mile race bib over a blue table.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/all-city-mile-bib-960.webp",
+        "width": 960,
+        "height": 1439
+      },
+      {
+        "src": "/work/all-city-mile-bib-640.webp",
+        "width": 640,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "all-city-mile-results",
+    "kind": "image",
+    "src": "/work/all-city-mile-results.webp",
+    "width": 2048,
+    "height": 1365,
+    "aspectRatio": 1.500366,
+    "alt": "Women hold All City Mile result cards at the track.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/all-city-mile-results-1440.webp",
+        "width": 1440,
+        "height": 960
+      },
+      {
+        "src": "/work/all-city-mile-results-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/work/all-city-mile-results-640.webp",
+        "width": 640,
+        "height": 427
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-run-your-way",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-run-your-way.webp",
+    "width": 1013,
+    "height": 1350,
+    "aspectRatio": 0.75037,
+    "alt": "A Run Your Way New Balance banner stands among athletes training in a gym.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-run-your-way-960.webp",
+        "width": 960,
+        "height": 1279
+      },
+      {
+        "src": "/work/you-deserve-flowers-run-your-way-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-shoe-motion",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-shoe-motion.webp",
+    "width": 1013,
+    "height": 1350,
+    "aspectRatio": 0.75037,
+    "alt": "Runners in orange and teal shoes move across a black event mat.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-shoe-motion-960.webp",
+        "width": 960,
+        "height": 1279
+      },
+      {
+        "src": "/work/you-deserve-flowers-shoe-motion-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-retail-display",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-retail-display.webp",
+    "width": 1536,
+    "height": 2048,
+    "aspectRatio": 0.75,
+    "alt": "A Mom, Run Fast AF T-shirt hangs above a floral sneaker display inside a store.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-retail-display-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/you-deserve-flowers-retail-display-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/you-deserve-flowers-retail-display-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "you-deserve-flowers-flower-bar",
+    "kind": "image",
+    "src": "/work/you-deserve-flowers-flower-bar.webp",
+    "width": 1536,
+    "height": 2048,
+    "aspectRatio": 0.75,
+    "alt": "Buckets of flowers and a table form a flower bar inside a bright storefront.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/you-deserve-flowers-flower-bar-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/you-deserve-flowers-flower-bar-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/you-deserve-flowers-flower-bar-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "usa-track-championships-community",
+    "kind": "image",
+    "src": "/work/usa-track-championships-community.webp",
+    "width": 1290,
+    "height": 915,
+    "aspectRatio": 1.409836,
+    "alt": "A large group gathers behind a New Balance banner beneath a Citius Magazine logo.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/usa-track-championships-community-960.webp",
+        "width": 960,
+        "height": 681
+      },
+      {
+        "src": "/work/usa-track-championships-community-640.webp",
+        "width": 640,
+        "height": 454
+      }
+    ]
+  },
+  {
+    "id": "usa-track-championships-collaborators",
+    "kind": "image",
+    "src": "/work/usa-track-championships-collaborators.webp",
+    "width": 1290,
+    "height": 1106,
+    "aspectRatio": 1.166365,
+    "alt": "Runners pose in front of a Citius Magazine and New Balance backdrop.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/usa-track-championships-collaborators-960.webp",
+        "width": 960,
+        "height": 823
+      },
+      {
+        "src": "/work/usa-track-championships-collaborators-640.webp",
+        "width": 640,
+        "height": 549
+      }
+    ]
+  },
+  {
+    "id": "cortina-family-curling",
+    "kind": "image",
+    "src": "/work/cortina-family-curling.webp",
+    "width": 1170,
+    "height": 2048,
+    "aspectRatio": 0.571289,
+    "alt": "A spectator holds a young child while watching a curling match in an Olympic arena.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/cortina-family-curling-960.webp",
+        "width": 960,
+        "height": 1680
+      },
+      {
+        "src": "/work/cortina-family-curling-640.webp",
+        "width": 640,
+        "height": 1120
+      }
+    ]
+  },
+  {
+    "id": "cortina-family-travel",
+    "kind": "image",
+    "src": "/work/cortina-family-travel.webp",
+    "width": 1536,
+    "height": 2048,
+    "aspectRatio": 0.75,
+    "alt": "Families share a shuttle ride between Winter Games venues, with a child beside an adult in a blue jacket.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/cortina-family-travel-1440.webp",
+        "width": 1440,
+        "height": 1920
+      },
+      {
+        "src": "/work/cortina-family-travel-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/work/cortina-family-travel-640.webp",
+        "width": 640,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": "cortina-athlete-celebration",
+    "kind": "image",
+    "src": "/work/cortina-athlete-celebration.webp",
+    "width": 1290,
+    "height": 2036,
+    "aspectRatio": 0.633595,
+    "alt": "Two Team USA athletes celebrate in competition suits, holding mascots and wearing medals.",
+    "decorative": false,
+    "focalPoint": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "credit": null,
+    "creditBasis": "not-required",
+    "permission": "approved",
+    "posterId": null,
+    "variants": [
+      {
+        "src": "/work/cortina-athlete-celebration-960.webp",
+        "width": 960,
+        "height": 1515
+      },
+      {
+        "src": "/work/cortina-athlete-celebration-640.webp",
+        "width": 640,
+        "height": 1010
       }
     ]
   }

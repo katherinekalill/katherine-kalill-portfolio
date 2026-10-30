@@ -42,7 +42,7 @@ export const profileContent: ProfileContent = {
       eyebrow: 'Experience',
       title: 'Built across brand and community work',
       paragraphs: [
-        'From August 2024 through February 2026, I worked in field events and account marketing for New Balance across the Pacific Northwest and Western Canada. In June through September 2026, I supported social and community strategy for iRestore on contract.',
+        'From August 2024 through February 2026, I worked in field events and account marketing for New Balance across the Pacific Northwest and Western Canada.',
         'Since 2023, I have also run Katherine Kalill Productions, an independent practice for brand, event, and content work. Earlier technology-sector commercial customer and account experience at VMware informs how I work across teams and relationships.',
       ],
     },

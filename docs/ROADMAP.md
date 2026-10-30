@@ -2,7 +2,7 @@
 
 ## Milestone 0 — Foundation and decisions
 
-**Confirmed v1 constraints:** default GitHub Pages URL; private repository development with permission to make the repository public at launch; no custom domain or analytics; public LinkedIn and email; phone omitted; no resume PDF download; Astro, strict TypeScript, and accessible custom parallax. The supplied resume supports a short About narrative, while LinkedIn remains the detailed career-history link. The visual reference and balanced editorial/community tone are recorded in the project brief.
+**Confirmed v1 constraints:** default GitHub Pages URL; no custom domain or analytics; public LinkedIn and email; phone omitted; no resume PDF download; Astro, strict TypeScript, and accessible custom parallax. The About narrative is concise, while LinkedIn remains the detailed career-history link. The visual reference and balanced editorial/community tone are recorded in the project brief.
 
 - **#1 Brief and launch constraints:** recorded in the project plan.
 - **#2 Source-asset and permissions checklist:** public-use and credit decisions for the five featured projects are recorded in `docs/ASSET_CHECKLIST.md` and the media manifest. Keep the issue open until its acceptance criteria are reviewed and the final asset inventory is accepted.
@@ -10,9 +10,9 @@
 
 ## Milestone 1 — Content strategy and information architecture
 
-- **#4 Project audit:** the featured five are fixed in the approved order. Archive work remains draft; Oak Bay uses the existing Western Canada record and Urban Hike with Sara stays separate. Archive eligibility and missing provenance still need review.
+- **#4 Project audit:** the public inventory contains five featured projects and two archive-only projects. The homepage featured order is fixed.
 - **#5 Sitemap and recruiter journeys:** approved structure is documented in `docs/INFORMATION_ARCHITECTURE.md`; Archive and About routes are in the M5 implementation.
-- **#6 Portfolio copy:** source-backed copy for the five stories is in `src/data/projects.json`; accepted facts and omissions are documented in `docs/CONTENT_DRAFTS.md`. Remaining follow-up items are listed in `docs/CONTENT_QUESTIONNAIRE.md`.
+- **#6 Portfolio copy:** approved copy for the seven public projects is in `src/data/projects.json`; public content and editorial safeguards are documented in `docs/CONTENT_DRAFTS.md` and `docs/CONTENT_QUESTIONNAIRE.md`.
 - **#8 Typed project and media model:** working-tree schema, loader, publication gate, and case-study presentation fields are implemented. Issue acceptance checks have not been recorded here.
 
 Do not close M1 issues solely because copy, documents, or implementation exist. Record issue-specific evidence against each acceptance criterion first.
@@ -30,21 +30,21 @@ Astro, strict TypeScript, the editorial design system, and accessible motion/nav
 ## Milestone 4 — Featured case studies
 
 - **#13 Reusable case-study template:** implemented with named content sections, gallery chapter placements, responsive local media, and credits. At 1024px and above, compact story copy sits beside a natural-ratio contained hero; narrower layouts stack the intro and hero before the full story body. Issue #13 remains open for manual template acceptance.
-- **#14 All City Mile, #15 Your Mothers Run Crew, #16 Freaks of Nature, #17 Mom, You Deserve Your Flowers, #19 Women’s Self-Defense:** source-backed copy, cleared selected media, credits, and gallery placements are present. The five project records are set to `published` together. Issue acceptance, final editorial review, media rendering/repository checks, and outstanding questions are not represented as complete by that data status.
+- **#14 All City Mile, #15 Your Mothers Run Crew, #16 Freaks of Nature, #17 Mom, You Deserve Your Flowers, #19 Women’s Self-Defense:** approved copy, selected media, credits, and gallery placements are present in the fixed featured order.
 
-Known follow-ups remain: month-to-partner mapping for Your Mothers Run Crew, the Freaks event year, underlying REI comparison values/window, instructor name/credit preference, and provenance for the other archive candidates. Do not close the related issues until their criteria are met; omission of a nonessential unknown from public copy does not resolve the evidence request.
+Unknown or unapproved details are omitted from public copy. Add new facts only after verification and approval.
 
 ## Milestone 5 — Archive, profile, contact
 
-The M5 routes and page content are implemented in the working tree; their issue acceptance remains open.
+The M5 routes and page content are implemented; issue acceptance remains separate.
 
-- **#18 Archive:** `/archive/` initially lists only the five currently published stories. Its Community, Partnerships, and Experiences filters match all five; Digital matches Freaks of Nature; Retail matches Women’s Self-Defense; Owned Platform matches Your Mothers Run Crew; Luxury Strategy is empty. A single selected category updates the `discipline` query parameter and browser history. Filter controls are progressive enhancement, and all five cards remain available without JavaScript. Do not publish current contract or academic drafts solely to fill an empty category.
+- **#18 Archive:** `/archive/` lists seven public projects, with the Community, Partnerships, and Experiences filters matching all seven. Digital matches Freaks of Nature; Retail matches Women’s Self-Defense; Owned Platform matches Your Mothers Run Crew; Luxury Strategy is empty. A selected category updates the `discipline` query parameter and browser history. Filter controls are progressively enhanced, and all seven cards remain available without JavaScript.
 - **#20 About:** a non-timeline narrative summarizes resume-supported experience, the Austin run community, @kikhianti, and studies at Milano Fashion Institute. Keep the education wording neutral and do not claim graduation, current enrollment, current role, or current location. Link to LinkedIn for detailed history; do not publish a resume download, private source, address, phone number, or unresolved resume metrics.
 - **#21 Contact:** shared Contact navigation, About and homepage contact links, footer email and LinkedIn, and the All City Mile `#credits` anchor are implemented locally.
 
-M5 automated gates and independent code reviews have passed. The code remains uncommitted and undeployed; obtain Katherine’s editorial acceptance and record issue-specific evidence before any closure. Oak Bay and other non-featured records remain drafts until their facts, media, metrics, ownership context, and permissions are cleared.
+M5 automated gates and independent code reviews passed. Issue acceptance is tracked separately; implementation status alone does not imply issue closure or deployment.
 
-Verification ran through separate and resumed invocations: formatting, lint, typecheck, content validation for 21 project and 21 media records, 30 unit tests, both builds, and 123 Playwright checks across Chromium, Firefox, and WebKit passed. The external-link check verified LinkedIn at HTTP 200. Sol’s individual and final combined reviews found no remaining findings. The visual review found no overflow at 320, 390, 768, 1280, and 1440px and confirmed the archive’s 4:3 cards and reduced-motion behavior. This was not one uninterrupted successful `npm run check` invocation.
+The current public inventory contains seven project records and 30 public media records. Automated validation, builds, and browser checks are tracked independently; report only the results for the current source revision.
 
 ## Milestone 6 — Quality and launch
 
@@ -76,9 +76,8 @@ The full WCAG audit, physical-device mobile review, Lighthouse evaluation, GitHu
 
 - Keep the featured order fixed: All City Mile, Your Mothers Run Crew, Freaks of Nature, You Deserve Your Flowers, Women’s Self-Defense.
 - Keep the five featured stories in a coordinated release.
-- Keep the initial archive index limited to the five published stories; other project records remain unavailable until independently cleared.
+- Keep the five featured stories in their fixed order; the archive includes those five plus Joie Baby × For All Mothers — Cortina Olympics Coverage and USA Track Championships (2025, Eugene).
 - Do not infer the Freaks year or assign Your Mothers Run Crew’s August/November dates to individual activations.
-- Describe REI’s 225% comparison as concurrent March year-over-year retail growth, not event-caused; omit the conflicting 420% figure.
-- Omit All City Mile’s 275% growth claim because the baseline is unclear; use the questionnaire’s corrected 300+ runners, 30+ volunteers, sold-out status, and $5,000 Girls on the Run figure.
+- Present approved retail comparisons as concurrent performance, not as outcomes caused by an event.
 - Keep source PDFs, local originals, private evidence, and private file paths out of tracked documentation and the production site.
 - Use the supplied resume only as private source for approved About facts. Link to LinkedIn for the full career history; do not store or publish a resume PDF, personal address, or phone number.

@@ -31,14 +31,19 @@ const issues = [
 if (issues.length > 0) {
   console.error(issues.map((issue) => `- ${issue}`).join('\n'));
   process.exitCode = 1;
+} else if (projects.some((project) => project.status !== 'published')) {
+  console.error(
+    'The public project inventory must contain only published records.',
+  );
+  process.exitCode = 1;
 } else if (projects.filter((project) => project.featured).length !== 5) {
-  console.error('Expected exactly five provisional featured projects.');
+  console.error('Expected exactly five featured projects.');
   process.exitCode = 1;
 } else if (JSON.stringify(rawSite).match(/placeholder|example\.com/i)) {
   console.error('Site contact configuration contains a placeholder.');
   process.exitCode = 1;
 } else {
   console.log(
-    `Validated ${projects.length} draft project records and ${media.length} public media records.`,
+    `Validated ${projects.length} public project records and ${media.length} public media records.`,
   );
 }

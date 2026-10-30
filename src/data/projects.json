@@ -47,7 +47,13 @@
       }
     ],
     "takeaway": null,
-    "mediaIds": ["all-city-mile-hero", "all-city-mile-huddle"],
+    "mediaIds": [
+      "all-city-mile-hero",
+      "all-city-mile-huddle",
+      "all-city-mile-community",
+      "all-city-mile-bib",
+      "all-city-mile-results"
+    ],
     "credits": [
       {
         "name": "New Balance",
@@ -98,6 +104,24 @@
           "mediaId": "all-city-mile-huddle",
           "layout": "landscape",
           "caption": "Runners join a huddle at the track.",
+          "chapterId": "race-day-format"
+        },
+        {
+          "mediaId": "all-city-mile-community",
+          "layout": "landscape",
+          "caption": "Runners gather for a group photo at the All City Mile community race.",
+          "chapterId": "race-day-format"
+        },
+        {
+          "mediaId": "all-city-mile-bib",
+          "layout": "portrait",
+          "caption": "A numbered All City Mile race bib rests on the event table.",
+          "chapterId": "race-day-format"
+        },
+        {
+          "mediaId": "all-city-mile-results",
+          "layout": "landscape",
+          "caption": "Women hold All City Mile result cards at the track.",
           "chapterId": "race-day-format"
         }
       ]
@@ -328,7 +352,7 @@
     "featured": true,
     "featuredOrder": 4,
     "title": "Mom, You Deserve Your Flowers",
-    "editorialTitle": "Turning a Retail Moment Into a Personal Gesture",
+    "editorialTitle": "Bridging Fashion Culture With a Passion for High Performance",
     "clientPlatform": "New Balance × Athletic Form",
     "operatingContext": "New Balance community event leadership · community partnership · product trial",
     "location": "Seattle, Washington",
@@ -366,11 +390,12 @@
     ],
     "takeaway": null,
     "mediaIds": [
-      "you-deserve-flowers-hero",
+      "you-deserve-flowers-run-your-way",
+      "you-deserve-flowers-shoe-motion",
       "you-deserve-flowers-activation",
-      "you-deserve-flowers-display",
-      "you-deserve-flowers-bouquets",
-      "you-deserve-flowers-team"
+      "you-deserve-flowers-retail-display",
+      "you-deserve-flowers-flower-bar",
+      "you-deserve-flowers-bouquets"
     ],
     "credits": [
       {
@@ -397,8 +422,14 @@
       }
     ],
     "presentation": {
-      "heroMediaId": "you-deserve-flowers-hero",
+      "heroMediaId": "you-deserve-flowers-run-your-way",
       "gallery": [
+        {
+          "mediaId": "you-deserve-flowers-shoe-motion",
+          "layout": "portrait",
+          "caption": "Runners in orange and teal shoes move across a black event mat.",
+          "chapterId": "event-activation"
+        },
         {
           "mediaId": "you-deserve-flowers-activation",
           "layout": "portrait",
@@ -406,21 +437,21 @@
           "chapterId": "event-activation"
         },
         {
-          "mediaId": "you-deserve-flowers-display",
-          "layout": "landscape",
-          "caption": "New Balance products featured at the community event.",
+          "mediaId": "you-deserve-flowers-retail-display",
+          "layout": "portrait",
+          "caption": "A Mom, Run Fast AF T-shirt hangs above a floral shoe display inside the store.",
           "chapterId": "event-activation"
+        },
+        {
+          "mediaId": "you-deserve-flowers-flower-bar",
+          "layout": "portrait",
+          "caption": "Buckets of flowers and a table form a flower bar inside the storefront.",
+          "chapterId": "community-response"
         },
         {
           "mediaId": "you-deserve-flowers-bouquets",
           "layout": "portrait",
           "caption": "Bouquets prepared for the Mother’s Day gathering.",
-          "chapterId": "event-activation"
-        },
-        {
-          "mediaId": "you-deserve-flowers-team",
-          "layout": "portrait",
-          "caption": "Event collaborators after the activation.",
           "chapterId": "community-response"
         }
       ]
@@ -538,597 +569,179 @@
     "workContext": "professional"
   },
   {
-    "id": "western-canada-market-expansion",
-    "slug": "western-canada-market-expansion",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Oak Bay Half Marathon × New Balance Rebel v5",
-    "editorialTitle": "Making a Race Weekend Feel Like a Brand Takeover",
-    "clientPlatform": "New Balance × Oak Bay Half Marathon × Frontrunners",
-    "operatingContext": "New Balance market activation · retail partnership · event and social content",
-    "location": "Victoria, British Columbia",
-    "year": null,
-    "disciplines": [
-      "Brand experience",
-      "Retail partnerships",
-      "Events",
-      "Social content"
-    ],
-    "summary": "A New Balance race-weekend activation around the Oak Bay Half Marathon and Rebel v5 launch paired retail training, ambassador content, a community shakeout run, and a coordinated social takeover with local retail partner Frontrunners.",
-    "insight": "A race weekend and new shoe launch offered a chance to connect product education, local retail, community trial, and partner social channels.",
-    "intention": "Build a sustained New Balance presence across the race weekend and give runners and retail partners useful product and event experiences.",
-    "opportunity": "Coordinate content and in-person touchpoints across the Oak Bay Half Marathon and Frontrunners so the event, product launch, and local partner reinforced one another.",
-    "idea": "A four-day plan paired ambassador-led content, an 80-runner shakeout, real-time partner social posts, and a finish-line activation.",
-    "role": "Katherine trained retail partners on the Rebel v5, storyboarded and directed content shoots, coordinated the ambassador experience and shakeout run, managed real-time content for the Oak Bay Half and Frontrunners Instagram accounts, and organized the finish-line activation.",
-    "experience": "The activation included a private ambassador shoot and team dinner, a track content session, and a finish-line poster station where runners could stamp their race times. Nine reels were edited and posted in real time over the weekend. The source material reports account-level reach and viewership changes over five days; it does not establish sales or attribute those changes to one activity.",
-    "metrics": [
-      {
-        "value": "80",
-        "label": "runners at the shakeout run",
-        "verification": "pending"
-      },
-      {
-        "value": "9",
-        "label": "reels posted across partner accounts over race weekend",
-        "verification": "pending"
-      },
-      {
-        "value": "+1,301.4%",
-        "label": "Oak Bay Half Instagram viewership change over five days",
-        "verification": "pending"
-      },
-      {
-        "value": "+1,466.4%",
-        "label": "Oak Bay Half Instagram profile visits change over five days",
-        "verification": "pending"
-      },
-      {
-        "value": "+236.1%",
-        "label": "Frontrunners Instagram profile visits change over five days",
-        "verification": "pending"
-      },
-      {
-        "value": "+173.2%",
-        "label": "Frontrunners Instagram accounts reached change over five days",
-        "verification": "pending"
-      }
-    ],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [
-      {
-        "name": "Oak Bay Half Marathon",
-        "contribution": "Race and social channel partner"
-      },
-      {
-        "name": "Frontrunners",
-        "contribution": "Retail and social channel partner"
-      }
-    ],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [
-      "Event marketing",
-      "Retail partnerships",
-      "Social content strategy"
-    ],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "irestore",
-    "slug": "irestore",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "iRestore Social Media Community Management",
-    "editorialTitle": null,
-    "clientPlatform": "iRestore",
-    "operatingContext": "Completed three-month contract",
-    "location": null,
-    "year": null,
-    "disciplines": ["Community management", "Social media"],
-    "summary": "A completed three-month social media community-management contract for iRestore. Specific responsibilities and outcomes remain to be confirmed.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": "Three-month social media community-management contract",
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "super-jock-n-jill",
-    "slug": "super-jock-n-jill",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Super Jock 'n Jill Creator and Retail Activation",
-    "editorialTitle": null,
-    "clientPlatform": "Super Jock 'n Jill",
-    "operatingContext": "Retail and creator activation",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "rad",
-    "slug": "rad",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "RAD",
-    "editorialTitle": null,
-    "clientPlatform": "RAD",
-    "operatingContext": "Pending verification",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
     "id": "for-all-mothers",
     "slug": "for-all-mothers",
-    "status": "draft",
+    "status": "published",
     "featured": false,
     "featuredOrder": null,
-    "title": "For All Mothers",
-    "editorialTitle": null,
-    "clientPlatform": "For All Mothers",
-    "operatingContext": "Pending verification",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "personal-platform",
-    "slug": "personal-platform",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "@kikhianti",
-    "editorialTitle": null,
-    "clientPlatform": "@kikhianti",
-    "operatingContext": "Owned platform",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "zegna-la",
-    "slug": "zegna-la",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Zegna LA VIP Experience",
-    "editorialTitle": null,
-    "clientPlatform": "Zegna",
-    "operatingContext": "Academic concept",
-    "location": "Los Angeles",
-    "year": null,
-    "disciplines": ["Academic concept"],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "world-cup-la-store",
-    "slug": "world-cup-la-store",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "World Cup LA Store Activation",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Academic concept",
-    "location": "Los Angeles",
-    "year": null,
-    "disciplines": ["Academic concept", "Retail activation"],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "new-balance-community-retail",
-    "slug": "new-balance-community-retail",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Other New Balance Community and Retail Activations",
-    "editorialTitle": null,
-    "clientPlatform": "New Balance",
-    "operatingContext": "Community and retail activations",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "luxury-concepts",
-    "slug": "luxury-concepts",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Luxury Concepts",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Academic concepts",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": "Academic concept work includes Jacquemus brand strategy, Rick Owens fashion-show casting, Valentino Rock Stud launch strategy, and Dalfilo fashion-week activation strategy. Archive selection and presentation details remain to be confirmed.",
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "role": null,
-    "experience": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "canada",
-    "slug": "canada",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Canada",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Pending verification",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "experience": null,
-    "role": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "canada-1",
-    "slug": "canada-1",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Canada (second Drive folder)",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Pending verification",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "experience": null,
-    "role": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "latinas-history-month",
-    "slug": "latinas-history-month",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Latinas History Month Celebration",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Pending verification",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "experience": null,
-    "role": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "seattle-marathon",
-    "slug": "seattle-marathon",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Seattle Marathon years 1 and 2",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Pending verification",
-    "location": "Seattle",
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "experience": null,
-    "role": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "sjj-50",
-    "slug": "sjj-50",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "SJJ 50",
-    "editorialTitle": null,
-    "clientPlatform": null,
-    "operatingContext": "Pending verification",
-    "location": null,
-    "year": null,
-    "disciplines": [],
-    "summary": null,
-    "insight": null,
-    "intention": null,
-    "opportunity": null,
-    "idea": null,
-    "experience": null,
-    "role": null,
-    "metrics": [],
-    "takeaway": null,
-    "mediaIds": [],
-    "credits": [],
-    "confidentiality": "pending",
-    "targetRoleRelevance": [],
-    "chapters": [],
-    "presentation": {
-      "heroMediaId": null,
-      "gallery": []
-    }
-  },
-  {
-    "id": "urban-hike-sara",
-    "slug": "urban-hike-sara",
-    "status": "draft",
-    "featured": false,
-    "featuredOrder": null,
-    "title": "Urban Hike with Sara Anfuso",
-    "editorialTitle": "Connecting a New Audience to a Local Run Store",
-    "clientPlatform": "New Balance × Super Jock ’n Jill × Sara Anfuso",
-    "operatingContext": "New Balance retail partnership · creator collaboration · community event",
-    "location": "Seattle, Washington",
+    "archiveCategories": ["community", "partnerships", "experiences"],
+    "workContext": "professional",
+    "title": "Joie Baby × For All Mothers",
+    "editorialTitle": "Cortina Olympics Coverage",
+    "clientPlatform": "Joie Baby × For All Mothers",
+    "operatingContext": "Athlete storytelling · family support · social content",
+    "location": "Cortina",
     "year": null,
     "disciplines": [
-      "Retail partnerships",
-      "Community",
-      "Creator marketing",
-      "Events"
+      "Athlete storytelling",
+      "Partnerships",
+      "Social content",
+      "Family support"
     ],
-    "summary": "A New Balance partnership with creator Sara Anfuso and Seattle specialty retailer Super Jock ’n Jill used a long-term content relationship and an urban hike to bring a younger audience into the local running store.",
-    "insight": "Super Jock ’n Jill’s legacy and New Balance’s independent heritage created common ground for an authentic partnership, while Sara’s urban-hike community could introduce the store to people who had not visited before.",
-    "intention": "Build a trusted local partnership and connect Sara’s audience to the experience of a neighborhood run specialty store.",
-    "opportunity": "A patient creator relationship and an in-person event could bridge digital discovery and a local retail visit without centering immediate sales.",
-    "idea": "Engage Sara over several months, then bring the partnership together in a store-to-store urban hike with shoe demos and a welcoming post-hike gathering.",
-    "experience": "The collaboration included Sara’s New Balance product use and a shoe-fitting visit at Super Jock ’n Jill, followed by an urban hike beginning and ending at the store. The event included more than 40 demo pairs, coffee and donuts, and co-branded staff shirts. The supplied case-study material reports more than 200 participants, mostly a new and younger audience; that attendance claim remains pending source review.",
-    "role": "Katherine identified and cultivated the creator partnership, supported long-term product seeding, coordinated content and the store visit, and managed event logistics for the urban hike.",
-    "metrics": [
-      {
-        "value": "200+",
-        "label": "reported urban-hike participants; source review pending",
-        "verification": "pending"
-      },
-      {
-        "value": "40+",
-        "label": "pairs of shoes available to demo; source review pending",
-        "verification": "pending"
-      }
-    ],
+    "summary": "Capturing the realities of motherhood alongside elite sport at the Winter Olympics in Cortina.",
+    "insight": null,
+    "intention": null,
+    "opportunity": null,
+    "idea": "Tell the stories of athlete mothers and families balancing competition, caregiving, and work at the Winter Olympics.",
+    "role": "Katherine coordinated shoots with athletes and families; filmed and shaped stories about motherhood, work, and elite training; edited two social reels; shared behind-the-scenes story posts on her personal channels; and captured footage and audio for future use, including routines, packed bags, children’s boots, competition, and reunions.",
+    "experience": null,
+    "metrics": [],
     "takeaway": null,
-    "mediaIds": [],
+    "mediaIds": [
+      "cortina-family-curling",
+      "cortina-family-travel",
+      "cortina-athlete-celebration"
+    ],
     "credits": [
       {
-        "name": "Sara Anfuso",
-        "contribution": "Creator and community partner"
+        "name": "For All Mothers",
+        "contribution": "Partner; grants supported families bringing children to the Games"
       },
       {
-        "name": "Super Jock ’n Jill",
-        "contribution": "Local retail and event partner"
+        "name": "Joie Baby",
+        "contribution": "Partner; products supported families at the Games"
+      },
+      {
+        "name": "Kelly Curtis",
+        "contribution": "USA Skeleton athlete featured in the storytelling"
+      },
+      {
+        "name": "Kaillie Humphries",
+        "contribution": "USA Bobsleigh athlete featured in the storytelling"
+      },
+      {
+        "name": "Tabitha and Tara Peterson",
+        "contribution": "USA Curling athletes featured in the storytelling"
+      }
+    ],
+    "confidentiality": "clear",
+    "targetRoleRelevance": [
+      "Brand experience",
+      "Partnerships",
+      "Events and content"
+    ],
+    "chapters": [
+      {
+        "id": "caregiving-and-competition",
+        "title": "Caregiving beside competition",
+        "body": "The stories followed three athlete mothers and their families balancing competition, caregiving, and work. Featured athletes included USA Skeleton athlete Kelly Curtis, USA Bobsleigh athlete Kaillie Humphries, and USA Curling athletes Tabitha and Tara Peterson."
+      },
+      {
+        "id": "family-support-at-the-games",
+        "title": "Support for families at the Games",
+        "body": "For All Mothers grants helped families bring children to the Games, while Joie Baby products supported them there."
+      },
+      {
+        "id": "stories-for-social-and-beyond",
+        "title": "Stories for social and beyond",
+        "body": "Katherine edited two social reels and shared behind-the-scenes story posts on her personal channels. She also captured footage and audio for future use, from routines and packed bags to children’s boots, competition, and reunions."
+      }
+    ],
+    "presentation": {
+      "heroMediaId": "cortina-family-curling",
+      "gallery": [
+        {
+          "mediaId": "cortina-family-travel",
+          "layout": "portrait",
+          "caption": "Families travel together on a shuttle between Winter Games venues.",
+          "chapterId": "caregiving-and-competition"
+        },
+        {
+          "mediaId": "cortina-athlete-celebration",
+          "layout": "portrait",
+          "caption": "Two Team USA athletes celebrate in competition suits and medals.",
+          "chapterId": "stories-for-social-and-beyond"
+        }
+      ]
+    }
+  },
+  {
+    "id": "usa-track-championships",
+    "slug": "usa-track-championships",
+    "status": "published",
+    "featured": false,
+    "featuredOrder": null,
+    "archiveCategories": ["community", "partnerships", "experiences"],
+    "workContext": "professional",
+    "title": "USA Track Championships",
+    "editorialTitle": null,
+    "clientPlatform": "Citius Magazine × New Balance",
+    "operatingContext": "Citius editorial partnership · community run · athlete spotlights",
+    "location": "Eugene",
+    "year": 2025,
+    "disciplines": [
+      "Community",
+      "Partnerships",
+      "Events",
+      "Athlete storytelling"
+    ],
+    "summary": "Partnered with Citius Magazine to curate community and athlete spotlights across the 2025 USA Track Championships in Eugene.",
+    "insight": null,
+    "intention": null,
+    "opportunity": null,
+    "idea": "Bring local runners together with New Balance Olympian Emma Coburn for a community run featuring newly released SC Elite racing shoes and the Rebel, alongside Citius podcast hosts and beverage partners.",
+    "role": "I developed the strategy for the community run, coordinated a venue buyout for 200+ people with New Balance merchandising inside, organized event logistics and the live-podcast setup for Citius coverage—including athletes such as Sydney McLaughlin-Levrone—and managed athlete-house decor so athletes and their families had what they needed after competition.",
+    "experience": null,
+    "metrics": [],
+    "takeaway": null,
+    "mediaIds": [
+      "usa-track-championships-community",
+      "usa-track-championships-collaborators"
+    ],
+    "credits": [
+      {
+        "name": "Citius Magazine",
+        "contribution": "Editorial, podcast, and event partner"
       },
       {
         "name": "New Balance",
-        "contribution": "Brand partner"
+        "contribution": "Event and merchandising partner"
       }
     ],
-    "confidentiality": "pending",
+    "confidentiality": "clear",
     "targetRoleRelevance": [
-      "Retail partnerships",
-      "Creator marketing",
-      "Community marketing"
+      "Brand experience",
+      "Community marketing",
+      "Partnerships",
+      "Event marketing"
     ],
-    "chapters": [],
+    "chapters": [
+      {
+        "id": "community-run",
+        "title": "A community run alongside the championships",
+        "body": "The strategy brought local runners together with New Balance Olympian Emma Coburn for a community run featuring newly released SC Elite racing shoes and the Rebel, alongside Citius podcast hosts and beverage partners."
+      },
+      {
+        "id": "live-podcast-coverage",
+        "title": "Live podcast and athlete spotlights",
+        "body": "Katherine organized event logistics and the live-podcast setup for Citius coverage, including athletes such as Sydney McLaughlin-Levrone. The venue buyout was for 200+ people and included New Balance merchandising."
+      },
+      {
+        "id": "athlete-house",
+        "title": "Care for athletes and families",
+        "body": "Katherine managed athlete-house decor and made sure athletes and their families had what they needed after competition."
+      }
+    ],
     "presentation": {
-      "heroMediaId": null,
-      "gallery": []
+      "heroMediaId": "usa-track-championships-community",
+      "gallery": [
+        {
+          "mediaId": "usa-track-championships-collaborators",
+          "layout": "landscape",
+          "caption": "Runners pose in front of a Citius Magazine and New Balance backdrop.",
+          "chapterId": "community-run"
+        }
+      ]
     }
   }
 ]
