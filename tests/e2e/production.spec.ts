@@ -319,7 +319,7 @@ test('production home and all seven published stories work under the project bas
     'usa-track-championships-community',
     'usa-track-championships-collaborators',
   ]);
-  await expect(page.locator('.homepage-hero__controls')).toBeVisible();
+  await expect(page.locator('[data-hero-controls]')).toBeVisible();
   await expect(
     page
       .locator('[data-project-id="all-city-mile"]')
@@ -829,7 +829,7 @@ test('homepage background cycling honors pause, reduced motion, and decode failu
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
 });
 
-test('homepage background completes the ten-frame loop on the 1000 ms clock', async ({
+test('homepage background completes the ten-frame loop on the 4000 ms clock', async ({
   page,
 }) => {
   await installPausedClock(page);
@@ -846,7 +846,7 @@ test('homepage background completes the ten-frame loop on the 1000 ms clock', as
     .locator('[data-hero-layer="1"] img')
     .evaluate((image) => (image as HTMLImageElement).decode());
 
-  await page.clock.runFor(999);
+  await page.clock.runFor(3999);
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
   await page.clock.runFor(1);
 
@@ -867,12 +867,12 @@ test('homepage background completes the ten-frame loop on the 1000 ms clock', as
       'src',
       new RegExp(mediaId),
     );
-    await page.clock.runFor(1000);
+    await page.clock.runFor(4000);
   }
   await expect(
     page.locator('.homepage-hero__layer.is-visible [data-headshot-source]'),
   ).toHaveCount(1);
-  await page.clock.runFor(1000);
+  await page.clock.runFor(4000);
   await expect(
     page.locator('.homepage-hero__layer.is-visible img'),
   ).toHaveAttribute('src', /all-city-mile-hero/);
@@ -913,7 +913,7 @@ test('homepage waits for the high-priority headshot before starting its clock', 
   await page
     .locator('[data-hero-layer="1"] img')
     .evaluate((image) => (image as HTMLImageElement).decode());
-  await page.clock.runFor(999);
+  await page.clock.runFor(3999);
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
   await page.clock.runFor(1);
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
@@ -936,7 +936,7 @@ test('homepage background suspends offscreen and starts a fresh interval when vi
   await page
     .locator('[data-hero-layer="1"] img')
     .evaluate((image) => (image as HTMLImageElement).decode());
-  await page.clock.runFor(1000);
+  await page.clock.runFor(4000);
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
 
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -2001,7 +2001,7 @@ test('published home-to-story navigation works by keyboard without JavaScript or
   });
   await expect(allCityMile).toBeVisible();
   await expect(page.locator('#all-city-mile-photo-credit')).toHaveCount(0);
-  await expect(page.locator('.homepage-hero__controls')).toBeHidden();
+  await expect(page.locator('[data-hero-controls]')).toBeHidden();
   const preview = allCityMile.locator('.collaborator-list__previews');
   await expect(preview).toHaveCSS('visibility', 'hidden');
   await allCityMile.hover();

@@ -159,16 +159,16 @@
   min-width: 5.5rem;
   min-height: 44px;
   padding: 0.5rem 0.9rem;
-  border: 1px solid rgb(255 255 255 / 72%);
+  border: 1px solid currentColor;
   border-radius: 999px;
-  color: #fff;
+  color: var(--color-ink, #1e1e1a);
   background: transparent;
   font: inherit;
   cursor: pointer;
 }
 
 .hero-motion-control button:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid currentColor;
   outline-offset: 3px;
 }
 
