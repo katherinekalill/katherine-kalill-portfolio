@@ -45,4 +45,21 @@ export const homepageCollaborators: HomepageCollaborator[] = [
     chapterId: 'community-led-event',
     mediaIds: ['womens-self-defense-hero', 'womens-self-defense-lesson'],
   },
+  {
+    name: 'Joie Baby × For All Mothers',
+    relationship: 'Brand and community partners · family storytelling',
+    projectSlug: 'for-all-mothers',
+    chapterId: null,
+    mediaIds: ['cortina-family-curling', 'cortina-family-travel'],
+  },
+  {
+    name: 'Citius Magazine',
+    relationship: 'Editorial partner · championship community',
+    projectSlug: 'usa-track-championships',
+    chapterId: 'community-run',
+    mediaIds: [
+      'usa-track-championships-community',
+      'usa-track-championships-collaborators',
+    ],
+  },
 ];

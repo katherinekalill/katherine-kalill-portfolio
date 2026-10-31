@@ -9,6 +9,10 @@ export const homepageTeasers = {
     'A Mother’s Day workout pairs New Balance shoe trials with bouquets, brunch, and a local training community.',
   'womens-self-defense':
     'A trail-shoe demo run leads into practical self-defense instruction with REI and Seattle community partners.',
+  'for-all-mothers':
+    'At the Winter Games, athlete stories make room for the families and caregiving that support competition.',
+  'usa-track-championships':
+    'A Citius Magazine community run brings fans and athletes together around the USA Track & Field Championships.',
 } satisfies Record<string, string>;
 
 export function validateHomepageTeasers(

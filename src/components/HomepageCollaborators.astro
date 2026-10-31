@@ -10,7 +10,6 @@ interface MediaItem {
   height: number;
   focalPoint: { x: number; y: number };
   alt: string;
-  credit: string | null;
   variants: Array<{ src: string; width: number; height: number }>;
 }
 
@@ -27,22 +26,6 @@ interface Props {
 }
 
 const { media, projects, preview = false } = Astro.props;
-const allCityMileCredits = [
-  ...new Set(
-    homepageCollaborators
-      .filter(({ projectSlug }) => projectSlug === 'all-city-mile')
-      .flatMap(({ mediaIds }) => mediaIds)
-      .map((id) => media.find((item) => item.id === id)?.credit)
-      .filter((credit): credit is string => Boolean(credit)),
-  ),
-];
-const allCityMileCreditNote =
-  !preview && allCityMileCredits.length
-    ? `All City Mile photography: ${allCityMileCredits.join(', ')}.`
-    : undefined;
-const allCityMileCreditNoteId = allCityMileCreditNote
-  ? 'all-city-mile-photo-credit'
-  : undefined;
 
 if (!preview) {
   for (const collaborator of homepageCollaborators) {
@@ -85,11 +68,6 @@ if (!preview) {
                   : ''
               }`,
             )}
-            aria-describedby={
-              collaborator.projectSlug === 'all-city-mile'
-                ? allCityMileCreditNoteId
-                : undefined
-            }
           >
             <span class="collaborator-list__copy">
               <span class="collaborator-list__name">{collaborator.name}</span>
@@ -132,9 +110,4 @@ if (!preview) {
       );
     })}
   </ul>
-  {allCityMileCreditNote && (
-    <p class="collaborator-list__credit" id={allCityMileCreditNoteId}>
-      {allCityMileCreditNote}
-    </p>
-  )}
 </div>

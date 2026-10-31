@@ -10,9 +10,10 @@ const slugs = [
   'freaks-of-nature',
   'you-deserve-your-flowers',
   'womens-self-defense',
+  'for-all-mothers',
+  'usa-track-championships',
 ];
-const archiveOnlySlugs = ['for-all-mothers', 'usa-track-championships'];
-const publicProjectSlugs = [...slugs, ...archiveOnlySlugs];
+const publicProjectSlugs = slugs;
 const collaborators = [
   [
     'All City Mile',
@@ -44,6 +45,18 @@ const collaborators = [
     'womens-self-defense',
     'community-led-event',
   ],
+  [
+    'Joie Baby × For All Mothers',
+    'Brand and community partners · family storytelling',
+    'for-all-mothers',
+    null,
+  ],
+  [
+    'Citius Magazine',
+    'Editorial partner · championship community',
+    'usa-track-championships',
+    'community-run',
+  ],
 ] as const;
 const textualExtensions = new Set([
   '.css',
@@ -61,6 +74,8 @@ const storyTitles = [
   'Creating a Reason to Gather',
   'Bridging Fashion Culture With a Passion for High Performance',
   'Using Brand Purpose to Create Practical Impact',
+  'Making Space for Motherhood in Elite Sport',
+  'Bringing Professional Athletes and Community Together',
 ];
 const storyFacts = [
   ['300+', '30+', '$5,000', 'Sold out'],
@@ -68,6 +83,8 @@ const storyFacts = [
   ['50 spots', '2 reels'],
   ['Sold out', '200 shirts', '60+'],
   ['Sold out', '225%'],
+  ['Kelly Curtis', 'Kaillie Humphries', 'Tabitha and Tara Peterson'],
+  ['200+ people'],
 ];
 const projectMetadata = [
   {
@@ -130,6 +147,30 @@ const projectMetadata = [
       height: 1440,
     },
   },
+  {
+    slug: 'for-all-mothers',
+    name: 'Making Space for Motherhood in Elite Sport',
+    description:
+      'Capturing the realities of motherhood alongside elite sport at the Winter Olympics in Cortina.',
+    image: {
+      src: '/work/cortina-family-curling.webp',
+      alt: 'A spectator holds a young child while watching a curling match in an Olympic arena.',
+      width: 1170,
+      height: 2048,
+    },
+  },
+  {
+    slug: 'usa-track-championships',
+    name: 'Bringing Professional Athletes and Community Together',
+    description:
+      'Partnered with Citius Magazine to curate community and athlete spotlights across the 2025 USA Track Championships in Eugene.',
+    image: {
+      src: '/work/usa-track-championships-community.webp',
+      alt: 'A large group gathers behind a New Balance banner beneath a Citius Magazine logo.',
+      width: 1290,
+      height: 915,
+    },
+  },
 ] as const;
 
 declare global {
@@ -162,6 +203,33 @@ async function readStructuredData(
           JSON.parse(script.textContent ?? '') as Record<string, unknown>,
       ),
     );
+}
+
+async function installPausedClock(page: import('@playwright/test').Page) {
+  const start = new Date('2026-10-30T08:00:00.000Z');
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(new Date(start.getTime() + 1000));
+}
+
+async function waitForHeroIntersection(
+  page: import('@playwright/test').Page,
+  isIntersecting: boolean,
+) {
+  await page.evaluate(
+    (expected) =>
+      new Promise<void>((resolve) => {
+        const hero = document.querySelector('.homepage-hero');
+        if (!hero) throw new Error('Homepage hero is missing');
+        const observer = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting === expected)) {
+            observer.disconnect();
+            resolve();
+          }
+        });
+        observer.observe(hero);
+      }),
+    isIntersecting,
+  );
 }
 
 function expectedPersonStructuredData() {
@@ -207,7 +275,7 @@ async function waitForEntranceAnimations(
   });
 }
 
-test('production home and five published stories work under the project base', async ({
+test('production home and all seven published stories work under the project base', async ({
   page,
   request,
 }) => {
@@ -217,6 +285,41 @@ test('production home and five published stories work under the project base', a
   expect(home?.status()).toBe(200);
   await expect(page.getByRole('main')).toBeVisible();
   await expect(page.locator('.homepage-range')).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'Katherine Kalill',
+  );
+  await expect(page.locator('.homepage-hero__eyebrow')).toHaveText(
+    'Sport · Fashion · Culture',
+  );
+  await expect(page.locator('.homepage-hero__thesis')).toHaveText(
+    'The Business of Human Connection',
+  );
+  await expect(page.locator('[data-headshot-source]')).toHaveAttribute(
+    'fetchpriority',
+    'high',
+  );
+  await expect(page.locator('[data-headshot-source]')).toHaveAttribute(
+    'srcset',
+    /640w.*960w.*1440w/,
+  );
+  const heroSlides = await page
+    .locator('[data-hero-slides]')
+    .evaluate(
+      (script) =>
+        JSON.parse(script.textContent ?? '[]') as Array<{ id: string }>,
+    );
+  expect(heroSlides.map(({ id }) => id)).toEqual([
+    'all-city-mile-hero',
+    'all-city-mile-huddle',
+    'freaks-of-nature-hero',
+    'womens-self-defense-hero',
+    'womens-self-defense-partner',
+    'all-city-mile-community',
+    'all-city-mile-results',
+    'usa-track-championships-community',
+    'usa-track-championships-collaborators',
+  ]);
+  await expect(page.locator('.homepage-hero__controls')).toBeVisible();
   await expect(
     page
       .locator('[data-project-id="all-city-mile"]')
@@ -379,7 +482,12 @@ test('production home and five published stories work under the project base', a
   const collaboratorList = page.getByRole('list', {
     name: 'Brands and collaborators',
   });
-  await expect(collaboratorList.getByRole('listitem')).toHaveCount(5);
+  await expect(collaboratorList.getByRole('listitem')).toHaveCount(7);
+  expect(
+    await collaboratorList
+      .locator('.collaborator-list__name')
+      .allTextContents(),
+  ).toEqual(collaborators.map(([name]) => name));
   for (const [name, relationship, slug, chapter] of collaborators) {
     const link = collaboratorList.getByRole('link', { name: new RegExp(name) });
     await expect(link).toBeVisible();
@@ -395,23 +503,16 @@ test('production home and five published stories work under the project base', a
   const allCityMileLink = collaboratorList.getByRole('link', {
     name: /All City Mile/,
   });
-  await expect(allCityMileLink).toHaveAttribute(
+  await expect(allCityMileLink).not.toHaveAttribute(
     'aria-describedby',
-    'all-city-mile-photo-credit',
+    /credit/,
   );
-  await expect(page.locator('#all-city-mile-photo-credit')).toHaveText(
-    'All City Mile photography: Cooper Reid.',
-  );
-  const collaboratorListBounds = await collaboratorList.boundingBox();
-  const creditBounds = await page
-    .locator('#all-city-mile-photo-credit')
-    .boundingBox();
-  expect(creditBounds!.y).toBeGreaterThanOrEqual(
-    collaboratorListBounds!.y + collaboratorListBounds!.height,
-  );
-  expect(
-    Math.abs(creditBounds!.x - collaboratorListBounds!.x),
-  ).toBeLessThanOrEqual(1);
+  await expect(page.locator('#all-city-mile-photo-credit')).toHaveCount(0);
+  await expect(
+    page
+      .getByRole('contentinfo')
+      .getByRole('link', { name: /Photo credit · All City Mile/ }),
+  ).toBeVisible();
 
   const fontHref = await page
     .locator('link[rel="preload"][as="font"]')
@@ -450,6 +551,16 @@ test('production home and five published stories work under the project base', a
       await expect(story).toContainText('Cooper Reid');
     }
     const chapterIds: Record<string, string[]> = {
+      'for-all-mothers': [
+        'caregiving-and-competition',
+        'family-support-at-the-games',
+        'stories-for-social-and-beyond',
+      ],
+      'usa-track-championships': [
+        'community-run',
+        'live-podcast-coverage',
+        'athlete-house',
+      ],
       'all-city-mile': ['race-day-format'],
       'your-mothers-run-crew': ['goop', 'little-words-project'],
       'freaks-of-nature': [
@@ -480,6 +591,10 @@ test('production home and five published stories work under the project base', a
     );
     const expectedProject = projectMetadata[index];
     expect(expectedProject?.slug).toBe(slug);
+    expect(expectedProject).toBeDefined();
+    expect(
+      await story.locator('.case-study__hero img').getAttribute('src'),
+    ).toContain(expectedProject!.image.src);
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
       'content',
       'article',
@@ -646,7 +761,7 @@ test('production home and five published stories work under the project base', a
     ).toBe(true);
   }
 
-  await page.goto(`${base}/`);
+  await page.goto(`${base}/`, { waitUntil: 'domcontentloaded' });
   await page.setViewportSize({ width: 320, height: 780 });
   expect(
     await page.locator('body').evaluate((body) => body.scrollWidth),
@@ -654,14 +769,301 @@ test('production home and five published stories work under the project base', a
   expect(consoleErrors).toEqual([]);
 });
 
-test('new archive case studies publish their supplied facts, imagery, and metadata', async ({
+test('homepage background cycling honors pause, reduced motion, and decode failures', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto(`${base}/`);
+  const toggle = page.locator('[data-hero-toggle]');
+  const layers = page.locator('[data-hero-layer]');
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-label', 'Play background images');
+  await page.waitForTimeout(1100);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-label', 'Pause background images');
+  await expect
+    .poll(() =>
+      layers.nth(1).evaluate((layer) => layer.classList.contains('is-visible')),
+    )
+    .toBe(true);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-label', 'Play background images');
+  await page.waitForTimeout(1100);
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+  await toggle.focus();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(toggle).toBeFocused();
+  await expect(toggle).toHaveAttribute('aria-disabled', 'true');
+  await expect(toggle).toHaveAttribute(
+    'aria-label',
+    'Background image playback unavailable',
+  );
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(toggle).toBeFocused();
+  await expect(toggle).toHaveAttribute('aria-disabled', 'false');
+  await expect(toggle).toHaveAttribute('aria-label', 'Play background images');
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await toggle.click();
+  await expect
+    .poll(() =>
+      layers.nth(1).evaluate((layer) => layer.classList.contains('is-visible')),
+    )
+    .toBe(true);
+
+  await page.route('**/work/all-city-mile-hero*', (route) => route.abort());
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  const failedHeroRequest = page.waitForEvent('requestfailed', (request) =>
+    request.url().includes('all-city-mile-hero'),
+  );
+  await page.reload();
+  await failedHeroRequest;
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect
+    .poll(() => layers.nth(1).locator('img').getAttribute('src'))
+    .toContain('all-city-mile-huddle');
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+});
+
+test('homepage background completes the ten-frame loop on the 1000 ms clock', async ({
+  page,
+}) => {
+  await installPausedClock(page);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${base}/`);
+  const layers = page.locator('[data-hero-layer]');
+  await page
+    .locator('[data-headshot-source]')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await waitForHeroIntersection(page, true);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+
+  await page.clock.runFor(999);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await page.clock.runFor(1);
+
+  const sequence = [
+    'all-city-mile-hero',
+    'all-city-mile-huddle',
+    'freaks-of-nature-hero',
+    'womens-self-defense-hero',
+    'womens-self-defense-partner',
+    'all-city-mile-community',
+    'all-city-mile-results',
+    'usa-track-championships-community',
+    'usa-track-championships-collaborators',
+  ];
+  for (const mediaId of sequence) {
+    const active = page.locator('.homepage-hero__layer.is-visible');
+    await expect(active.locator('img')).toHaveAttribute(
+      'src',
+      new RegExp(mediaId),
+    );
+    await page.clock.runFor(1000);
+  }
+  await expect(
+    page.locator('.homepage-hero__layer.is-visible [data-headshot-source]'),
+  ).toHaveCount(1);
+  await page.clock.runFor(1000);
+  await expect(
+    page.locator('.homepage-hero__layer.is-visible img'),
+  ).toHaveAttribute('src', /all-city-mile-hero/);
+});
+
+test('homepage waits for the high-priority headshot before starting its clock', async ({
+  page,
+}) => {
+  let releaseHeadshot!: () => void;
+  let markRequested!: () => void;
+  const imageGate = new Promise<void>((resolve) => {
+    releaseHeadshot = resolve;
+  });
+  const imageRequested = new Promise<void>((resolve) => {
+    markRequested = resolve;
+  });
+  await installPausedClock(page);
+  await page.route('**/katherine-kalill-headshot*', async (route) => {
+    const response = await route.fetch();
+    markRequested();
+    await imageGate;
+    await route.fulfill({ response });
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto(`${base}/`, { waitUntil: 'domcontentloaded' });
+  const headshot = page.locator('[data-headshot-source]');
+  const layers = page.locator('[data-hero-layer]');
+  await expect(headshot).toHaveAttribute('fetchpriority', 'high');
+  await imageRequested;
+  await waitForHeroIntersection(page, true);
+  await page.clock.runFor(5000);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1).locator('img')).toHaveCount(0);
+
+  releaseHeadshot();
+  await headshot.evaluate((image) => (image as HTMLImageElement).decode());
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await page.clock.runFor(999);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await page.clock.runFor(1);
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+});
+
+test('homepage background suspends offscreen and starts a fresh interval when visible', async ({
+  page,
+}) => {
+  await installPausedClock(page);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${base}/`);
+  const hero = page.locator('.homepage-hero');
+  const layers = page.locator('[data-hero-layer]');
+  await page
+    .locator('[data-headshot-source]')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await waitForHeroIntersection(page, true);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await page.clock.runFor(1000);
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.clock.runFor(16);
+  await waitForHeroIntersection(page, false);
+  await expect
+    .poll(() =>
+      hero.evaluate((element) => element.getBoundingClientRect().bottom),
+    )
+    .toBeLessThanOrEqual(0);
+  await page.clock.runFor(5000);
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1).locator('img')).toHaveAttribute(
+    'src',
+    /all-city-mile-hero/,
+  );
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.clock.runFor(16);
+  await waitForHeroIntersection(page, true);
+  await expect
+    .poll(() =>
+      hero.evaluate((element) => element.getBoundingClientRect().bottom > 0),
+    )
+    .toBe(true);
+  await page
+    .locator('[data-hero-layer="0"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await page.clock.runFor(900);
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+  await page.clock.runFor(200);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(0).locator('img')).toHaveAttribute(
+    'src',
+    /all-city-mile-huddle/,
+  );
+});
+
+test('homepage keeps the visible frame while the next image request is delayed', async ({
+  page,
+}) => {
+  let releaseImage!: () => void;
+  let markRequested!: () => void;
+  const imageGate = new Promise<void>((resolve) => {
+    releaseImage = resolve;
+  });
+  const imageRequested = new Promise<void>((resolve) => {
+    markRequested = resolve;
+  });
+  await page.route('**/work/all-city-mile-hero*', async (route) => {
+    const response = await route.fetch();
+    markRequested();
+    await imageGate;
+    await route.fulfill({ response });
+  });
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${base}/`, { waitUntil: 'domcontentloaded' });
+  const layers = page.locator('[data-hero-layer]');
+  await page
+    .locator('[data-headshot-source]')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await waitForHeroIntersection(page, true);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await imageRequested;
+  await page.waitForTimeout(1100);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
+  releaseImage();
+  await layers
+    .nth(1)
+    .locator('img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+});
+
+test('homepage hero keeps its copy inside the frame on narrow and zoomed screens', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${base}/`);
+  await page.setViewportSize({ width: 320, height: 700 });
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.locator('.homepage-hero__description')).toBeVisible();
+  expect(
+    await page.locator('body').evaluate((body) => body.scrollWidth),
+  ).toBeLessThanOrEqual(320);
+  let bounds = await page.evaluate(() => {
+    const heroBounds = document
+      .querySelector('.homepage-hero')!
+      .getBoundingClientRect();
+    const copyBounds = document
+      .querySelector('.homepage-hero__content')!
+      .getBoundingClientRect();
+    return { heroBottom: heroBounds.bottom, copyBottom: copyBounds.bottom };
+  });
+  expect(bounds.copyBottom).toBeLessThanOrEqual(bounds.heroBottom + 1);
+
+  await page.setViewportSize({ width: 1280, height: 360 });
+  await page.evaluate(() => {
+    document.documentElement.style.zoom = '200%';
+  });
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.locator('.homepage-hero__description')).toBeVisible();
+  bounds = await page.evaluate(() => {
+    const heroBounds = document
+      .querySelector('.homepage-hero')!
+      .getBoundingClientRect();
+    const copyBounds = document
+      .querySelector('.homepage-hero__content')!
+      .getBoundingClientRect();
+    return { heroBottom: heroBounds.bottom, copyBottom: copyBounds.bottom };
+  });
+  expect(bounds.copyBottom).toBeLessThanOrEqual(bounds.heroBottom + 1);
+  expect(
+    await page.locator('body').evaluate((body) => body.scrollWidth),
+  ).toBeLessThanOrEqual(1280);
+});
+
+test('Cortina and USA Track stories publish their approved facts, imagery, and metadata', async ({
   page,
 }) => {
   const cases = [
     {
       slug: 'for-all-mothers',
-      title: 'Cortina Olympics Coverage',
-      name: 'Cortina Olympics Coverage',
+      title: 'Making Space for Motherhood in Elite Sport',
+      name: 'Making Space for Motherhood in Elite Sport',
       description:
         'Capturing the realities of motherhood alongside elite sport at the Winter Olympics in Cortina.',
       image: {
@@ -671,7 +1073,6 @@ test('new archive case studies publish their supplied facts, imagery, and metada
         height: 2048,
       },
       facts: [
-        'three athlete mothers',
         'For All Mothers grants helped families bring children to the Games',
         'Joie Baby products supported them there',
         'edited two social reels',
@@ -687,8 +1088,8 @@ test('new archive case studies publish their supplied facts, imagery, and metada
     },
     {
       slug: 'usa-track-championships',
-      title: 'USA Track Championships',
-      name: 'USA Track Championships',
+      title: 'Bringing Professional Athletes and Community Together',
+      name: 'Bringing Professional Athletes and Community Together',
       description:
         'Partnered with Citius Magazine to curate community and athlete spotlights across the 2025 USA Track Championships in Eugene.',
       image: {
@@ -951,7 +1352,9 @@ test('published pages remain accessible and fit phone and desktop viewports', as
 
   for (const route of routes) {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.emulateMedia({
+      reducedMotion: route === `${base}/` ? 'reduce' : 'no-preference',
+    });
     await page.goto(route);
     await waitForEntranceAnimations(page);
     const accessibility = await new AxeBuilder({ page }).analyze();
@@ -1006,30 +1409,8 @@ test('published pages remain accessible and fit phone and desktop viewports', as
     ).toBeLessThanOrEqual(320);
     if (route === `${base}/`) {
       const firstCard = page.locator('[data-project-id="all-city-mile"]');
-      const credit = firstCard.locator('.featured-story__credit');
-      await expect(credit).toHaveText('Photo: Cooper Reid');
-      await expect(firstCard.getByRole('link')).toHaveAttribute(
-        'aria-describedby',
-        /work-credit-all-city-mile/,
-      );
-      const creditBounds = await firstCard.evaluate((card) => {
-        const credit = card.querySelector('.featured-story__credit');
-        const link = card.querySelector('.featured-story__link');
-        if (!credit || !link) return null;
-        return {
-          linkLeft: link.getBoundingClientRect().left,
-          linkRight: link.getBoundingClientRect().right,
-          creditLeft: credit.getBoundingClientRect().left,
-          creditRight: credit.getBoundingClientRect().right,
-        };
-      });
-      expect(creditBounds).not.toBeNull();
-      expect(creditBounds!.creditLeft).toBeGreaterThanOrEqual(
-        creditBounds!.linkLeft - 1,
-      );
-      expect(creditBounds!.creditRight).toBeLessThanOrEqual(
-        creditBounds!.linkRight + 1,
-      );
+      await expect(firstCard.locator('.featured-story__credit')).toHaveCount(0);
+      await expect(firstCard).not.toContainText('Cooper Reid');
     }
     for (const width of [390, 768]) {
       await page.setViewportSize({ width, height: 844 });
@@ -1044,26 +1425,11 @@ test('published pages remain accessible and fit phone and desktop viewports', as
       `${route} desktop layout`,
     ).toBeLessThanOrEqual(1440);
     if (route === `${base}/`) {
-      const desktopCreditBounds = await page
-        .locator('[data-project-id="all-city-mile"]')
-        .evaluate((card) => {
-          const credit = card.querySelector('.featured-story__credit');
-          const link = card.querySelector('.featured-story__link');
-          if (!credit || !link) return null;
-          return {
-            linkLeft: link.getBoundingClientRect().left,
-            linkRight: link.getBoundingClientRect().right,
-            creditLeft: credit.getBoundingClientRect().left,
-            creditRight: credit.getBoundingClientRect().right,
-          };
-        });
-      expect(desktopCreditBounds).not.toBeNull();
-      expect(desktopCreditBounds!.creditLeft).toBeGreaterThanOrEqual(
-        desktopCreditBounds!.linkLeft - 1,
-      );
-      expect(desktopCreditBounds!.creditRight).toBeLessThanOrEqual(
-        desktopCreditBounds!.linkRight + 1,
-      );
+      await expect(
+        page.locator(
+          '[data-project-id="all-city-mile"] .featured-story__credit',
+        ),
+      ).toHaveCount(0);
     }
   }
 });
@@ -1149,18 +1515,18 @@ test('archive filters, query history, empty category, and progressive enhancemen
         item.querySelector('a')?.getAttribute('href')?.split('/').at(-2),
       ),
     ),
-  ).toEqual([...slugs, 'for-all-mothers', 'usa-track-championships']);
+  ).toEqual(slugs);
   await expect(
     page.locator('[data-archive-card] a[href$="/work/for-all-mothers/"]'),
   ).toContainText('Joie Baby × For All Mothers');
   await expect(
     page.locator('[data-archive-card] a[href$="/work/for-all-mothers/"]'),
-  ).toContainText('Cortina Olympics Coverage');
+  ).toContainText('Making Space for Motherhood in Elite Sport');
   await expect(
     page.locator(
       '[data-archive-card] a[href$="/work/usa-track-championships/"]',
     ),
-  ).toContainText('USA Track Championships');
+  ).toContainText('Bringing Professional Athletes and Community Together');
 
   const filters = page.locator('[data-archive-filters]');
   await expect(filters).toBeVisible();
@@ -1189,20 +1555,16 @@ test('archive filters, query history, empty category, and progressive enhancemen
   for (const category of ['community', 'partnerships', 'experiences']) {
     await page.locator(`[data-archive-filter="${category}"]`).click();
     await expect(count).toHaveText('7 projects');
-    expect(await visibleSlugs()).toEqual([
-      ...slugs,
-      'for-all-mothers',
-      'usa-track-championships',
-    ]);
+    expect(await visibleSlugs()).toEqual(slugs);
   }
 
   await page.locator('[data-archive-filter="digital"]').click();
   await expect(page).toHaveURL(
     new RegExp(`${base}/archive/\\?discipline=digital$`),
   );
-  await expect(count).toHaveText('1 project');
+  await expect(count).toHaveText('2 projects');
   await expect(buttons.nth(4)).toHaveAttribute('aria-pressed', 'true');
-  expect(await visibleSlugs()).toEqual(['freaks-of-nature']);
+  expect(await visibleSlugs()).toEqual(['freaks-of-nature', 'for-all-mothers']);
 
   await page.locator('[data-archive-filter="retail"]').click();
   await expect(page).toHaveURL(
@@ -1212,7 +1574,7 @@ test('archive filters, query history, empty category, and progressive enhancemen
   expect(await visibleSlugs()).toEqual(['womens-self-defense']);
   await page.goBack();
   await expect(buttons.nth(4)).toHaveAttribute('aria-pressed', 'true');
-  expect(await visibleSlugs()).toEqual(['freaks-of-nature']);
+  expect(await visibleSlugs()).toEqual(['freaks-of-nature', 'for-all-mothers']);
   await page.goForward();
   await expect(buttons.nth(5)).toHaveAttribute('aria-pressed', 'true');
   expect(await visibleSlugs()).toEqual(['womens-self-defense']);
@@ -1237,18 +1599,14 @@ test('archive filters, query history, empty category, and progressive enhancemen
   await page.goto(`${base}/archive/?discipline=not-a-category`);
   await expect(buttons.first()).toHaveAttribute('aria-pressed', 'true');
   await expect(count).toHaveText('7 projects');
-  expect(await visibleSlugs()).toEqual([
-    ...slugs,
-    'for-all-mothers',
-    'usa-track-championships',
-  ]);
+  expect(await visibleSlugs()).toEqual(slugs);
   await page.locator('[data-archive-filter="all"]').click();
   await expect(page).toHaveURL(`${base}/archive/`);
 
   await page.locator('[data-archive-filter="digital"]').focus();
   await expect(page.locator('[data-archive-filter="digital"]')).toBeFocused();
   await page.keyboard.press('Enter');
-  await expect(count).toHaveText('1 project');
+  await expect(count).toHaveText('2 projects');
   await expect(page.locator('[data-archive-filter="digital"]')).toHaveAttribute(
     'aria-pressed',
     'true',
@@ -1428,21 +1786,23 @@ test('published rail is ordered, labelled, and restores both scroll positions re
   await expect(page.locator('#range')).toHaveCount(1);
   const rail = page.locator('[data-featured-rail]');
   await expect(rail).toHaveJSProperty('tagName', 'OL');
-  await expect(rail.locator(':scope > li')).toHaveCount(5);
-  await expect(rail.locator('.featured-story__title')).toHaveCount(5);
-  await expect(rail.locator('.featured-story__client')).toHaveCount(5);
-  await expect(rail.locator('.featured-story__context')).toHaveCount(5);
+  await expect(rail.locator(':scope > li')).toHaveCount(7);
+  await expect(rail.locator('.featured-story__title')).toHaveCount(7);
+  await expect(rail.locator('.featured-story__client')).toHaveCount(7);
+  await expect(rail.locator('.featured-story__context')).toHaveCount(7);
 
   const next = page.getByRole('button', { name: 'Next project' });
   const previous = page.getByRole('button', { name: 'Previous project' });
+  const lastFeaturedSlug = slugs.at(-1);
   await next.scrollIntoViewIfNeeded();
   while (await next.isEnabled()) await next.click();
-  const initialLeft = await rail.evaluate((element) => element.scrollLeft);
   const story = rail.locator(':scope > li').last().getByRole('link');
   await story.scrollIntoViewIfNeeded();
+  const initialLeft = await rail.evaluate((element) => element.scrollLeft);
+  expect(initialLeft).toBeGreaterThan(0);
   const initialY = await page.evaluate(() => window.scrollY);
   await story.click();
-  await expect(page).toHaveURL(`${base}/work/womens-self-defense/`);
+  await expect(page).toHaveURL(`${base}/work/${lastFeaturedSlug}/`);
   await page.goBack();
   await expect(page).toHaveURL(`${base}/`);
   await expect
@@ -1451,12 +1811,20 @@ test('published rail is ordered, labelled, and restores both scroll positions re
   expect(await page.evaluate(() => window.scrollY)).toBe(initialY);
 
   await previous.click();
-  const secondLeft = await rail.evaluate((element) => element.scrollLeft);
-  const secondStory = rail.locator(':scope > li').nth(1).getByRole('link');
+  const secondStoryIndex = slugs.length - 2;
+  const secondStory = rail
+    .locator(':scope > li')
+    .nth(secondStoryIndex)
+    .getByRole('link');
   await secondStory.scrollIntoViewIfNeeded();
+  await expect
+    .poll(() => rail.evaluate((element) => element.scrollLeft))
+    .toBeGreaterThan(0);
+  const secondLeft = await rail.evaluate((element) => element.scrollLeft);
+  expect(secondLeft).not.toBe(initialLeft);
   const secondY = await page.evaluate(() => window.scrollY);
   await secondStory.click();
-  await expect(page).toHaveURL(`${base}/work/your-mothers-run-crew/`);
+  await expect(page).toHaveURL(`${base}/work/${slugs[secondStoryIndex]}/`);
   await page.goBack();
   await expect(page).toHaveURL(`${base}/`);
   await expect
@@ -1475,7 +1843,7 @@ test('collaborator previews show only for fine-pointer hover and hide on leave',
 
   const list = page.getByRole('list', { name: 'Brands and collaborators' });
   const previews = list.locator('.collaborator-list__previews');
-  await expect(previews).toHaveCount(5);
+  await expect(previews).toHaveCount(7);
   for (const preview of await previews.all()) {
     await expect(preview).toHaveCSS('visibility', 'hidden');
     await expect(preview).toHaveCSS('opacity', '0');
@@ -1598,7 +1966,7 @@ test('touch-sized collaborator rows keep one static thumbnail per row', async ({
   const rows = page
     .getByRole('list', { name: 'Brands and collaborators' })
     .getByRole('listitem');
-  await expect(rows).toHaveCount(5);
+  await expect(rows).toHaveCount(7);
   for (const row of await rows.all()) {
     const previews = row.locator('.collaborator-list__previews');
     await expect(previews).toHaveCSS('visibility', 'visible');
@@ -1626,17 +1994,14 @@ test('published home-to-story navigation works by keyboard without JavaScript or
   const collaborators = page.getByRole('list', {
     name: 'Brands and collaborators',
   });
-  await expect(collaborators.getByRole('listitem')).toHaveCount(5);
-  await expect(collaborators.getByRole('link')).toHaveCount(5);
+  await expect(collaborators.getByRole('listitem')).toHaveCount(7);
+  await expect(collaborators.getByRole('link')).toHaveCount(7);
   const allCityMile = collaborators.getByRole('link', {
     name: /All City Mile/,
   });
   await expect(allCityMile).toBeVisible();
-  await expect(page.locator('#all-city-mile-photo-credit')).toBeVisible();
-  await expect(allCityMile).toHaveAttribute(
-    'aria-describedby',
-    'all-city-mile-photo-credit',
-  );
+  await expect(page.locator('#all-city-mile-photo-credit')).toHaveCount(0);
+  await expect(page.locator('.homepage-hero__controls')).toBeHidden();
   const preview = allCityMile.locator('.collaborator-list__previews');
   await expect(preview).toHaveCSS('visibility', 'hidden');
   await allCityMile.hover();

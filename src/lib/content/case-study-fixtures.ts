@@ -146,6 +146,8 @@ export const caseStudyFixtures: CaseStudyProject[] = [
     'Using Brand Purpose to Create Practical Impact',
     5,
   ),
+  project('for-all-mothers', 'Cortina Olympics Coverage', 6),
+  project('usa-track-championships', 'USA Track Championships', 7),
 ];
 
 export function fixtureMedia(project: CaseStudyProject): CaseStudyMedia[] {

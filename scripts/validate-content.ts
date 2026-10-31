@@ -1,5 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import {
+  featuredProjectOrder,
+  featuredRelease,
   mediaSchema,
   projectSchema,
   siteSchema,
@@ -21,6 +23,7 @@ const rawSite = await readJson<unknown>('../src/data/site.json');
 const projects: Project[] = rawProjects.map((entry) =>
   projectSchema.parse(entry),
 );
+const featuredProjects = projects.filter((project) => project.featured);
 const media: Media[] = rawMedia.map((entry) => mediaSchema.parse(entry));
 siteSchema.parse(rawSite);
 
@@ -36,14 +39,22 @@ if (issues.length > 0) {
     'The public project inventory must contain only published records.',
   );
   process.exitCode = 1;
-} else if (projects.filter((project) => project.featured).length !== 5) {
-  console.error('Expected exactly five featured projects.');
+} else if (featuredProjects.length !== featuredProjectOrder.length) {
+  console.error(
+    `Expected exactly ${featuredProjectOrder.length} featured projects.`,
+  );
   process.exitCode = 1;
 } else if (JSON.stringify(rawSite).match(/placeholder|example\.com/i)) {
   console.error('Site contact configuration contains a placeholder.');
   process.exitCode = 1;
 } else {
-  console.log(
-    `Validated ${projects.length} public project records and ${media.length} public media records.`,
-  );
+  try {
+    featuredRelease(projects);
+    console.log(
+      `Validated ${projects.length} public project records and ${media.length} public media records.`,
+    );
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  }
 }

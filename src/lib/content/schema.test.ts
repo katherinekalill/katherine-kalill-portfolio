@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import projectRecords from '../../data/projects.json';
 import {
   mediaSchema,
   projectSchema,
@@ -326,7 +327,7 @@ describe('content publication gate', () => {
     );
   });
 
-  it('keeps featured production routes behind the coordinated five story release', () => {
+  it('keeps featured production routes behind the coordinated seven story release', () => {
     const projects = featuredProjectOrder.map((slug, index) => ({
       ...draft,
       id: slug,
@@ -351,7 +352,66 @@ describe('content publication gate', () => {
         })),
       ).published,
     ).toBe(true);
-    expect(() => featuredRelease(projects.slice(1))).toThrow('approved order');
+    expect(() => featuredRelease(projects.slice(1))).toThrow(
+      'sequential order from 1 to 7',
+    );
+    expect(() =>
+      featuredRelease(
+        projects.map((project, index) => ({
+          ...project,
+          featuredOrder: index + 2,
+        })),
+      ),
+    ).toThrow('sequential order from 1 to 7');
+    expect(() =>
+      featuredRelease([
+        ...projects,
+        {
+          ...draft,
+          id: 'extra',
+          slug: 'extra',
+          featured: true,
+          featuredOrder: 8,
+        },
+      ]),
+    ).toThrow('approved order');
+  });
+
+  it('keeps the approved featured order and new story facts in project content', () => {
+    const featured = projectRecords
+      .filter((project) => project.featured)
+      .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+    expect(featured.map((project) => project.slug)).toEqual([
+      ...featuredProjectOrder,
+    ]);
+    expect(featured.map((project) => project.featuredOrder)).toEqual([
+      1, 2, 3, 4, 5, 6, 7,
+    ]);
+
+    const cortina = projectRecords.find(
+      (project) => project.slug === 'for-all-mothers',
+    )!;
+    expect(cortina).toMatchObject({
+      featured: true,
+      featuredOrder: 6,
+      year: null,
+    });
+    expect(cortina.archiveCategories).toContain('digital');
+    expect(cortina.role).toContain('edited two social reels');
+    expect(cortina.role).toContain('personal channels');
+    expect(JSON.stringify(cortina)).not.toMatch(/three athlete mothers/i);
+
+    const track = projectRecords.find(
+      (project) => project.slug === 'usa-track-championships',
+    )!;
+    expect(track.featuredOrder).toBe(7);
+    expect(track.metrics).toContainEqual({
+      value: '200+',
+      label: 'people hosted at the community run',
+      verification: 'verified',
+    });
+    expect(track.role).toContain('hosted 200+ people');
+    expect(track.role).toContain('live-podcast setup');
   });
 
   it('accepts responsive variants only when they preserve source proportions', () => {

@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import headshot from '../assets/profile/katherine-kalill-headshot.jpg';
+import { homepageCopy } from '../data/homepage';
+import { routeHref } from '../lib/site';
+import { siteConfig } from '../lib/site-config';
+import {
+  createHomepageHeroSlides,
+  type HomepageHeroMedia,
+} from '../data/homepage-hero';
+import '../styles/homepage-hero.css';
+
+interface Props {
+  media: HomepageHeroMedia[];
+  preview?: boolean;
+}
+
+const { media, preview = false } = Astro.props;
+const slides = preview ? [] : createHomepageHeroSlides(media, routeHref);
+const heroSlidesJson = JSON.stringify(slides).replaceAll('<', '\\u003c');
+/* eslint-disable astro/no-set-html-directive -- Escaped JSON keeps slide data inert inside this script element. */
+---
+
+<section
+  class="homepage-hero"
+  id="homepage-hero"
+  aria-labelledby="home-title"
+  data-homepage-hero
+>
+  <div class="homepage-hero__images" aria-hidden="true">
+    {preview ? (
+      <div class="homepage-hero__preview-art" aria-hidden="true"></div>
+    ) : (
+      <>
+        <div class="homepage-hero__layer is-visible" data-hero-layer="0">
+          <Image
+            class="homepage-hero__image homepage-hero__image--headshot"
+            src={headshot}
+            alt=""
+            width={1440}
+            height={1080}
+            widths={[640, 960, 1440]}
+            sizes="100vw"
+            format="webp"
+            quality={82}
+            loading="eager"
+            fetchpriority="high"
+            style="object-position: 40% 20%"
+            data-headshot-source
+          />
+        </div>
+        <div class="homepage-hero__layer" data-hero-layer="1"></div>
+      </>
+    )}
+  </div>
+  <div class="homepage-hero__shade" aria-hidden="true"></div>
+  <div class="homepage-hero__content shell">
+    <p class="homepage-hero__eyebrow">Sport · Fashion · Culture</p>
+    <h1 id="home-title" data-reveal="hero">
+      {siteConfig.name}
+    </h1>
+    <p class="homepage-hero__thesis">{siteConfig.portfolioThesis}</p>
+    <p class="homepage-hero__description" data-reveal>
+      {homepageCopy.positioning.description}
+    </p>
+    <a
+      class="homepage-hero__explore"
+      href="#point-of-view"
+      data-section-id="point-of-view"
+      data-reveal="hero-explore"
+    >
+      Explore <span aria-hidden="true">↓</span>
+    </a>
+  </div>
+  <script type="application/json" data-hero-slides set:html={heroSlidesJson} />
+</section>
+
+<script>
+  import '../scripts/homepage-hero';
+</script>

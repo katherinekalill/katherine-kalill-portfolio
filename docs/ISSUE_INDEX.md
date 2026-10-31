@@ -58,15 +58,15 @@ Every implementation issue includes milestone-specific deliverables and closure 
 | Issue(s)    | Work present                                                                                                | Acceptance evidence still to record                                                          |
 | ----------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | #2          | Featured asset permissions, media selections, credits, and public checklist recorded                        | Review the issue’s full asset-inventory criteria and record acceptance; issue remains open   |
-| #4–6        | Five featured stories and two archive-only projects are included in the public inventory                    | Record issue-specific content and route acceptance; related issues remain open               |
+| #4–6        | Seven featured stories are included in the public inventory in the approved order                           | Record issue-specific content and route acceptance; related issues remain open               |
 | #8          | Schema, data model, media manifest, and coordinated publication gate implemented                            | Run and record the issue’s validation/acceptance evidence; issue remains open                |
 | #11–12      | Homepage narrative and accessible navigation/transitions implemented                                        | Record manual/editorial and implementation acceptance against each issue; issues remain open |
 | #13         | Shared case-study template uses a natural-ratio hero beside copy at 1024px and above, then stacks below     | Record manual template acceptance; issue remains open                                        |
-| #14–17, #19 | Five records now contain approved copy, cleared media refs, credits, and publish together                   | Record issue-specific editorial, media, and rendered-page acceptance; issues remain open     |
+| #14–17, #19 | The original five records contain approved copy, cleared media refs, and credits                            | Record issue-specific editorial, media, and rendered-page acceptance; issues remain open     |
 | #18         | The public archive contains seven projects and the category-filter behavior is implemented                  | Review the seven-project scope and empty category, and record acceptance; issue remains open |
 | #20–21      | About, shared Contact navigation, public contact links, and the All City Mile credit anchor are implemented | Review approved biography/privacy wording and record acceptance; issues remain open          |
 
-Issue #28 tracks the public portfolio refresh while preserving the fixed five featured projects and adding two archive-only stories. This index does not imply issue closure or deployment.
+Issue #28 tracks the public portfolio refresh, including the seven-project featured order and current archive content. This index does not imply issue closure or deployment.
 
 ## Previous automated verification snapshot — 2026-10-01
 
@@ -80,6 +80,10 @@ The M5 quality gates passed in separate/resumed invocations: formatting, lint, T
 
 The visual review found no overflow at 320, 390, 768, 1280, or 1440px and confirmed the archive’s 4:3 cards and reduced-motion behavior. The full WCAG audit, physical-device review, Lighthouse evaluation, and issue acceptance remain separate from this implementation record.
 
-## M6 public inventory verification
+## Previous M6 public inventory verification
 
-The sanitized project source contains seven published records: five featured and two archive-only. Content validation covers seven public project records and 30 public media records. The #28 implementation preserves the homepage order, archive routes, and current public facts; issue acceptance and deployment remain separate.
+The sanitized source contains seven published projects and 30 public media records. Formatting, lint, type diagnostics, content validation, 32 unit tests, and both builds passed. All 126 Playwright scenarios were verified across the initial run and focused reruns; this was not one clean full-suite invocation. The external-link check returned HTTP 200 for LinkedIn and Instagram. Manual visual review covered the two added stories at desktop and mobile widths and the homepage work section, with no layout issues found. Issue acceptance, GitHub issue updates, and deployment remain separate.
+
+## Homepage hero verification — 2026-10-30
+
+Formatting, lint, type and content checks, 34 unit tests, and both builds passed. The full browser run passed 143 of 144 checks; the remaining Firefox observer-timing assertion was corrected and passed five Firefox repeats plus Chromium and WebKit. All 144 scenarios are verified across those runs, rather than one clean full-suite invocation. LinkedIn and Instagram returned HTTP 200. Desktop/mobile visual review covered the grayscale headshot and landscape backgrounds, readable hero copy, and long editorial titles. Live observation confirmed the ten-frame loop at approximately one-second intervals. Current code review found no remaining findings. Manual acceptance remains pending; no commit, issue update, or deployment was made.

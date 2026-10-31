@@ -418,12 +418,18 @@ export const featuredProjectOrder = [
   'freaks-of-nature',
   'you-deserve-your-flowers',
   'womens-self-defense',
+  'for-all-mothers',
+  'usa-track-championships',
 ] as const;
 
 export function featuredRelease(projects: Project[]) {
   const featured = projects
     .filter((project) => project.featured)
     .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
+  if (featured.some((project, index) => project.featuredOrder !== index + 1))
+    throw new Error(
+      `Featured projects must use sequential order from 1 to ${featuredProjectOrder.length}.`,
+    );
   const actual = featured.map((project) => project.slug);
   if (
     actual.length !== featuredProjectOrder.length ||
@@ -433,8 +439,6 @@ export function featuredRelease(projects: Project[]) {
       `Featured projects must match the approved order: ${featuredProjectOrder.join(', ')}.`,
     );
   }
-  if (featured.some((project, index) => project.featuredOrder !== index + 1))
-    throw new Error('Featured projects must use sequential order from 1 to 5.');
   const published = featured.filter(
     (project) => project.status === 'published',
   );

@@ -206,8 +206,8 @@ const initializeNavigation = () => {
     const origin = event.target;
     if (!(origin instanceof Element)) return;
     const link = origin.closest<HTMLAnchorElement>('a[href]');
-    if (!link) return;
-    if (mobile.matches) setOpen(false);
+    if (!link?.hasAttribute('data-section-id')) return;
+    if (mobile.matches && navigation.contains(link)) setOpen(false);
 
     const targetId = link.dataset.sectionId;
     const target = targetId ? document.getElementById(targetId) : null;
@@ -231,9 +231,11 @@ const initializeNavigation = () => {
           : {};
       window.history.pushState(nextState, '', destination.href);
     }
-    for (const { link: item } of sectionLinks)
-      item.removeAttribute('aria-current');
-    link.setAttribute('aria-current', 'location');
+    if (sectionLinks.some(({ link: item }) => item === link)) {
+      for (const { link: item } of sectionLinks)
+        item.removeAttribute('aria-current');
+      link.setAttribute('aria-current', 'location');
+    }
     cancelScrollAnimation();
     requestedTarget = target;
     settledTarget = undefined;
@@ -281,7 +283,7 @@ const initializeNavigation = () => {
   const cleanup = () => {
     toggle.removeEventListener('click', onToggle);
     navigation.removeEventListener('keydown', onKeydown);
-    navigation.removeEventListener('click', onNavigationClick);
+    document.removeEventListener('click', onNavigationClick);
     mobile.removeEventListener('change', onBreakpointChange);
     reducedMotion.removeEventListener('change', onReducedMotionChange);
     window.removeEventListener('scroll', onScroll);
@@ -313,7 +315,7 @@ const initializeNavigation = () => {
   }
   toggle.addEventListener('click', onToggle);
   navigation.addEventListener('keydown', onKeydown);
-  navigation.addEventListener('click', onNavigationClick);
+  document.addEventListener('click', onNavigationClick);
   mobile.addEventListener('change', onBreakpointChange);
   reducedMotion.addEventListener('change', onReducedMotionChange);
   window.addEventListener('scroll', onScroll, { passive: true });

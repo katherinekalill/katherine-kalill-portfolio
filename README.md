@@ -10,13 +10,15 @@ The site combines fashion-level art direction and restrained parallax with warm,
 
 ## Featured work
 
-1. All City Mile x Rebel Relays
+1. All City Mile × Rebel Relays
 2. Your Mothers Run Crew
-3. Freaks of Nature x Alba Optics x Runaway Milano
+3. Freaks of Nature × Alba Optics × Runaway Milano
 4. Mom, You Deserve Your Flowers
-5. Women's Self-Defense Initiative with New Balance and REI
+5. Women’s Self-Defense Initiative with New Balance and REI
+6. Joie Baby × For All Mothers — Making Space for Motherhood in Elite Sport
+7. USA Track Championships — Bringing Professional Athletes and Community Together
 
-The homepage features five approved case studies in their fixed order. The `/archive/` index contains those stories plus two archive-only projects: Joie Baby × For All Mothers — Cortina Olympics Coverage and USA Track Championships (2025, Eugene). The public source inventory contains these seven projects only.
+All seven approved case studies appear on the homepage and in the `/archive/` index in this order. The public source inventory contains these seven projects only. The homepage hero and sequence are implemented. Formatting, lint, type and content checks, 34 unit tests, both builds, and the external-link check passed; the source contains seven published projects and 30 public media records, and LinkedIn and Instagram returned HTTP 200. All 144 browser scenarios were verified across the full run and focused reruns, though not in a single clean full-suite invocation. Manual acceptance remains pending; no issue updates, commit, or deployment were made.
 
 ## Audience and target roles
 
@@ -73,7 +75,7 @@ npx playwright install chromium firefox webkit
 npm run test:e2e
 ```
 
-The homepage links to all five featured `/work/<slug>/` case studies. Developer-only story fixtures are not part of the public project inventory.
+The homepage links to all seven featured `/work/<slug>/` case studies. Developer-only story fixtures are not part of the public project inventory.
 
 Run the full validation sequence with `npm run check`. To inspect a production build locally, run `npm run build` followed by `npm run preview`, then open <http://localhost:4173/katherine-kalill-portfolio/>. The static preview server uses Vite's default port 4173; the development server uses 4321.
 
@@ -106,4 +108,4 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the delivery plan, [docs/PROJECTS.md]
 
 ## Status
 
-The repository contains the homepage, five featured case studies, seven-project archive, and About experience. Automated acceptance, editorial review, and deployment are tracked separately; no issue closure or deployment is implied by this source snapshot.
+The repository contains the homepage, seven featured case studies, seven-project archive, and About experience. Automated acceptance, editorial review, and deployment are tracked separately; no issue closure or deployment is implied by this source snapshot.

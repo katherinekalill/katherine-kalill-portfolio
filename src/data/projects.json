@@ -572,12 +572,17 @@
     "id": "for-all-mothers",
     "slug": "for-all-mothers",
     "status": "published",
-    "featured": false,
-    "featuredOrder": null,
-    "archiveCategories": ["community", "partnerships", "experiences"],
+    "featured": true,
+    "featuredOrder": 6,
+    "archiveCategories": [
+      "community",
+      "partnerships",
+      "experiences",
+      "digital"
+    ],
     "workContext": "professional",
     "title": "Joie Baby × For All Mothers",
-    "editorialTitle": "Cortina Olympics Coverage",
+    "editorialTitle": "Making Space for Motherhood in Elite Sport",
     "clientPlatform": "Joie Baby × For All Mothers",
     "operatingContext": "Athlete storytelling · family support · social content",
     "location": "Cortina",
@@ -593,7 +598,7 @@
     "intention": null,
     "opportunity": null,
     "idea": "Tell the stories of athlete mothers and families balancing competition, caregiving, and work at the Winter Olympics.",
-    "role": "Katherine coordinated shoots with athletes and families; filmed and shaped stories about motherhood, work, and elite training; edited two social reels; shared behind-the-scenes story posts on her personal channels; and captured footage and audio for future use, including routines, packed bags, children’s boots, competition, and reunions.",
+    "role": "Katherine coordinated shoots with athletes and families, filmed stories about caregiving, work, and elite training, edited two social reels, and shared behind-the-scenes story posts on her personal channels. She also captured footage and audio for future use, including routines, packed bags, children’s boots, competition, and reunions.",
     "experience": null,
     "metrics": [],
     "takeaway": null,
@@ -634,7 +639,7 @@
       {
         "id": "caregiving-and-competition",
         "title": "Caregiving beside competition",
-        "body": "The stories followed three athlete mothers and their families balancing competition, caregiving, and work. Featured athletes included USA Skeleton athlete Kelly Curtis, USA Bobsleigh athlete Kaillie Humphries, and USA Curling athletes Tabitha and Tara Peterson."
+        "body": "The stories explored how athletes and families navigate competition, caregiving, and work. Featured athletes included USA Skeleton athlete Kelly Curtis, USA Bobsleigh athlete Kaillie Humphries, and USA Curling athletes Tabitha and Tara Peterson."
       },
       {
         "id": "family-support-at-the-games",
@@ -669,12 +674,12 @@
     "id": "usa-track-championships",
     "slug": "usa-track-championships",
     "status": "published",
-    "featured": false,
-    "featuredOrder": null,
+    "featured": true,
+    "featuredOrder": 7,
     "archiveCategories": ["community", "partnerships", "experiences"],
     "workContext": "professional",
     "title": "USA Track Championships",
-    "editorialTitle": null,
+    "editorialTitle": "Bringing Professional Athletes and Community Together",
     "clientPlatform": "Citius Magazine × New Balance",
     "operatingContext": "Citius editorial partnership · community run · athlete spotlights",
     "location": "Eugene",
@@ -690,9 +695,15 @@
     "intention": null,
     "opportunity": null,
     "idea": "Bring local runners together with New Balance Olympian Emma Coburn for a community run featuring newly released SC Elite racing shoes and the Rebel, alongside Citius podcast hosts and beverage partners.",
-    "role": "I developed the strategy for the community run, coordinated a venue buyout for 200+ people with New Balance merchandising inside, organized event logistics and the live-podcast setup for Citius coverage—including athletes such as Sydney McLaughlin-Levrone—and managed athlete-house decor so athletes and their families had what they needed after competition.",
+    "role": "I developed the strategy for the community run, hosted 200+ people, and coordinated the venue buyout and New Balance merchandising. I organized event logistics and the live-podcast setup for Citius coverage featuring athletes including Sydney McLaughlin-Levrone. I also supported the athlete house with decor so athletes and their families had what they needed after competition.",
     "experience": null,
-    "metrics": [],
+    "metrics": [
+      {
+        "value": "200+",
+        "label": "people hosted at the community run",
+        "verification": "verified"
+      }
+    ],
     "takeaway": null,
     "mediaIds": [
       "usa-track-championships-community",
@@ -719,12 +730,12 @@
       {
         "id": "community-run",
         "title": "A community run alongside the championships",
-        "body": "The strategy brought local runners together with New Balance Olympian Emma Coburn for a community run featuring newly released SC Elite racing shoes and the Rebel, alongside Citius podcast hosts and beverage partners."
+        "body": "The strategy brought local runners together with New Balance Olympian Emma Coburn for a community run featuring newly released SC Elite racing shoes and the Rebel, alongside Citius podcast hosts and beverage partners. The run hosted 200+ people, with a venue buyout and New Balance merchandising."
       },
       {
         "id": "live-podcast-coverage",
         "title": "Live podcast and athlete spotlights",
-        "body": "Katherine organized event logistics and the live-podcast setup for Citius coverage, including athletes such as Sydney McLaughlin-Levrone. The venue buyout was for 200+ people and included New Balance merchandising."
+        "body": "Katherine organized event logistics and the live-podcast setup for Citius coverage featuring athletes including Sydney McLaughlin-Levrone."
       },
       {
         "id": "athlete-house",

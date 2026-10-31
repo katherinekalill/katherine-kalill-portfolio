@@ -6,6 +6,8 @@ import {
 } from '../data/homepage-teasers';
 import { siteConfig } from '../lib/site-config';
 import { routeHref } from '../lib/site';
+import { featuredProjectOrder } from '../lib/content/schema';
+import HomepageHero from './HomepageHero.astro';
 import ContactLinks from './ContactLinks.astro';
 import ActionLink from './ActionLink.astro';
 import FeaturedStory from './FeaturedStory.astro';
@@ -43,8 +45,6 @@ interface HomepageMedia {
   height: number;
   focalPoint: { x: number; y: number };
   alt: string;
-  decorative: boolean;
-  credit: string | null;
   variants: Array<{ src: string; width: number; height: number }>;
 }
 
@@ -52,7 +52,11 @@ const { preview = false, projects = [], media = [] } = Astro.props;
 const featured = projects
   .filter((project) => project.featured)
   .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0));
-const completeFeaturedSequence = featured.length === 5;
+const completeFeaturedSequence =
+  featured.length === featuredProjectOrder.length &&
+  featured.every(
+    (project, index) => project.slug === featuredProjectOrder[index],
+  );
 const usePreview = preview;
 
 for (const slug of validateHomepageTeasers()) {
@@ -93,18 +97,28 @@ const title = usePreview
   }
   robots={preview ? 'noindex,nofollow' : 'index,follow'}
 >
-  <section class="hero shell" aria-labelledby="home-title">
-    <p class="hero__eyebrow">{siteConfig.name} · Sport · Fashion · Culture</p>
-    <h1 id="home-title" data-reveal="hero">
-      {siteConfig.portfolioThesis}
-    </h1>
-    <p class="hero__description" data-reveal>
-      {homepageCopy.positioning.description}
-    </p>
-    <div class="hero__rule" aria-hidden="true"></div>
-  </section>
+  {!usePreview && (
+    <div
+      slot="footer-control"
+      class="hero-motion-control"
+      data-hero-controls
+      hidden
+    >
+      <button
+        type="button"
+        aria-label="Pause background images"
+        aria-controls="homepage-hero"
+        data-hero-toggle
+      >
+        <span data-hero-toggle-label>Pause background images</span>
+      </button>
+    </div>
+  )}
+  <HomepageHero media={media} preview={usePreview} />
 
   <section
+    id="point-of-view"
+    tabindex="-1"
     class="point-of-view shell section"
     aria-labelledby="point-of-view-title"
   >
@@ -194,7 +208,6 @@ const title = usePreview
                 height: projectMedia.height,
                 focalPoint: projectMedia.focalPoint,
                 alt: projectMedia.alt,
-                credit: projectMedia.credit,
                 srcSet:
                   projectMedia.variants.length > 0
                     ? [projectMedia, ...projectMedia.variants]

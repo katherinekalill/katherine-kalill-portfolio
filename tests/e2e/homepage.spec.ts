@@ -97,7 +97,7 @@ test('homepage review presents all seven sections and the confirmed story order'
 
   const headings = await page.locator('main h1, main h2').allTextContents();
   expect(headings).toEqual([
-    'The Business of Human Connection',
+    'Katherine Kalill',
     'Emotion is the strategy',
     'A reason to come together.',
     'From global brands to independent communities',
@@ -122,8 +122,10 @@ test('homepage review presents all seven sections and the confirmed story order'
     'freaks-of-nature',
     'you-deserve-your-flowers',
     'womens-self-defense',
+    'for-all-mothers',
+    'usa-track-championships',
   ]);
-  await expect(page.locator('.featured-story img')).toHaveCount(5);
+  await expect(page.locator('.featured-story img')).toHaveCount(7);
   await expect(
     page.getByRole('link', {
       name: 'Making Competition Feel Like Community',
@@ -148,7 +150,7 @@ test('featured rail exposes every card through one-card controls and keeps nativ
   const cards = rail.locator('.featured-story');
   const previous = page.getByRole('button', { name: 'Previous project' });
   const next = page.getByRole('button', { name: 'Next project' });
-  await expect(cards).toHaveCount(5);
+  await expect(cards).toHaveCount(7);
   await expect(previous).toBeDisabled();
   await expect(next).toBeEnabled();
 
@@ -176,7 +178,7 @@ test('featured rail exposes every card through one-card controls and keeps nativ
   expect(controlMoves).toBeGreaterThanOrEqual(2);
   await expect(next).toBeDisabled();
   await expect(page.locator('[data-rail-status]')).toContainText(
-    `Project ${controlMoves + 1} of 5:`,
+    `Project ${controlMoves + 1} of 7:`,
   );
   const lastCardBounds = await cards.last().evaluate((card) => {
     const railBounds = card.parentElement!.getBoundingClientRect();
@@ -237,7 +239,7 @@ test('featured rail retains every story without JavaScript and supports touch sc
   const noScriptPage = await noScriptContext.newPage();
   await noScriptPage.goto(previewPath);
   const noScriptRail = noScriptPage.locator('[data-featured-rail]');
-  await expect(noScriptRail.locator('.featured-story')).toHaveCount(5);
+  await expect(noScriptRail.locator('.featured-story')).toHaveCount(7);
   await expect(
     noScriptPage.getByRole('button', { name: 'Next project' }),
   ).toBeHidden();
@@ -722,10 +724,11 @@ test('rail images rearm after leaving the rail clip and returning', async ({
   await recordEntrances(page);
   await page.goto(previewPath);
   const rail = page.locator('[data-featured-rail]');
-  const firstImage = rail
-    .locator('.featured-story')
-    .first()
-    .locator('[data-reveal="image"]');
+  const firstCard = rail.locator('.featured-story').first();
+  const firstProjectId =
+    (await firstCard.getAttribute('data-project-id')) ?? '';
+  expect(firstProjectId).toBe('all-city-mile');
+  const firstImage = firstCard.locator('[data-reveal="image"]');
   const featuredSection = rail.locator('xpath=..');
   const previous = page.getByRole('button', { name: 'Previous project' });
   const next = page.getByRole('button', { name: 'Next project' });
@@ -736,12 +739,14 @@ test('rail images rearm after leaving the rail clip and returning', async ({
   await expect(featuredSection).toBeFocused();
   await firstImage.scrollIntoViewIfNeeded();
   const recordsForFirstImage = () =>
-    page.evaluate(() =>
-      (window.__portfolioEntrances ?? []).filter(
-        ({ targetClass, projectId }) =>
-          targetClass.includes('featured-story__image') &&
-          projectId === 'all-city-mile',
-      ),
+    page.evaluate(
+      (expectedProjectId) =>
+        (window.__portfolioEntrances ?? []).filter(
+          ({ targetClass, projectId }) =>
+            targetClass.includes('featured-story__image') &&
+            projectId === expectedProjectId,
+        ),
+      firstProjectId,
     );
   await expect.poll(async () => (await recordsForFirstImage()).length).toBe(1);
   await expect(featuredSection).toBeFocused();
@@ -950,7 +955,7 @@ test('navigation links and all homepage copy remain available without JavaScript
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'The Business of Human Connection',
+      name: 'Katherine Kalill',
     }),
   ).toBeVisible();
   await expect(
@@ -958,7 +963,7 @@ test('navigation links and all homepage copy remain available without JavaScript
   ).toBeVisible();
   await expect(page.locator('#archive')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Menu' })).toBeHidden();
-  await expect(page.locator('.featured-story img')).toHaveCount(5);
+  await expect(page.locator('.featured-story img')).toHaveCount(7);
   await page.getByRole('link', { name: 'Work', exact: true }).click();
   await expect(page).toHaveURL(/#work$/);
   const anchorPositions = await page.evaluate(() => {
@@ -1068,6 +1073,10 @@ test('native navigation returns to the homepage scroll position', async ({
   expect(expectedRailLeft).toBeGreaterThan(0);
   const storyLink = rail.locator('.featured-story').nth(2).getByRole('link');
   await storyLink.scrollIntoViewIfNeeded();
+  const departureRailLeft = await rail.evaluate(
+    (element) => element.scrollLeft,
+  );
+  expect(departureRailLeft).toBeGreaterThan(0);
   const previousY = await page.evaluate(() => window.scrollY);
   expect(previousY).toBeGreaterThan(0);
 
@@ -1087,7 +1096,7 @@ test('native navigation returns to the homepage scroll position', async ({
   const restoredY = await page.evaluate(() => window.scrollY);
   await expect
     .poll(() => rail.evaluate((element) => element.scrollLeft))
-    .toBe(expectedRailLeft);
+    .toBe(departureRailLeft);
   const restoredLinkBounds = await storyLink.evaluate((element) => {
     const { top, bottom } = element.getBoundingClientRect();
     return { top, bottom, viewportHeight: window.innerHeight };
@@ -1185,12 +1194,12 @@ test('homepage layout works from narrow phone through wide desktop widths', asyn
     await expect(
       page.getByRole('heading', {
         level: 1,
-        name: 'The Business of Human Connection',
+        name: 'Katherine Kalill',
       }),
     ).toBeVisible();
     expect(
       await page.locator('body').evaluate((body) => body.scrollWidth),
     ).toBeLessThanOrEqual(width);
-    await expect(page.locator('.featured-story img')).toHaveCount(5);
+    await expect(page.locator('.featured-story img')).toHaveCount(7);
   }
 });

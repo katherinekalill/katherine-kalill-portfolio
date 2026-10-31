@@ -192,6 +192,7 @@ const serializeStructuredData = (value: unknown) =>
       <slot />
     </main>
     <footer class="site-footer">
+      <slot name="footer-control" />
       <nav class="site-footer__links" aria-label="Footer">
         {siteConfig.email && (
           <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>

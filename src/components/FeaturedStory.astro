@@ -16,7 +16,6 @@ interface Props {
         height: number;
         focalPoint: { x: number; y: number };
         alt: string;
-        credit: string | null;
         srcSet?: string | undefined;
         sizes?: string | undefined;
       }
@@ -33,7 +32,6 @@ const {
   image,
   previewImage,
 } = Astro.props;
-const creditId = image?.credit ? `work-credit-${id}` : undefined;
 const teaserId = `story-teaser-${id}`;
 const clientId = clientPlatform ? `story-client-${id}` : undefined;
 const contextId = operatingContext ? `story-context-${id}` : undefined;
@@ -45,7 +43,7 @@ const contextId = operatingContext ? `story-context-${id}` : undefined;
       class="featured-story__link"
       href={href}
       aria-labelledby={`story-${id}`}
-      aria-describedby={[clientId, contextId, teaserId, creditId]
+      aria-describedby={[clientId, contextId, teaserId]
         .filter(Boolean)
         .join(' ')}
     >
@@ -93,11 +91,6 @@ const contextId = operatingContext ? `story-context-${id}` : undefined;
         <p class="featured-story__teaser" id={teaserId}>
           {teaser}
         </p>
-        {image?.credit && (
-          <span class="featured-story__credit" id={creditId}>
-            Photo: {image.credit}
-          </span>
-        )}
         <span class="featured-story__visit" aria-hidden="true">
           Explore story ↗
         </span>

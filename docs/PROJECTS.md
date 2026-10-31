@@ -1,8 +1,8 @@
 # Public project inventory
 
-The public source data contains seven projects: five featured case studies and two archive-only stories. No unpublished project records are included.
+The public source data contains seven published, featured case studies. No unpublished project records are included.
 
-## Featured projects
+## Published projects
 
 ### All City Mile × Rebel Relays
 
@@ -24,12 +24,10 @@ A New Balance and Athletic Form Mother’s Day event in Seattle on May 10, 2025.
 
 A sold-out New Balance and REI event in Seattle on March 16, 2025. The public story describes a demo run and a runner-focused self-defense class, with the approved retail comparison presented as concurrent performance rather than an event-attributed outcome.
 
-## Archive-only projects
+### Joie Baby × For All Mothers — Making Space for Motherhood in Elite Sport
 
-### Joie Baby × For All Mothers — Cortina Olympics Coverage
+Coverage of Kelly Curtis, Kaillie Humphries, and Tabitha and Tara Peterson, and their families balancing competition, caregiving, and work at the Winter Olympics in Cortina. The public case study describes family support, shoot coordination, two social reels, behind-the-scenes posts, and captured footage for future use. The year is unknown and omitted.
 
-Stories about three athlete mothers and their families balancing competition, caregiving, and work at the Winter Olympics in Cortina. The public case study describes the partners’ family support, shoot coordination, two social reels, behind-the-scenes posts, and captured footage for future use.
+### USA Track Championships — Bringing Professional Athletes and Community Together
 
-### USA Track Championships
-
-Eugene, 2025. Partnered with Citius Magazine to curate community and athlete spotlights. The public case study includes the community-run strategy, a venue buyout for 200+ people with New Balance merchandising, live-podcast logistics, and athlete-house support.
+Eugene, 2025. Partnered with Citius Magazine to curate community and athlete spotlights. The public case study includes the community-run strategy, a venue buyout that hosted 200+ people with New Balance merchandising, live-podcast logistics, and athlete-house support.
