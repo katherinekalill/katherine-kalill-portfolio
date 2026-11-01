@@ -29,6 +29,8 @@ for (const rail of document.querySelectorAll<HTMLElement>(
   let saveFrame = 0;
   let stateReady = navigationEntry?.type !== 'back_forward';
   let animationTarget = rail.scrollLeft;
+  let focusedCard: HTMLElement | undefined;
+  let focusFrame = 0;
   const initialSaved = objectState().homepageRail;
   const initialSavedLeft =
     initialSaved && typeof initialSaved === 'object'
@@ -69,6 +71,15 @@ for (const rail of document.querySelectorAll<HTMLElement>(
       saveFrame = 0;
       savePosition();
     });
+  };
+
+  const alignFocusedCard = () => {
+    focusFrame = 0;
+    if (!focusedCard?.contains(document.activeElement)) return;
+    const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const target = Math.max(0, Math.min(cardStart(focusedCard), maxScroll));
+    if (Math.abs(rail.scrollLeft - target) > 1) rail.scrollLeft = target;
+    updateControls();
   };
 
   const move = (direction: -1 | 1) => {
@@ -136,7 +147,15 @@ for (const rail of document.querySelectorAll<HTMLElement>(
   previous.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
   rail.addEventListener('scroll', updateControls, { passive: true });
-  window.addEventListener('resize', updateControls, { passive: true });
+  window.addEventListener(
+    'resize',
+    () => {
+      updateControls();
+      if (focusedCard && !focusFrame)
+        focusFrame = requestAnimationFrame(alignFocusedCard);
+    },
+    { passive: true },
+  );
   rail.addEventListener('wheel', cancelAnimation, { passive: true });
   rail.addEventListener('touchstart', cancelAnimation, { passive: true });
   rail.addEventListener('pointerdown', cancelAnimation, { passive: true });
@@ -153,13 +172,16 @@ for (const rail of document.querySelectorAll<HTMLElement>(
     );
     if (!card) return;
     cancelAnimation();
-    const left = cardStart(card);
-    const right = left + card.getBoundingClientRect().width;
-    if (left < rail.scrollLeft) rail.scrollLeft = left;
-    else if (right > rail.scrollLeft + rail.clientWidth) {
-      rail.scrollLeft = right - rail.clientWidth;
-    }
-    updateControls();
+    focusedCard = card;
+    if (focusFrame) cancelAnimationFrame(focusFrame);
+    // Reconcile after the browser's native focus scrolling has run.
+    focusFrame = requestAnimationFrame(alignFocusedCard);
+  });
+  rail.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
+      if (focusedCard?.contains(document.activeElement)) return;
+      focusedCard = undefined;
+    });
   });
   window.addEventListener(
     'scroll',

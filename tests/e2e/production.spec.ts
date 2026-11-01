@@ -769,31 +769,71 @@ test('production home and all seven published stories work under the project bas
   expect(consoleErrors).toEqual([]);
 });
 
-test('homepage background cycling honors pause, reduced motion, and decode failures', async ({
+test('homepage background pause persists and restarts a full interval', async ({
   page,
 }) => {
+  await installPausedClock(page);
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto(`${base}/`);
   const toggle = page.locator('[data-hero-toggle]');
   const layers = page.locator('[data-hero-layer]');
-  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await page
+    .locator('[data-headshot-source]')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await waitForHeroIntersection(page, true);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(page.locator('[data-hero-layer="1"] img')).toHaveAttribute(
+    'src',
+    /all-city-mile-hero/,
+  );
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-label', 'Play background images');
-  await page.waitForTimeout(1100);
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await waitForHeroIntersection(page, false);
+  await page.clock.runFor(5000);
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
+  await page.locator('.homepage-hero').scrollIntoViewIfNeeded();
+  await waitForHeroIntersection(page, true);
+  await page.clock.runFor(5000);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-label', 'Pause background images');
-  await expect
-    .poll(() =>
-      layers.nth(1).evaluate((layer) => layer.classList.contains('is-visible')),
-    )
-    .toBe(true);
-  await toggle.click();
-  await expect(toggle).toHaveAttribute('aria-label', 'Play background images');
-  await page.waitForTimeout(1100);
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await waitForHeroIntersection(page, false);
+  await page.clock.runFor(5000);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
+  await page.locator('.homepage-hero').scrollIntoViewIfNeeded();
+  await waitForHeroIntersection(page, true);
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await page.clock.runFor(4200);
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
+});
+
+test('homepage background follows reduced motion preference changes', async ({
+  page,
+}) => {
+  await installPausedClock(page);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${base}/`);
+  const toggle = page.locator('[data-hero-toggle]');
+  const layers = page.locator('[data-hero-layer]');
+  await page
+    .locator('[data-headshot-source]')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await waitForHeroIntersection(page, true);
   await toggle.focus();
+  await page.locator('.homepage-hero').scrollIntoViewIfNeeded();
+  await waitForHeroIntersection(page, true);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(toggle).toBeFocused();
   await expect(toggle).toHaveAttribute('aria-disabled', 'true');
@@ -803,29 +843,56 @@ test('homepage background cycling honors pause, reduced motion, and decode failu
   );
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
   await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
+  await page.clock.runFor(5000);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(toggle).toBeFocused();
   await expect(toggle).toHaveAttribute('aria-disabled', 'false');
-  await expect(toggle).toHaveAttribute('aria-label', 'Play background images');
-  await expect(layers.nth(0)).toHaveClass(/is-visible/);
-  await toggle.click();
-  await expect
-    .poll(() =>
-      layers.nth(1).evaluate((layer) => layer.classList.contains('is-visible')),
-    )
-    .toBe(true);
-
-  await page.route('**/work/all-city-mile-hero*', (route) => route.abort());
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
-  const failedHeroRequest = page.waitForEvent('requestfailed', (request) =>
-    request.url().includes('all-city-mile-hero'),
+  await expect(toggle).toHaveAttribute('aria-label', 'Pause background images');
+  await page.locator('.homepage-hero').scrollIntoViewIfNeeded();
+  await waitForHeroIntersection(page, true);
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await page.clock.runFor(4200);
+  await expect(layers.nth(1)).toHaveClass(/is-visible/);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(toggle).toBeFocused();
+  await expect(toggle).toHaveAttribute('aria-disabled', 'true');
+  await expect(toggle).toHaveAttribute(
+    'aria-label',
+    'Background image playback unavailable',
   );
-  await page.reload();
-  await failedHeroRequest;
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
-  await expect
-    .poll(() => layers.nth(1).locator('img').getAttribute('src'))
-    .toContain('all-city-mile-huddle');
+  await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
+});
+
+test('homepage background skips failed image decodes', async ({ page }) => {
+  await installPausedClock(page);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.route('**/work/all-city-mile-hero*', (route) => route.abort());
+  await page.goto(`${base}/`);
+  const layers = page.locator('[data-hero-layer]');
+  await page
+    .locator('[data-headshot-source]')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await waitForHeroIntersection(page, true);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(layers.nth(1).locator('img')).toHaveAttribute(
+    'src',
+    /all-city-mile-hero/,
+  );
+  await page.clock.runFor(4000);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await expect(layers.nth(1).locator('img')).toHaveAttribute(
+    'src',
+    /all-city-mile-huddle/,
+  );
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
+  await page.clock.runFor(4000);
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
 });
 
@@ -861,17 +928,37 @@ test('homepage background completes the ten-frame loop on the 4000 ms clock', as
     'usa-track-championships-community',
     'usa-track-championships-collaborators',
   ];
-  for (const mediaId of sequence) {
+  for (const [index, mediaId] of sequence.entries()) {
     const active = page.locator('.homepage-hero__layer.is-visible');
     await expect(active.locator('img')).toHaveAttribute(
       'src',
       new RegExp(mediaId),
     );
-    await page.clock.runFor(4000);
+    if (index < sequence.length - 1) {
+      await page.clock.runFor(1210);
+      const incoming = page.locator(
+        `.homepage-hero__layer:not(.is-visible) img`,
+      );
+      await expect(incoming).toHaveAttribute(
+        'src',
+        new RegExp(sequence[index + 1]!),
+      );
+      await incoming.evaluate((image) => (image as HTMLImageElement).decode());
+      await page.clock.runFor(2790);
+      // A small cushion lets each browser settle observer and timer callbacks at the boundary.
+      await page.clock.runFor(100);
+      await expect(
+        page.locator('.homepage-hero__layer.is-visible img'),
+      ).toHaveAttribute('src', new RegExp(sequence[index + 1]!));
+    }
   }
+  await page.clock.runFor(4000);
   await expect(
     page.locator('.homepage-hero__layer.is-visible [data-headshot-source]'),
   ).toHaveCount(1);
+  await page
+    .locator('[data-hero-layer="1"] img')
+    .evaluate((image) => (image as HTMLImageElement).decode());
   await page.clock.runFor(4000);
   await expect(
     page.locator('.homepage-hero__layer.is-visible img'),
@@ -936,7 +1023,9 @@ test('homepage background suspends offscreen and starts a fresh interval when vi
   await page
     .locator('[data-hero-layer="1"] img')
     .evaluate((image) => (image as HTMLImageElement).decode());
-  await page.clock.runFor(4000);
+  await page.clock.runFor(3900);
+  await expect(layers.nth(0)).toHaveClass(/is-visible/);
+  await page.clock.runFor(200);
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
 
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -965,7 +1054,7 @@ test('homepage background suspends offscreen and starts a fresh interval when vi
   await page
     .locator('[data-hero-layer="0"] img')
     .evaluate((image) => (image as HTMLImageElement).decode());
-  await page.clock.runFor(900);
+  await page.clock.runFor(3900);
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
   await page.clock.runFor(200);
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
@@ -1002,7 +1091,7 @@ test('homepage keeps the visible frame while the next image request is delayed',
   await waitForHeroIntersection(page, true);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await imageRequested;
-  await page.waitForTimeout(1100);
+  await page.waitForTimeout(5000);
   await expect(layers.nth(0)).toHaveClass(/is-visible/);
   await expect(layers.nth(1)).not.toHaveClass(/is-visible/);
   releaseImage();
@@ -1011,6 +1100,76 @@ test('homepage keeps the visible frame while the next image request is delayed',
     .locator('img')
     .evaluate((image) => (image as HTMLImageElement).decode());
   await expect(layers.nth(1)).toHaveClass(/is-visible/);
+});
+
+test('homepage Explore supports pointer, keyboard, hash, reduced motion, and no JavaScript', async ({
+  page,
+  browser,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(`${base}/`);
+  const explore = page.getByRole('link', { name: 'Explore' });
+  const pointOfView = page.locator('#point-of-view');
+  await explore.focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#point-of-view$/);
+  await expect(pointOfView).toBeFocused();
+  await expect
+    .poll(() =>
+      pointOfView.evaluate((target) => target.getBoundingClientRect().top),
+    )
+    .toBeGreaterThanOrEqual(100);
+  await expect
+    .poll(() =>
+      pointOfView.evaluate((target) => target.getBoundingClientRect().top),
+    )
+    .toBeLessThan(145);
+  await expect(pointOfView).toHaveAttribute(
+    'data-navigation-focus',
+    'keyboard',
+  );
+
+  await page.goto(`${base}/`);
+  await explore.click();
+  await expect(pointOfView).toBeFocused();
+  await expect(pointOfView).toHaveAttribute('data-navigation-focus', 'pointer');
+  await expect(page).toHaveURL(/#point-of-view$/);
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto(`${base}/`);
+  await explore.click();
+  await page.waitForTimeout(50);
+  await page.mouse.wheel(0, 100);
+  await page.waitForTimeout(100);
+  const interruptedAt = await page.evaluate(() => window.scrollY);
+  expect(
+    await pointOfView.evaluate((target) => target.getBoundingClientRect().top),
+  ).toBeGreaterThan(145);
+  await page.waitForTimeout(200);
+  expect(await page.evaluate(() => window.scrollY)).toBeCloseTo(
+    interruptedAt,
+    0,
+  );
+
+  const noScriptContext = await browser.newContext({
+    baseURL: 'http://127.0.0.1:4321',
+    javaScriptEnabled: false,
+    viewport: { width: 1280, height: 900 },
+  });
+  const noScriptPage = await noScriptContext.newPage();
+  await noScriptPage.goto(`${base}/`);
+  await noScriptPage.getByRole('link', { name: 'Explore' }).click();
+  await expect(noScriptPage).toHaveURL(/#point-of-view$/);
+  await expect(noScriptPage.locator('#point-of-view')).toBeVisible();
+  await expect
+    .poll(() =>
+      noScriptPage
+        .locator('#point-of-view')
+        .evaluate((target) => target.getBoundingClientRect().top),
+    )
+    .toBeGreaterThanOrEqual(100);
+  await noScriptContext.close();
 });
 
 test('homepage hero keeps its copy inside the frame on narrow and zoomed screens', async ({
