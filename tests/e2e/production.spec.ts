@@ -1136,22 +1136,6 @@ test('homepage Explore supports pointer, keyboard, hash, reduced motion, and no 
   await expect(pointOfView).toHaveAttribute('data-navigation-focus', 'pointer');
   await expect(page).toHaveURL(/#point-of-view$/);
 
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto(`${base}/`);
-  await explore.click();
-  await page.waitForTimeout(50);
-  await page.mouse.wheel(0, 100);
-  await page.waitForTimeout(100);
-  const interruptedAt = await page.evaluate(() => window.scrollY);
-  expect(
-    await pointOfView.evaluate((target) => target.getBoundingClientRect().top),
-  ).toBeGreaterThan(145);
-  await page.waitForTimeout(200);
-  expect(await page.evaluate(() => window.scrollY)).toBeCloseTo(
-    interruptedAt,
-    0,
-  );
-
   const noScriptContext = await browser.newContext({
     baseURL: 'http://127.0.0.1:4321',
     javaScriptEnabled: false,
@@ -1170,6 +1154,83 @@ test('homepage Explore supports pointer, keyboard, hash, reduced motion, and no 
     )
     .toBeGreaterThanOrEqual(100);
   await noScriptContext.close();
+});
+
+test('homepage Explore stops at the current position when wheel input interrupts animation', async ({
+  page,
+}) => {
+  await installPausedClock(page);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto(`${base}/`);
+
+  const explore = page.getByRole('link', { name: 'Explore' });
+  const pointOfView = page.locator('#point-of-view');
+  await explore.click();
+  await page.clock.runFor(20);
+  await page.clock.runFor(250);
+
+  const positionBeforeInterruption = await page.evaluate(() => window.scrollY);
+  expect(positionBeforeInterruption).toBeGreaterThan(0);
+  expect(
+    await pointOfView.evaluate((target) => target.getBoundingClientRect().top),
+  ).toBeGreaterThan(145);
+
+  await page.evaluate(() =>
+    window.dispatchEvent(
+      new WheelEvent('wheel', { bubbles: true, deltaY: 100 }),
+    ),
+  );
+  const interruptedAt = await page.evaluate(() => window.scrollY);
+  await page.clock.runFor(1000);
+  expect(
+    Math.abs((await page.evaluate(() => window.scrollY)) - interruptedAt),
+  ).toBeLessThanOrEqual(1);
+  expect(
+    await pointOfView.evaluate((target) => target.getBoundingClientRect().top),
+  ).toBeGreaterThan(145);
+});
+
+test('homepage Explore stays interrupted after real wheel input settles', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto(`${base}/`);
+
+  const explore = page.getByRole('link', { name: 'Explore' });
+  const pointOfView = page.locator('#point-of-view');
+  await explore.click();
+  const startedAt = Date.now();
+  await page.waitForTimeout(50);
+  await page.mouse.wheel(0, 100);
+
+  let previousPosition = await page.evaluate(() => window.scrollY);
+  let stableSamples = 0;
+  let settledPosition = previousPosition;
+  for (let sample = 0; sample < 12 && stableSamples < 4; sample += 1) {
+    await page.waitForTimeout(50);
+    const position = await page.evaluate(() => window.scrollY);
+    if (Math.abs(position - previousPosition) <= 1) {
+      stableSamples += 1;
+    } else {
+      stableSamples = 0;
+    }
+    previousPosition = position;
+    settledPosition = position;
+  }
+  expect(stableSamples).toBe(4);
+
+  const remainingAnimationTime = Math.max(0, 800 - (Date.now() - startedAt));
+  if (remainingAnimationTime > 0) {
+    await page.waitForTimeout(remainingAnimationTime);
+  }
+  expect(
+    Math.abs((await page.evaluate(() => window.scrollY)) - settledPosition),
+  ).toBeLessThanOrEqual(1);
+  expect(
+    await pointOfView.evaluate((target) => target.getBoundingClientRect().top),
+  ).toBeGreaterThan(145);
 });
 
 test('homepage hero keeps its copy inside the frame on narrow and zoomed screens', async ({
